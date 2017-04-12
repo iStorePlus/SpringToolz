@@ -6,21 +6,95 @@
 	<array>
 		<dict>
 			<key>cell</key>
-			<string>PSGroupCell</string>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>shadows_enabled</string>
 			<key>label</key>
-			<string>SpringToolz First Page</string>
+			<string>Enable Shadows</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Thanks for using my tweak 😉! I hope you are founding it useful. Don&apos;t hesitate to contact me if you are having troubles and/or questions.</string>
+			<key>footerAlignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string></string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
-			<true/>
+			<false/>
 			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz.settings</string>
+			<string>com.stoqn4opm.springtoolz</string>
 			<key>key</key>
-			<string>AwesomeSwitch1</string>
+			<string>round_icons_enabled</string>
 			<key>label</key>
-			<string>Awesome Switch 1</string>
+			<string>Round Icons</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Choose Close Match Threshold</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>max</key>
+			<integer>100</integer>
+			<key>min</key>
+			<integer>0</integer>
+			<key>showValue</key>
+			<true/>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>20</integer>
+			<key>key</key>
+			<string>threshold</string>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>default</key>
+			<integer>60</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Donate (PayPal)</string>
+			<key>action</key>
+			<string>donate</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Find me on Facebook</string>
+			<key>action</key>
+			<string>facebook</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Respring (Apply Changes)</string>
+			<key>action</key>
+			<string>respring</string>
 		</dict>
 	</array>
 	<key>title</key>
