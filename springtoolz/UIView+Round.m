@@ -26,6 +26,30 @@
 
 - (void)dropShadow {
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.bounds];
+    [self dropShadowWithPath:shadowPath];
+}
+
+- (void)dropCircularShadowWithTag:(NSInteger)tag behind:(UIView *)subview {
+    
+    for (UIView *subview in self.subviews) {
+        if(subview.tag == tag) {
+            return;
+        }
+    }
+    
+    UIView *shadowView = [[UIView alloc] initWithFrame:subview.frame];
+    [shadowView setBackgroundColor:[UIColor clearColor]];
+    
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithOvalInRect:subview.bounds];
+    [shadowView dropShadowWithPath:shadowPath];
+    
+    shadowView.tag = tag;
+    [self insertSubview:shadowView belowSubview:subview];
+}
+
+#pragma mark - Internal Helpers
+
+- (void)dropShadowWithPath:(UIBezierPath *)shadowPath {
     self.layer.shadowPath = [shadowPath CGPath];
     self.layer.masksToBounds = NO;
     self.layer.shadowOffset = CGSizeMake(0, 0);

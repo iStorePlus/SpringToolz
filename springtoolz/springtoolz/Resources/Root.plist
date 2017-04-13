@@ -5,17 +5,17 @@
 	<key>items</key>
 	<array>
 		<dict>
-	 	<key>cell</key>
-	 	<string>PSStaticTextCell</string>
-	 	<key>cellClass</key>
-	 	<string>PFHeaderCell</string>
-	 	<key>background</key>
-	 	<string>#EBEBF0</string>
-	 	<key>image</key>
-	 	<string>/Library/PreferenceBundles/SpringToolz.bundle/header.png</string>
-	 	<key>height</key>
-	 	<integer>100</integer>
-	 </dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>cellClass</key>
+			<string>PFHeaderCell</string>
+			<key>background</key>
+			<string>#BCBBC1</string>
+			<key>image</key>
+			<string>/Library/PreferenceBundles/SpringToolz.bundle/header.png</string>
+			<key>height</key>
+			<integer>100</integer>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>

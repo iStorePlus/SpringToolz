@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "UIView+Round.h"
+#import "SBIconView.h"
 
 #pragma mark - Settings Related Stuff
 
@@ -18,23 +19,23 @@ static void loadPrefs() {
 
 #pragma mark - Hooking
 
-%hook UIView
+%hook SBIconView
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
-    if ([NSStringFromClass([self class]) isEqualToString:@"SBIconView"]) {
-    	
-		for (UIView *subview in [self subviews]) {
-        	if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"]) {
-				
-                if (SHADOWS_ENABLED) {
-                    [subview dropShadow];
-                }
+	
+	for (UIView *subview in [self subviews]) {
+    	if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"]) {
+			
+            if (SHADOWS_ENABLED) {
+                // [subview dropShadow];
+            }
+            [subview makeCircular];
+            
+            [self dropCircularShadowWithTag:0x00123f behind:subview];
 
-
-                // [subview makeCircular];
-        	}
     	}
-    }
+	}
+    
     %orig;
 }
 

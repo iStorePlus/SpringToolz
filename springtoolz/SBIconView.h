@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (Round)
+@interface SBIconView: UIView
 
-- (void)makeCircular;
-- (void)dropShadow;
-- (void)dropCircularShadowWithTag:(NSInteger)tag behind:(UIView *)subview;
 @end
