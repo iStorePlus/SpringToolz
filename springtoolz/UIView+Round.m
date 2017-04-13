@@ -13,7 +13,8 @@
 
 - (void)makeSubviewsCurcular:(BOOL)circular andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)options {
     for (UIView *subview in [self subviews]) {
-        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"]) {
+        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+            [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
             
             if (circular) {
                 [subview makeCircular];
