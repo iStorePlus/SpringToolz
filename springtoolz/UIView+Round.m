@@ -44,7 +44,8 @@
     [shadowView dropShadowWithPath:shadowPath];
     
     shadowView.tag = tag;
-    [self insertSubview:shadowView belowSubview:subview];
+    [self addSubview:shadowView];
+    [self sendSubviewToBack:shadowView];
 }
 
 #pragma mark - Internal Helpers
