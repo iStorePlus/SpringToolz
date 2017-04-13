@@ -7,8 +7,30 @@
 //
 
 #import "UIView+Round.h"
+#define SHADOW_TAG 0x00123f
 
 @implementation UIView (Round)
+
+- (void)makeSubviewsCurcular:(BOOL)circular andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)options {
+    for (UIView *subview in [self subviews]) {
+        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"]) {
+            
+            if (circular) {
+                [subview makeCircular];
+            }
+            
+            if (shadow) {
+                if (circular) {
+                    [self dropCircularShadowWithTag:SHADOW_TAG andOptions:options behind:subview];
+                } else {
+                    [subview dropShadowWithOptions:options];
+                }
+            }
+        }
+    }
+}
+
+#pragma mark - Internal Helpers
 
 - (void)makeCircular {
     
@@ -49,8 +71,6 @@
     [self addSubview:shadowView];
     [self sendSubviewToBack:shadowView];
 }
-
-#pragma mark - Internal Helpers
 
 - (void)dropShadowWithPath:(UIBezierPath *)shadowPath options:(NSDictionary *)options {
     
