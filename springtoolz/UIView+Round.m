@@ -33,17 +33,19 @@
 #pragma mark - Internal Helpers
 
 - (void)makeCircular {
+    UIView *superView = [self superview];
+    [self removeFromSuperview];
     
-    CGFloat circleDiameter = self.frame.size.width * 0.94;
-    CGFloat xOrigin = (self.frame.size.width - circleDiameter) / 2.0;
+    CGFloat diameter = self.frame.size.width * 0.965;
+    CGRect smallerFrame = CGRectMake(0, 0, diameter, diameter);
+    UIView *container = [[UIView alloc] initWithFrame:smallerFrame];
     
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    CGRect maskRect = CGRectMake(xOrigin, xOrigin, circleDiameter, circleDiameter);
-    CGPathRef path = CGPathCreateWithEllipseInRect(maskRect, NULL);
-    maskLayer.path = path;
-    CGPathRelease(path);
+    [container addSubview:self];
+    [superView addSubview:container];
+    [superView sendSubviewToBack:container];
     
-    self.layer.mask = maskLayer;
+    container.clipsToBounds = TRUE;
+    container.layer.cornerRadius = container.frame.size.width / 2.0;
 }
 
 - (void)dropShadowWithOptions:(NSDictionary *)options {
