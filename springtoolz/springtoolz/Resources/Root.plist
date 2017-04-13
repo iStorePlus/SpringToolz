@@ -6,15 +6,15 @@
 	<array>
 		<dict>
 			<key>cell</key>
-			<string>PSStaticTextCell</string>
-			<key>cellClass</key>
-			<string>PFHeaderCell</string>
-			<key>background</key>
-			<string>#BCBBC1</string>
-			<key>image</key>
-			<string>/Library/PreferenceBundles/SpringToolz.bundle/header.png</string>
-			<key>height</key>
-			<integer>100</integer>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>circular_icons_enabled</string>
+			<key>label</key>
+			<string>Circular Icons</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -31,54 +31,80 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>footerText</key>
-			<string>Thanks for using my tweak 😉! I hope you are founding it useful. Don&apos;t hesitate to contact me if you are having troubles and/or questions.</string>
-			<key>footerAlignment</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>footerText</key>
-			<string></string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>key</key>
-			<string>round_icons_enabled</string>
 			<key>label</key>
-			<string>Round Icons</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSStaticTextCell</string>
-			<key>label</key>
-			<string>Choose Close Match Threshold</string>
+			<string>SHADOW INTENSITY</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSliderCell</string>
 			<key>max</key>
-			<integer>100</integer>
+			<integer>1</integer>
 			<key>min</key>
 			<integer>0</integer>
 			<key>showValue</key>
-			<true/>
+			<false/>
 			<key>isSegmented</key>
-			<true/>
+			<false/>
 			<key>segmentCount</key>
-			<integer>20</integer>
+			<integer>0</integer>
 			<key>key</key>
-			<string>threshold</string>
+			<string>intensity</string>
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
 			<key>default</key>
-			<integer>60</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>HORIZONTAL SHADOW DEVIATION</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>max</key>
+			<real>0.4</real>
+			<key>min</key>
+			<real>-0.4</real>
+			<key>showValue</key>
+			<false/>
+			<key>isSegmented</key>
+			<false/>
+			<key>segmentCount</key>
+			<integer>0</integer>
+			<key>key</key>
+			<string>hor_deviation</string>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>default</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>VERTICAL SHADOW DEVIATION</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>max</key>
+			<real>0.4</real>
+			<key>min</key>
+			<real>-0.4</real>
+			<key>showValue</key>
+			<false/>
+			<key>isSegmented</key>
+			<false/>
+			<key>segmentCount</key>
+			<integer>0</integer>
+			<key>key</key>
+			<string>ver_deviation</string>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>default</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>cell</key>

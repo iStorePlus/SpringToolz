@@ -24,12 +24,14 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)dropShadow {
+- (void)dropShadowWithOptions:(NSDictionary *)options {
+    
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.bounds];
-    [self dropShadowWithPath:shadowPath];
+    [self dropShadowWithPath:shadowPath options:options];
+    [[self superview] sendSubviewToBack:self];
 }
 
-- (void)dropCircularShadowWithTag:(NSInteger)tag behind:(UIView *)subview {
+- (void)dropCircularShadowWithTag:(NSInteger)tag andOptions:(NSDictionary *)options behind:(UIView *)subview {
     
     for (UIView *subview in self.subviews) {
         if(subview.tag == tag) {
@@ -41,7 +43,7 @@
     [shadowView setBackgroundColor:[UIColor clearColor]];
     
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithOvalInRect:subview.bounds];
-    [shadowView dropShadowWithPath:shadowPath];
+    [self dropShadowWithPath:shadowPath options:options];
     
     shadowView.tag = tag;
     [self addSubview:shadowView];
@@ -50,12 +52,19 @@
 
 #pragma mark - Internal Helpers
 
-- (void)dropShadowWithPath:(UIBezierPath *)shadowPath {
+- (void)dropShadowWithPath:(UIBezierPath *)shadowPath options:(NSDictionary *)options {
+    
+    CGFloat verDeviation = [options valueForKey:@"ver_deviation"] ? [(NSNumber *)[options valueForKey:@"ver_deviation"] floatValue] : 0;
+    CGFloat horDeviation = [options valueForKey:@"hor_deviation"] ? [(NSNumber *)[options valueForKey:@"hor_deviation"] floatValue] : 0;
+    CGFloat intensity = [options valueForKey:@"intensity"] ? [(NSNumber *)[options valueForKey:@"intensity"] floatValue] : 1;
+    
     self.layer.shadowPath = [shadowPath CGPath];
     self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(0, 0);
+    self.layer.shadowOffset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
     self.layer.shadowRadius = 10;
-    self.layer.shadowOpacity = 1;
+    [UIView animateWithDuration:2 delay:4 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.layer.shadowOpacity = intensity;
+    } completion:nil];
     self.layer.shadowColor = [UIColor blackColor].CGColor;
 }
 

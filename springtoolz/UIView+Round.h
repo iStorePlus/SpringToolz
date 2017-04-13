@@ -11,6 +11,7 @@
 @interface UIView (Round)
 
 - (void)makeCircular;
-- (void)dropShadow;
-- (void)dropCircularShadowWithTag:(NSInteger)tag behind:(UIView *)subview;
+- (void)dropShadowWithOptions:(NSDictionary *)options;
+- (void)dropCircularShadowWithTag:(NSInteger)tag andOptions:(NSDictionary *)options behind:(UIView *)subview;
+
 @end
