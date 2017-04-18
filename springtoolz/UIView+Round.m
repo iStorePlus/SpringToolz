@@ -47,6 +47,9 @@
     
     container.clipsToBounds = TRUE;
     container.layer.cornerRadius = container.frame.size.width / 2.0;
+
+    self.layer.opaque = TRUE;
+    container.layer.opaque = TRUE;
 }
 
 - (void)dropShadowWithOptions:(NSDictionary *)options {
@@ -85,9 +88,18 @@
     self.layer.masksToBounds = NO;
     self.layer.shadowOffset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
     self.layer.shadowRadius = 10;
-    [UIView animateWithDuration:2 delay:4 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.layer.shadowOpacity = intensity;
-    } completion:nil];
+
+//    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
+//    animation.fromValue = @0;
+//    animation.toValue = @(intensity);
+//    animation.duration = 1.5;
+    
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.layer addAnimation:animation forKey:@"shadowOpacity"];
+            self.layer.shadowOpacity = intensity;
+//        });
+    
+    
     self.layer.shadowColor = [UIColor blackColor].CGColor;
 }
 
