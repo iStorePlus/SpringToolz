@@ -1,7 +1,7 @@
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = SpringToolz
-SpringToolz_FILES = Tweak.xm UIView+Round.m CABasicAnimation+Rotation.m UIBezierPath+CustomPaths.m
+SpringToolz_FILES = Tweak.xm UIView+Round.m CABasicAnimation+Rotation.m UIBezierPath+CustomPaths.m CustomMasksAnimationManager.m
 SpringToolz_FRAMEWORKS = UIKit CoreGraphics QuartzCore
 
 include $(THEOS_MAKE_PATH)/tweak.mk

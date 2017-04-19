@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "UIView+Round.h"
 #import "SBIconView.h"
+#import "CustomMasksAnimationManager.h"
 
 #pragma mark - Settings Related Stuff
 
@@ -40,6 +41,11 @@ static void loadPrefs() {
 
 %hook SBIconView
 
+- (void)prepareForReuse {
+    %orig;
+    [[CustomMasksAnimationManager sharedInstance] animate];
+}
+
 - (void)willMoveToSuperview:(UIView *)newSuperview {
 
     if (newSuperview == nil) {
@@ -57,3 +63,16 @@ static void loadPrefs() {
 
 %end
 
+%hook SBLockScreenManager
+
+- (void)unlockUIFromSource:(int)arg1 withOptions:(id)arg2 {
+    %orig;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[CustomMasksAnimationManager sharedInstance] animate];
+    });
+}
+
+%end
+
+    // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"asd" message:@"dsfsdg" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    // [alert show];

@@ -51,7 +51,7 @@
     
     CGFloat numberOfSides = [options valueForKey:@"sides_count"] ? [(NSNumber *)[options valueForKey:@"sides_count"] floatValue] : 0;
     CGFloat radiusDeviation = [options valueForKey:@"rad_deviation"] ? [(NSNumber *)[options valueForKey:@"rad_deviation"] floatValue] : 0;
-    CGFloat speed = [options valueForKey:@"speed"] ? [(NSNumber *)[options valueForKey:@"speed"] floatValue] : 1;
+//    CGFloat speed = [options valueForKey:@"speed"] ? [(NSNumber *)[options valueForKey:@"speed"] floatValue] : 1;
     
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     UIBezierPath *gearPath = [UIBezierPath gearPathWithNumberOfSides:numberOfSides radiusDeviation:radiusDeviation baseRadius:self.frame.size.width / 2.0 * 0.9];
