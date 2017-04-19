@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +20,52 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Pm-kP-Smt" customClass="SBIconView">
+                                <rect key="frame" x="83" y="233.5" width="209" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qr-Eg-KLy">
+                                        <rect key="frame" x="74" y="163" width="60" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ios-7-photo-icon-pn" translatesAutoresizingMaskIntoConstraints="NO" id="hb1-87-vF3" customClass="SBIconImageView">
+                                        <rect key="frame" x="39.5" y="8" width="130" height="130"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="130" id="SnD-WV-XKT"/>
+                                            <constraint firstAttribute="width" constant="130" id="aYV-RJ-jKv"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="hb1-87-vF3" firstAttribute="centerX" secondItem="6Pm-kP-Smt" secondAttribute="centerX" id="3P0-Us-RjX"/>
+                                    <constraint firstAttribute="height" constant="200" id="HXd-6F-Wda"/>
+                                    <constraint firstItem="4qr-Eg-KLy" firstAttribute="centerX" secondItem="6Pm-kP-Smt" secondAttribute="centerX" id="IdI-0K-deL"/>
+                                    <constraint firstAttribute="width" constant="209" id="JPO-VC-yFd"/>
+                                    <constraint firstAttribute="bottom" secondItem="4qr-Eg-KLy" secondAttribute="bottom" constant="16" id="VqG-yP-GSd"/>
+                                    <constraint firstItem="hb1-87-vF3" firstAttribute="top" secondItem="6Pm-kP-Smt" secondAttribute="top" constant="8" id="e5t-Se-XFj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6Pm-kP-Smt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UWT-us-edm"/>
+                            <constraint firstItem="6Pm-kP-Smt" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vBd-2v-n0F"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="iconView" destination="6Pm-kP-Smt" id="NpG-li-4zi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ios-7-photo-icon-pn" width="206" height="209"/>
+    </resources>
 </document>

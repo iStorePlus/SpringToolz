@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "UIView+Round.h"
+#import "SBIconView.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet SBIconView *iconView;
 
 @end
 
@@ -16,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self.iconView makeSubviewsCurcular:NO withGearMaskEnabled:YES gearMaskOptions:nil andWithShadow:NO andShadowOptions:nil];
 }
 
 

@@ -11,3 +11,17 @@
 @interface SBIconView: UIView
 
 @end
+
+@implementation SBIconView
+
+
+@end
+
+@interface SBIconImageView: UIImageView
+
+@end
+
+@implementation SBIconImageView
+
+
+@end

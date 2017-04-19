@@ -49,8 +49,8 @@
 - (void)applyGearMaskWithOptions:(NSDictionary *)options {
     
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.path = [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:10 baseRadius:self.frame.size.width / 2.0].CGPath;
-    maskLayer.transform = CATransform3DMakeTranslation(123, 10, 0);
+    maskLayer.path = [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:10 baseRadius:self.frame.size.width / 2.0 * 0.9].CGPath;
+    maskLayer.transform = CATransform3DMakeTranslation(self.frame.size.width / 2.0, self.frame.size.height / 2.0, 0);
     CABasicAnimation *rotation = [CABasicAnimation endlessRotationForLayer:maskLayer withSpeed:2.5];
     [maskLayer addAnimation:rotation forKey:@"transform"];
     self.layer.mask = maskLayer;
