@@ -14,6 +14,7 @@
 + (CustomMasksAnimationManager *)sharedInstance;
 
 - (void)addMaskView:(UIView *)mask;
+- (void)removeMaskView:(UIView *)mask;
 - (void)animate;
 
 @end
