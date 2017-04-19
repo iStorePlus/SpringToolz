@@ -11,7 +11,7 @@
 @interface CustomMasksAnimationManager()
 
 @property (nonatomic, strong) NSMutableArray<UIView *> *masks;
-
+@property (nonatomic, assign) NSUInteger viewTagHelper;
 @end
 
 @implementation CustomMasksAnimationManager
@@ -24,6 +24,8 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[CustomMasksAnimationManager alloc] init];
         sharedInstance.masks = [NSMutableArray new];
+        sharedInstance.viewTagHelper = 0;
+        
     });
     return sharedInstance;
 }
@@ -31,7 +33,14 @@
 #pragma mark - Public Methods
 
 - (void)addMaskView:(UIView *)mask {
+    mask.tag = self.viewTagHelper;
+    self.viewTagHelper++;
+    
     [self.masks addObject:mask];
+}
+
+- (void)removeMaskView:(UIView *)mask {
+    [self.masks removeObject:mask];
 }
 
 - (void)animate {
