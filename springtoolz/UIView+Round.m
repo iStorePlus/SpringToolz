@@ -89,17 +89,7 @@
     self.layer.shadowOffset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
     self.layer.shadowRadius = 10;
 
-//    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
-//    animation.fromValue = @0;
-//    animation.toValue = @(intensity);
-//    animation.duration = 1.5;
-    
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self.layer addAnimation:animation forKey:@"shadowOpacity"];
-            self.layer.shadowOpacity = intensity;
-//        });
-    
-    
+    self.layer.shadowOpacity = intensity;
     self.layer.shadowColor = [UIColor blackColor].CGColor;
 }
 
