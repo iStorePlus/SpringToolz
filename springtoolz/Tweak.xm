@@ -47,9 +47,9 @@ static void loadPrefs() {
     }
 
     if ([NSStringFromClass([newSuperview class]) isEqualToString:@"SBDockIconListView"]) {
-        [self makeSubviewsCurcular:USE_CIRCULAR_ICONS_IN_DOCK andWithShadow:SHADOWS_ENABLED_IN_DOCK andShadowOptions:SHADOW_OPTIONS];
+        [self makeSubviewsCurcular:USE_CIRCULAR_ICONS_IN_DOCK withGearMaskEnabled:YES gearMaskOptions:@{@"sides_count": @16, @"rad_deviation": @5, @"speed" : @5} andWithShadow:SHADOWS_ENABLED_IN_DOCK andShadowOptions:SHADOW_OPTIONS];
     } else {
-        [self makeSubviewsCurcular:USE_CIRCULAR_ICONS andWithShadow:SHADOWS_ENABLED andShadowOptions:SHADOW_OPTIONS];
+        [self makeSubviewsCurcular:USE_CIRCULAR_ICONS withGearMaskEnabled:YES gearMaskOptions:@{@"sides_count": @16, @"rad_deviation": @5, @"speed" : @5} andWithShadow:SHADOWS_ENABLED andShadowOptions:SHADOW_OPTIONS];
     }
 
     %orig;
