@@ -49,6 +49,7 @@
         for (UIView *mask in self.masks) {
             mask.transform = CGAffineTransformMakeRotation(M_PI);
         }
+        [self.masks removeAllObjects];
         
     } completion:nil];
 }

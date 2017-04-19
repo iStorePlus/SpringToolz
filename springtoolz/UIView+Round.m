@@ -66,6 +66,20 @@
     [mask.layer addSublayer:maskLayer];
     
     self.maskView = mask;
+//    self.layer.allowsEdgeAntialiasing = TRUE;
+//    mask.layer.allowsEdgeAntialiasing = TRUE;
+//    
+//    self.layer.drawsAsynchronously = TRUE;
+//    mask.layer.drawsAsynchronously = TRUE;
+    
+    self.superview.layer.shouldRasterize = TRUE;
+    self.superview.layer.rasterizationScale = [UIScreen mainScreen].scale;
+//    self.alpha = 1.0;
+//    self.layer.opaque = YES;
+//    
+//    mask.alpha = 1.0;
+//    mask.layer.opaque = YES;
+    
     [[CustomMasksAnimationManager sharedInstance] addMaskView:mask];
 }
 

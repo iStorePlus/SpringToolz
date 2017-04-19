@@ -49,6 +49,15 @@ static void loadPrefs() {
 - (void)willMoveToSuperview:(UIView *)newSuperview {
 
     if (newSuperview == nil) {
+
+        for (UIView *subview in [self subviews]) {
+            if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+                [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+                    
+                [[CustomMasksAnimationManager sharedInstance] removeMaskView:subview.maskView];
+            }
+        }
+
         return;
     }
 
@@ -67,7 +76,7 @@ static void loadPrefs() {
 
 - (void)unlockUIFromSource:(int)arg1 withOptions:(id)arg2 {
     %orig;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[CustomMasksAnimationManager sharedInstance] animate];
     });
 }
