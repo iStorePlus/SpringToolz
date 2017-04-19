@@ -9,6 +9,7 @@
 #import "UIView+Round.h"
 #import "UIBezierPath+CustomPaths.h"
 #import "CABasicAnimation+Rotation.h"
+#import "CustomMasksAnimationManager.h"
 
 #define SHADOW_TAG 0x00123f
 
@@ -65,14 +66,7 @@
     [mask.layer addSublayer:maskLayer];
     
     self.maskView = mask;
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
-            mask.transform = CGAffineTransformMakeRotation(M_PI);
-        } completion:nil];
-    });
-    
+    [[CustomMasksAnimationManager sharedInstance] addMaskView:mask];
 }
 
 
