@@ -7,14 +7,29 @@
 //
 
 #import "UIView+Round.h"
+#import "UIBezierPath+CustomPaths.h"
+#import "CABasicAnimation+Rotation.h"
+
 #define SHADOW_TAG 0x00123f
 
 @implementation UIView (Round)
 
-- (void)makeSubviewsCurcular:(BOOL)circular andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)options {
+- (void)makeSubviewsCurcular:(BOOL)circular
+         withGearMaskEnabled:(BOOL)gearMask gearMaskOptions:(NSDictionary *)gearMaskOptions
+               andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)shadowOptions {
+    
     for (UIView *subview in [self subviews]) {
         if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
             [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+            
+            
+            if (gearMask) {
+                [subview applyGearMaskWithOptions:gearMaskOptions];
+                if (shadow) {
+                    [self dropCircularShadowWithTag:SHADOW_TAG andOptions:shadowOptions behind:subview];
+                }
+                continue;
+            }
             
             if (circular) {
                 [subview makeCircular];
@@ -22,14 +37,25 @@
             
             if (shadow) {
                 if (circular) {
-                    [self dropCircularShadowWithTag:SHADOW_TAG andOptions:options behind:subview];
+                    [self dropCircularShadowWithTag:SHADOW_TAG andOptions:shadowOptions behind:subview];
                 } else {
-                    [subview dropShadowWithOptions:options];
+                    [subview dropShadowWithOptions:shadowOptions];
                 }
             }
         }
     }
 }
+
+- (void)applyGearMaskWithOptions:(NSDictionary *)options {
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.path = [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:10 baseRadius:self.frame.size.width / 2.0].CGPath;
+    maskLayer.transform = CATransform3DMakeTranslation(123, 10, 0);
+    CABasicAnimation *rotation = [CABasicAnimation endlessRotationForLayer:maskLayer withSpeed:2.5];
+    [maskLayer addAnimation:rotation forKey:@"transform"];
+    self.layer.mask = maskLayer;
+}
+
 
 #pragma mark - Internal Helpers
 

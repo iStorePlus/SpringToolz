@@ -10,6 +10,8 @@
 
 @interface UIView (Round)
 
-- (void)makeSubviewsCurcular:(BOOL)circular andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)options;
+- (void)makeSubviewsCurcular:(BOOL)circular
+         withGearMaskEnabled:(BOOL)gearMask gearMaskOptions:(NSDictionary *)gearMaskOptions
+               andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)shadowOptions;
 
 @end

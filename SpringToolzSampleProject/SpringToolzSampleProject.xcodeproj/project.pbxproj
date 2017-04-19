@@ -14,6 +14,8 @@
 		32574C7A1EA7791E00DC3AD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32574C791EA7791E00DC3AD8 /* Assets.xcassets */; };
 		32574C7D1EA7791E00DC3AD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32574C7B1EA7791E00DC3AD8 /* LaunchScreen.storyboard */; };
 		32574C861EA7797700DC3AD8 /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C851EA7797700DC3AD8 /* UIView+Round.m */; };
+		32574C8D1EA77F7900DC3AD8 /* UIBezierPath+CustomPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C8C1EA77F7900DC3AD8 /* UIBezierPath+CustomPaths.m */; };
+		32574C901EA7805700DC3AD8 /* CABasicAnimation+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C8F1EA7805700DC3AD8 /* CABasicAnimation+Rotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,10 @@
 		32574C841EA7797700DC3AD8 /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Round.h"; path = "../../springtoolz/UIView+Round.h"; sourceTree = "<group>"; };
 		32574C851EA7797700DC3AD8 /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Round.m"; path = "../../springtoolz/UIView+Round.m"; sourceTree = "<group>"; };
 		32574C871EA779A500DC3AD8 /* SBIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SBIconView.h; path = ../../springtoolz/SBIconView.h; sourceTree = "<group>"; };
+		32574C8B1EA77F7900DC3AD8 /* UIBezierPath+CustomPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+CustomPaths.h"; sourceTree = "<group>"; };
+		32574C8C1EA77F7900DC3AD8 /* UIBezierPath+CustomPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+CustomPaths.m"; sourceTree = "<group>"; };
+		32574C8E1EA7805700DC3AD8 /* CABasicAnimation+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CABasicAnimation+Rotation.h"; sourceTree = "<group>"; };
+		32574C8F1EA7805700DC3AD8 /* CABasicAnimation+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CABasicAnimation+Rotation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,10 @@
 				32574C741EA7791E00DC3AD8 /* ViewController.m */,
 				32574C841EA7797700DC3AD8 /* UIView+Round.h */,
 				32574C851EA7797700DC3AD8 /* UIView+Round.m */,
+				32574C8B1EA77F7900DC3AD8 /* UIBezierPath+CustomPaths.h */,
+				32574C8C1EA77F7900DC3AD8 /* UIBezierPath+CustomPaths.m */,
+				32574C8E1EA7805700DC3AD8 /* CABasicAnimation+Rotation.h */,
+				32574C8F1EA7805700DC3AD8 /* CABasicAnimation+Rotation.m */,
 				32574C761EA7791E00DC3AD8 /* Main.storyboard */,
 				32574C791EA7791E00DC3AD8 /* Assets.xcassets */,
 				32574C7B1EA7791E00DC3AD8 /* LaunchScreen.storyboard */,
@@ -159,6 +169,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				32574C751EA7791E00DC3AD8 /* ViewController.m in Sources */,
+				32574C8D1EA77F7900DC3AD8 /* UIBezierPath+CustomPaths.m in Sources */,
+				32574C901EA7805700DC3AD8 /* CABasicAnimation+Rotation.m in Sources */,
 				32574C861EA7797700DC3AD8 /* UIView+Round.m in Sources */,
 				32574C721EA7791E00DC3AD8 /* AppDelegate.m in Sources */,
 				32574C6F1EA7791E00DC3AD8 /* main.m in Sources */,
