@@ -60,9 +60,19 @@
     
     maskLayer.path = gearPath.CGPath;
     maskLayer.transform = CATransform3DMakeTranslation(self.frame.size.width / 2.0, self.frame.size.height / 2.0, 0);
-    CABasicAnimation *rotation = [CABasicAnimation endlessRotationForLayer:maskLayer withSpeed:speed];
-    [maskLayer addAnimation:rotation forKey:@"transform"];
-    self.layer.mask = maskLayer;
+    
+    UIView *mask = [[UIView alloc] initWithFrame:self.bounds];
+    [mask.layer addSublayer:maskLayer];
+    
+    self.maskView = mask;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
+            mask.transform = CGAffineTransformMakeRotation(M_PI);
+        } completion:nil];
+    });
+    
 }
 
 
