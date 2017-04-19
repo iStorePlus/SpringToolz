@@ -50,7 +50,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Pm-kP-Smt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UWT-us-edm"/>
                             <constraint firstItem="6Pm-kP-Smt" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vBd-2v-n0F"/>

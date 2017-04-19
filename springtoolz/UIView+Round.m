@@ -48,10 +48,19 @@
 
 - (void)applyGearMaskWithOptions:(NSDictionary *)options {
     
+    CGFloat numberOfSides = [options valueForKey:@"sides_count"] ? [(NSNumber *)[options valueForKey:@"sides_count"] floatValue] : 0;
+    CGFloat radiusDeviation = [options valueForKey:@"rad_deviation"] ? [(NSNumber *)[options valueForKey:@"rad_deviation"] floatValue] : 0;
+    CGFloat speed = [options valueForKey:@"speed"] ? [(NSNumber *)[options valueForKey:@"speed"] floatValue] : 1;
+    
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.path = [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:10 baseRadius:self.frame.size.width / 2.0 * 0.9].CGPath;
+    UIBezierPath *gearPath = [UIBezierPath gearPathWithNumberOfSides:numberOfSides radiusDeviation:radiusDeviation baseRadius:self.frame.size.width / 2.0 * 0.9];
+    if (!gearPath) {
+        return;
+    }
+    
+    maskLayer.path = gearPath.CGPath;
     maskLayer.transform = CATransform3DMakeTranslation(self.frame.size.width / 2.0, self.frame.size.height / 2.0, 0);
-    CABasicAnimation *rotation = [CABasicAnimation endlessRotationForLayer:maskLayer withSpeed:2.5];
+    CABasicAnimation *rotation = [CABasicAnimation endlessRotationForLayer:maskLayer withSpeed:speed];
     [maskLayer addAnimation:rotation forKey:@"transform"];
     self.layer.mask = maskLayer;
 }

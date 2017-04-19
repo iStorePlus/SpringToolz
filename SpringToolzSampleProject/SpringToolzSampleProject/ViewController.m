@@ -19,14 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.iconView makeSubviewsCurcular:NO withGearMaskEnabled:YES gearMaskOptions:nil andWithShadow:NO andShadowOptions:nil];
+    
+    [self.iconView makeSubviewsCurcular:NO
+                    withGearMaskEnabled:YES
+                        gearMaskOptions:@{@"sides_count": @100, @"rad_deviation": @5, @"speed" : @2.5}
+                          andWithShadow:YES
+                       andShadowOptions:nil];
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

@@ -11,6 +11,10 @@
 @implementation UIBezierPath (CustomPaths)
 
 + (UIBezierPath *)gearPathWithNumberOfSides:(NSUInteger)sides radiusDeviation:(CGFloat)radDeviation baseRadius:(CGFloat)baseRadius {
+
+    if (sides == 0) {
+        return nil;
+    }
     
     UIBezierPath *bPath = [UIBezierPath bezierPath];
     
