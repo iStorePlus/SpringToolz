@@ -1,7 +1,7 @@
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = SpringToolz
-SpringToolz_FILES = SPGTLZRootListController.m PFHeaderCell.mm SPGTLZPageIconsListController.m
+SpringToolz_FILES = SPGTLZDockIconsListController.m SPGTLZPageIconsListController.m SPGTLZRootListController.m SPGTLZShadowOptionsListController.m SPGTLZBaseListController.m
 SpringToolz_INSTALL_PATH = /Library/PreferenceBundles
 SpringToolz_FRAMEWORKS = UIKit
 SpringToolz_PRIVATE_FRAMEWORKS = Preferences
