@@ -32,7 +32,7 @@
 		</dict>
 		<dict>
 			<key>detail</key>
-			<string>PSListController</string>
+			<string>SPGTLZPageIconsListController</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
@@ -40,7 +40,7 @@
 		</dict>
 		<dict>
 			<key>detail</key>
-			<string>PSListController</string>
+			<string>SPGTLZShadowOptionsListController</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
