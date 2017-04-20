@@ -32,7 +32,7 @@
 		</dict>
 		<dict>
 			<key>detail</key>
-			<string>SPGTLZPageIconsListController</string>
+			<string>SPGTLZDockIconsListController</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
