@@ -54,7 +54,7 @@
 			<key>segmentCount</key>
 			<integer>0</integer>
 			<key>key</key>
-			<string>intensity</string>
+			<string>shadow_intensity</string>
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
 			<key>default</key>
@@ -80,7 +80,7 @@
 			<key>segmentCount</key>
 			<integer>0</integer>
 			<key>key</key>
-			<string>hor_deviation</string>
+			<string>shadow_hor_deviation</string>
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
 			<key>default</key>
@@ -106,7 +106,7 @@
 			<key>segmentCount</key>
 			<integer>0</integer>
 			<key>key</key>
-			<string>hor_deviation</string>
+			<string>shadow_ver_deviation</string>
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
 			<key>default</key>

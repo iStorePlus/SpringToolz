@@ -48,7 +48,7 @@
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
 			<key>key</key>
-			<string>circular_icons_enabled</string>
+			<string>dock_icons_shadows_enabled</string>
 			<key>label</key>
 			<string>Enable Shadows</string>
 		</dict>
@@ -60,7 +60,7 @@
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
 			<key>key</key>
-			<string>circular_icons_enabled</string>
+			<string>dock_icons_animations_enabled</string>
 			<key>label</key>
 			<string>Animate Shape</string>
 		</dict>
