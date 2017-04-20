@@ -1,10 +1,10 @@
-#include "SPGTLZRootListController.h"
+#include "SPGTLZPageIconsListController.h"
 
-@implementation SPGTLZRootListController
+@implementation SPGTLZPageIconsListController
 
 - (NSArray *)specifiers {
 	if (!_specifiers) {
-		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
+		_specifiers = [[self loadSpecifiersFromPlistName:@"ShadowOptions" target:self] retain];
 	}
 
 	return _specifiers;

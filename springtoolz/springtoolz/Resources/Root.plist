@@ -14,121 +14,37 @@
 			<key>key</key>
 			<string>circular_icons_enabled</string>
 			<key>label</key>
-			<string>Circular Icons</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>key</key>
-			<string>shadows_enabled</string>
-			<key>label</key>
-			<string>Enable Shadows</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>key</key>
-			<string>circular_icons_in_dock_enabled</string>
-			<key>label</key>
-			<string>Circular Icons in Dock</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>key</key>
-			<string>shadows_in_dock_enabled</string>
-			<key>label</key>
-			<string>Enable Shadows in Dock</string>
+			<string>Enabled</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>SHADOW INTENSITY</string>
+			<string></string>
 		</dict>
 		<dict>
+			<key>detail</key>
+			<string>SPGTLZPageIconsListController</string>
 			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>max</key>
-			<integer>1</integer>
-			<key>min</key>
-			<integer>0</integer>
-			<key>showValue</key>
-			<false/>
-			<key>isSegmented</key>
-			<false/>
-			<key>segmentCount</key>
-			<integer>0</integer>
-			<key>key</key>
-			<string>intensity</string>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>default</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
+			<string>PSLinkCell</string>
 			<key>label</key>
-			<string>HORIZONTAL SHADOW DEVIATION</string>
+			<string>Page Icons</string>
 		</dict>
 		<dict>
+			<key>detail</key>
+			<string>PSListController</string>
 			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>max</key>
-			<real>0.4</real>
-			<key>min</key>
-			<real>-0.4</real>
-			<key>showValue</key>
-			<false/>
-			<key>isSegmented</key>
-			<false/>
-			<key>segmentCount</key>
-			<integer>0</integer>
-			<key>key</key>
-			<string>hor_deviation</string>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>default</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
+			<string>PSLinkCell</string>
 			<key>label</key>
-			<string>VERTICAL SHADOW DEVIATION</string>
+			<string>Dock Icons</string>
 		</dict>
 		<dict>
+			<key>detail</key>
+			<string>PSListController</string>
 			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>max</key>
-			<real>0.4</real>
-			<key>min</key>
-			<real>-0.4</real>
-			<key>showValue</key>
-			<false/>
-			<key>isSegmented</key>
-			<false/>
-			<key>segmentCount</key>
-			<integer>0</integer>
-			<key>key</key>
-			<string>ver_deviation</string>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>default</key>
-			<integer>0</integer>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>Shadow Options</string>
 		</dict>
 		<dict>
 			<key>cell</key>
