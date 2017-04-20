@@ -15,6 +15,42 @@
 
 @implementation UIView (Round)
 
+//    @"shape"
+//    @"shadows"
+//    @"animations"
+//
+//    @"color"
+//    @"intensity"
+//    @"hor_deviation"
+//    @"ver_deviation"
+
+- (void)applyIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+    
+    NSString *shapeName = (NSString *)[iconOptions valueForKey:@"shape"];
+    NSNumber *shadowEnabled = (NSNumber *)[iconOptions valueForKey:@"shadows"];
+    NSNumber *animationsEnabled = (NSNumber *)[iconOptions valueForKey:@"animations"];
+    NSString *shadowColor = (NSString *)[shadowOptions valueForKey:@"color"];
+    NSNumber *shadowIntensity = (NSNumber *)[shadowOptions valueForKey:@"intensity"];
+    NSNumber *shadowHorDeviation = (NSNumber *)[shadowOptions valueForKey:@"hor_deviation"];
+    NSNumber *shadowVerDeviation = (NSNumber *)[shadowOptions valueForKey:@"ver_deviation"];
+    
+    
+    if (shapeName == nil || shadowEnabled == nil || animationsEnabled == nil ||
+        shadowColor == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil) {
+        return;
+    }
+    
+    UIBezierPath *shape = [[CustomMasksAnimationManager sharedInstance] maskForName:shapeName];
+    
+    for (UIView *subview in [self subviews]) {
+        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+            [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+     
+            [subview applyIconShape:shape];
+        }
+    }
+}
+
 - (void)makeSubviewsCurcular:(BOOL)circular
          withGearMaskEnabled:(BOOL)gearMask gearMaskOptions:(NSDictionary *)gearMaskOptions
                andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)shadowOptions {
@@ -47,42 +83,40 @@
     }
 }
 
-- (void)applyGearMaskWithOptions:(NSDictionary *)options {
+- (void)applyIconShape:(UIBezierPath *)shape {
     
-    CGFloat numberOfSides = [options valueForKey:@"sides_count"] ? [(NSNumber *)[options valueForKey:@"sides_count"] floatValue] : 0;
-    CGFloat radiusDeviation = [options valueForKey:@"rad_deviation"] ? [(NSNumber *)[options valueForKey:@"rad_deviation"] floatValue] : 0;
-//    CGFloat speed = [options valueForKey:@"speed"] ? [(NSNumber *)[options valueForKey:@"speed"] floatValue] : 1;
-    
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    UIBezierPath *gearPath = [UIBezierPath gearPathWithNumberOfSides:numberOfSides radiusDeviation:radiusDeviation baseRadius:self.frame.size.width / 2.0 * 0.9];
-    if (!gearPath) {
+    if (shape == nil) {
+        self.maskView = nil;
         return;
     }
     
-    maskLayer.path = gearPath.CGPath;
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    
+    maskLayer.path = shape.CGPath;
     maskLayer.transform = CATransform3DMakeTranslation(self.frame.size.width / 2.0, self.frame.size.height / 2.0, 0);
     
     UIView *mask = [[UIView alloc] initWithFrame:self.bounds];
     [mask.layer addSublayer:maskLayer];
     
     self.maskView = mask;
-//    self.layer.allowsEdgeAntialiasing = TRUE;
-//    mask.layer.allowsEdgeAntialiasing = TRUE;
-//    
-//    self.layer.drawsAsynchronously = TRUE;
-//    mask.layer.drawsAsynchronously = TRUE;
     
     self.superview.layer.shouldRasterize = TRUE;
     self.superview.layer.rasterizationScale = [UIScreen mainScreen].scale;
-//    self.alpha = 1.0;
-//    self.layer.opaque = YES;
-//    
-//    mask.alpha = 1.0;
-//    mask.layer.opaque = YES;
     
     [[CustomMasksAnimationManager sharedInstance] addMaskView:mask];
 }
 
+
+//    self.layer.allowsEdgeAntialiasing = TRUE;
+//    mask.layer.allowsEdgeAntialiasing = TRUE;
+//
+//    self.layer.drawsAsynchronously = TRUE;
+//    mask.layer.drawsAsynchronously = TRUE;
+//    self.alpha = 1.0;
+//    self.layer.opaque = YES;
+//
+//    mask.alpha = 1.0;
+//    mask.layer.opaque = YES;
 
 #pragma mark - Internal Helpers
 

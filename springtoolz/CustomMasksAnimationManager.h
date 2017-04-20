@@ -17,4 +17,6 @@
 - (void)removeMaskView:(UIView *)mask;
 - (void)animate;
 
+- (UIBezierPath *)maskForName:(NSString *)name;
+
 @end
