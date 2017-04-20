@@ -5,31 +5,40 @@
 
 #pragma mark - Settings Related Stuff
 
-static BOOL USE_CIRCULAR_ICONS = YES;
-static BOOL SHADOWS_ENABLED = YES;
+static BOOL TweakEnabled = YES;
 
-static BOOL USE_CIRCULAR_ICONS_IN_DOCK = YES;
-static BOOL SHADOWS_ENABLED_IN_DOCK = YES;
+static NSString *PageIconShape = @"default";
+static BOOL PageIconsShadowsEnabled = YES;
+static BOOL PageIconsAnimationEnabled = NO;
 
-static NSDictionary *SHADOW_OPTIONS = nil;
+static NSString *DockIconShape = @"default";
+static BOOL DockIconsShadowsEnabled = YES;
+static BOOL DockIconsAnimationEnabled = NO;
+
+static NSString *ShadowColor = @"black";
+static NSNumber *ShadowIntensity = @1;
+static NSNumber *ShadowHorDeviation = @0;
+static NSNumber *ShadowVerDeviation = @0;
 
 static void loadPrefs() {
     NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.stoqn4opm.springtoolz.plist"];
     if(prefs) {
         
-        USE_CIRCULAR_ICONS = ([prefs objectForKey:@"circular_icons_enabled"] ? [[prefs objectForKey:@"circular_icons_enabled"] boolValue] : USE_CIRCULAR_ICONS);
-        SHADOWS_ENABLED = ([prefs objectForKey:@"shadows_enabled"] ? [[prefs objectForKey:@"shadows_enabled"] boolValue] : SHADOWS_ENABLED);
-        
-        USE_CIRCULAR_ICONS_IN_DOCK = ([prefs objectForKey:@"circular_icons_in_dock_enabled"] ? [[prefs objectForKey:@"circular_icons_in_dock_enabled"] boolValue] : USE_CIRCULAR_ICONS_IN_DOCK);
-        SHADOWS_ENABLED_IN_DOCK = ([prefs objectForKey:@"shadows_in_dock_enabled"] ? [[prefs objectForKey:@"shadows_in_dock_enabled"] boolValue] : SHADOWS_ENABLED_IN_DOCK);
+        TweakEnabled = [prefs objectForKey:@"tweak_enabled"] ? [[prefs objectForKey:@"tweak_enabled"] boolValue] : TweakEnabled;
 
-        NSNumber *intensity = ([prefs objectForKey:@"intensity"] ? [prefs objectForKey:@"intensity"] : @1);
-        NSNumber *horDeviation = ([prefs objectForKey:@"hor_deviation"] ? [prefs objectForKey:@"hor_deviation"] : @0);
-        NSNumber *verDeviation = ([prefs objectForKey:@"ver_deviation"] ? [prefs objectForKey:@"ver_deviation"] : @0);
-        
-        SHADOW_OPTIONS = @{ @"ver_deviation" : verDeviation,
-                            @"hor_deviation" : horDeviation,
-                            @"intensity"    : intensity };
+        PageIconShape = [prefs objectForKey:@"page_icon_shape"] ? (NSString *)[prefs objectForKey:@"page_icon_shape"] : PageIconShape;
+        PageIconsShadowsEnabled = [prefs objectForKey:@"page_icons_shadows_enabled"] ? [[prefs objectForKey:@"page_icons_shadows_enabled"] boolValue] : PageIconsShadowsEnabled;
+        PageIconsAnimationEnabled = [prefs objectForKey:@"page_icons_animations_enabled"] ? [[prefs objectForKey:@"page_icons_animations_enabled"] boolValue] : PageIconsAnimationEnabled;
+
+        DockIconShape = [prefs objectForKey:@"dock_icon_shape"] ? (NSString *)[prefs objectForKey:@"dock_icon_shape"] : DockIconShape;
+        DockIconsShadowsEnabled = [prefs objectForKey:@"dock_icons_shadows_enabled"] ? [[prefs objectForKey:@"dock_icons_shadows_enabled"] boolValue] : DockIconsShadowsEnabled;
+        DockIconsAnimationEnabled = [prefs objectForKey:@"dock_icons_animations_enabled"] ? [[prefs objectForKey:@"dock_icons_animations_enabled"] boolValue] : DockIconsAnimationEnabled;
+
+
+        ShadowColor = [prefs objectForKey:@"shadow_color"] ? (NSString *)[prefs objectForKey:@"shadow_color"] : ShadowColor;
+        ShadowIntensity = [prefs objectForKey:@"shadow_intensity"] ? [prefs objectForKey:@"shadow_intensity"] : ShadowIntensity;
+        ShadowHorDeviation = [prefs objectForKey:@"shadow_hor_deviation"] ? [prefs objectForKey:@"shadow_hor_deviation"] : ShadowHorDeviation;
+        ShadowVerDeviation = [prefs objectForKey:@"shadow_ver_deviation"] ? [prefs objectForKey:@"shadow_ver_deviation"] : ShadowVerDeviation;
     }
 }
 
@@ -61,11 +70,11 @@ static void loadPrefs() {
         return;
     }
 
-    if ([NSStringFromClass([newSuperview class]) isEqualToString:@"SBDockIconListView"]) {
-        [self makeSubviewsCurcular:USE_CIRCULAR_ICONS_IN_DOCK withGearMaskEnabled:YES gearMaskOptions:@{@"sides_count": @3, @"rad_deviation": @2.5, @"speed" : @10} andWithShadow:SHADOWS_ENABLED_IN_DOCK andShadowOptions:SHADOW_OPTIONS];
-    } else {
-        [self makeSubviewsCurcular:USE_CIRCULAR_ICONS withGearMaskEnabled:YES gearMaskOptions:@{@"sides_count": @3, @"rad_deviation": @2.5, @"speed" : @10} andWithShadow:SHADOWS_ENABLED andShadowOptions:SHADOW_OPTIONS];
-    }
+    // if ([NSStringFromClass([newSuperview class]) isEqualToString:@"SBDockIconListView"]) {
+    //     [self makeSubviewsCurcular:USE_CIRCULAR_ICONS_IN_DOCK withGearMaskEnabled:YES gearMaskOptions:@{@"sides_count": @3, @"rad_deviation": @2.5, @"speed" : @10} andWithShadow:SHADOWS_ENABLED_IN_DOCK andShadowOptions:SHADOW_OPTIONS];
+    // } else {
+    //     [self makeSubviewsCurcular:USE_CIRCULAR_ICONS withGearMaskEnabled:YES gearMaskOptions:@{@"sides_count": @3, @"rad_deviation": @2.5, @"speed" : @10} andWithShadow:SHADOWS_ENABLED andShadowOptions:SHADOW_OPTIONS];
+    // }
 
     %orig;
 }
