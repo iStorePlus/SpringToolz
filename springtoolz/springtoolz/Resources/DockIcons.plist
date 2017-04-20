@@ -6,15 +6,33 @@
 	<array>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
+			<string>PSLinkListCell</string>
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
 			<key>key</key>
-			<string>circular_icons_enabled</string>
+			<string>dock_icon_shape</string>
 			<key>label</key>
-			<string>Enabled</string>
+			<string>Choose Shape</string>
+			<key>validTitles</key>
+			<array>
+				<string>Default</string>
+				<string>Circle</string>
+				<string>Gear Wheel 1</string>
+				<string>Gear Wheel 2</string>
+				<string>Gear Wheel 3</string>
+				<string>Circle Radius Deviation</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>default</string>
+				<string>circle</string>
+				<string>gear_wheel_1</string>
+				<string>gear_wheel_2</string>
+				<string>gear_wheel_3</string>
+				<string>circle_radius_deviation</string>
+			</array>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -23,59 +41,31 @@
 			<string></string>
 		</dict>
 		<dict>
-			<key>detail</key>
-			<string>SPGTLZPageIconsListController</string>
 			<key>cell</key>
-			<string>PSLinkCell</string>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>circular_icons_enabled</string>
 			<key>label</key>
-			<string>Page Icons</string>
-		</dict>
-		<dict>
-			<key>detail</key>
-			<string>PSListController</string>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>label</key>
-			<string>Dock Icons</string>
-		</dict>
-		<dict>
-			<key>detail</key>
-			<string>PSListController</string>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>label</key>
-			<string>Shadow Options</string>
+			<string>Enable Shadows</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSGroupCell</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>circular_icons_enabled</string>
 			<key>label</key>
-			<string>Donate (PayPal)</string>
-			<key>action</key>
-			<string>donate</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>label</key>
-			<string>Find me on Facebook</string>
-			<key>action</key>
-			<string>facebook</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>label</key>
-			<string>Respring (Apply Changes)</string>
-			<key>action</key>
-			<string>respring</string>
+			<string>Animate Shape</string>
 		</dict>
 	</array>
 	<key>title</key>
-	<string>SpringToolz</string>
+	<string>Dock Icons</string>
 </dict>
 </plist>

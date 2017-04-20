@@ -6,45 +6,33 @@
 	<array>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
+			<string>PSLinkListCell</string>
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
 			<key>key</key>
-			<string>circular_icons_enabled</string>
+			<string>shadow_color</string>
 			<key>label</key>
-			<string>Enabled</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string></string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>key</key>
-			<string>shadows_enabled</string>
-			<key>label</key>
-			<string>Enable Shadows</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>com.stoqn4opm.springtoolz</string>
-			<key>key</key>
-			<string>shadows_in_dock_enabled</string>
-			<key>label</key>
-			<string>Enable Shadows in Dock</string>
+			<string>Shadow Color</string>
+			<key>validTitles</key>
+			<array>
+				<string>Black</string>
+				<string>Green</string>
+				<string>Blue</string>
+				<string>Yellow</string>
+				<string>White</string>
+				<string>Gray</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>black</string>
+				<string>green</string>
+				<string>blue</string>
+				<string>yellow</string>
+				<string>white</string>
+				<string>gray</string>
+			</array>
 		</dict>
 		<dict>
 			<key>cell</key>
