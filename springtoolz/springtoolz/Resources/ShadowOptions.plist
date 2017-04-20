@@ -5,12 +5,34 @@
 	<key>items</key>
 	<array>
 		<dict>
-			<key>detail</key>
-			<string>PSListController</string>
 			<key>cell</key>
-			<string>PSLinkCell</string>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>key</key>
+			<string>shadow_color</string>
 			<key>label</key>
 			<string>Shadow Color</string>
+			<key>validTitles</key>
+			<array>
+				<string>Black</string>
+				<string>Green</string>
+				<string>Blue</string>
+				<string>Yellow</string>
+				<string>White</string>
+				<string>Gray</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>black</string>
+				<string>green</string>
+				<string>blue</string>
+				<string>yellow</string>
+				<string>white</string>
+				<string>gray</string>
+			</array>
 		</dict>
 		<dict>
 			<key>cell</key>
