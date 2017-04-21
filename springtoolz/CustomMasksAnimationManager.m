@@ -32,6 +32,14 @@
 
 #pragma mark - Public Methods
 
+- (void)setIconSize:(CGRect)iconSize {
+    CGFloat newLenght = iconSize.size.width * 0.9;
+    CGFloat xDelta = iconSize.size.width - newLenght;
+    CGFloat yDelta = iconSize.size.height - newLenght;
+    
+    _iconSize = CGRectMake( xDelta / 2.0, yDelta / 2.0, newLenght, newLenght);
+}
+
 - (void)addMaskView:(UIView *)mask {
     mask.tag = self.viewTagHelper;
     self.viewTagHelper++;
@@ -52,6 +60,15 @@
         [self.masks removeAllObjects];
         
     } completion:nil];
+}
+
+- (UIBezierPath *)maskForName:(NSString *)name {
+    
+    return [UIBezierPath bezierPathWithOvalInRect:self.iconSize];
+}
+
+- (UIColor *)shadowColorForName:(NSString *)name {
+    return [UIColor blackColor];
 }
 
 @end

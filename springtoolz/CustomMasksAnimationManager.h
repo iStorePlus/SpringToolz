@@ -13,10 +13,12 @@
 
 + (CustomMasksAnimationManager *)sharedInstance;
 
+@property (nonatomic, assign) CGRect iconSize;
+
 - (void)addMaskView:(UIView *)mask;
 - (void)removeMaskView:(UIView *)mask;
 - (void)animate;
 
 - (UIBezierPath *)maskForName:(NSString *)name;
-
+- (UIColor *)shadowColorForName:(NSString *)name;
 @end

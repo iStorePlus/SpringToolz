@@ -21,15 +21,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.iconView makeSubviewsCurcular:NO
-                    withGearMaskEnabled:YES
-                        gearMaskOptions:@{@"sides_count": @100, @"rad_deviation": @5, @"speed" : @2.5}
-                          andWithShadow:YES
-                       andShadowOptions:nil];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[CustomMasksAnimationManager sharedInstance] animate];
-    });
+    
+    [self.iconView
+     applyIconOptions:@{
+                        @"shape" : @"default",
+                        @"shadows" : @(YES),
+                        @"animations" : @(NO)}
+     withShadowOptions:@{
+                         @"color"            : @"black",
+                         @"intensity"        : @1,
+                         @"hor_deviation"    : @0,
+                         @"ver_deviation"    : @0}];
+    
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [[CustomMasksAnimationManager sharedInstance] animate];
+//    });
 }
 
 @end
