@@ -77,7 +77,7 @@ static void loadPrefs() {
 
 - (void)prepareForReuse {
     %orig;
-    [[CustomMasksAnimationManager sharedInstance] animate];
+    [[CustomMasksAnimationManager sharedInstance] animateIfNeeded];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -96,9 +96,9 @@ static void loadPrefs() {
     }
 
     if ([NSStringFromClass([newSuperview class]) isEqualToString:@"SBDockIconListView"]) {
-        [self applyIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
+        [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
     } else {
-        [self applyIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
+        [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
     }
 
     %orig;
@@ -111,7 +111,7 @@ static void loadPrefs() {
 - (void)unlockUIFromSource:(int)arg1 withOptions:(id)arg2 {
     %orig;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[CustomMasksAnimationManager sharedInstance] animate];
+        [[CustomMasksAnimationManager sharedInstance] animateIfNeeded];
     });
 }
 
