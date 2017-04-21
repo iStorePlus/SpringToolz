@@ -10,7 +10,7 @@
 			<key>defaults</key>
 			<string>com.stoqn4opm.springtoolz</string>
 			<key>detail</key>
-			<string>PSListItemsController</string>
+			<string>SPGTLZRootListItemsController</string>
 			<key>key</key>
 			<string>page_icon_shape</string>
 			<key>label</key>

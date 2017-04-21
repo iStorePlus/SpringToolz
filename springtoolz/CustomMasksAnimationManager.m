@@ -67,8 +67,31 @@
     return [UIBezierPath bezierPathWithOvalInRect:self.iconSize];
 }
 
-- (UIColor *)shadowColorForName:(NSString *)name {
-    return [UIColor blackColor];
-}
+/*
+ supported color names:
+ - black
+ - green
+ - blue
+ - yellow
+ - white
+ - gray
+ */
 
+- (UIColor *)shadowColorForName:(NSString *)name {
+    
+    if ([name isEqualToString:@"black"]) {
+        return [UIColor blackColor];
+    } else if ([name isEqualToString:@"green"]) {
+        return [UIColor greenColor];
+    } else if ([name isEqualToString:@"blue"]) {
+        return [UIColor blueColor];
+    } else if ([name isEqualToString:@"yellow"]) {
+        return [UIColor yellowColor];
+    } else if ([name isEqualToString:@"white"]) {
+        return [UIColor whiteColor];
+    } else if ([name isEqualToString:@"gray"]) {
+        return [UIColor grayColor];
+    }
+    return nil;
+}
 @end
