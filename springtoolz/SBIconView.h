@@ -25,3 +25,14 @@
 
 
 @end
+
+
+@interface SBDockIconListView: UIView
+
+@end
+
+@implementation SBDockIconListView
+
+
+@end
+

@@ -75,47 +75,34 @@ static void loadPrefs() {
 
 %hook SBIconView
 
-- (void)prepareForReuse {
-    %orig;
-    [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-}
-
 - (void)willMoveToSuperview:(UIView *)newSuperview {
 
-    if (newSuperview == nil) {
-
-        // for (UIView *subview in [self subviews]) {
-        //     if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-        //         [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
-                    
-        //         [[SPGTLZIconManager sharedInstance] removeMaskView:subview.maskView];
-        //     }
-        // }
-
-        return;
+    if (TweakEnabled) {
+        if ([NSStringFromClass([newSuperview class]) isEqualToString:@"SBDockIconListView"]) {
+            [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
+            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+        } else {
+            [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
+            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+        }
     }
 
-    if ([NSStringFromClass([newSuperview class]) isEqualToString:@"SBDockIconListView"]) {
-        [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
-    } else {
-        [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
+    %orig;
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+
+    if (TweakEnabled) {
+        if ([NSStringFromClass([self.superview class]) isEqualToString:@"SBDockIconListView"]) {
+            [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
+            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+        } else {
+            [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
+            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+        }
     }
 
     %orig;
 }
 
 %end
-
-%hook SBLockScreenManager
-
-- (void)unlockUIFromSource:(int)arg1 withOptions:(id)arg2 {
-    %orig;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-    });
-}
-
-%end
-
-    // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"asd" message:@"dsfsdg" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
-    // [alert show];

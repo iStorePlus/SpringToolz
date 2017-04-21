@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIBezierPath *pageIconsShape;
 @property (nonatomic, strong) UIBezierPath *dockIconsShape;
 
+@property (nonatomic, strong) NSTimer *animationTimer;
 @end
 
 @implementation SPGTLZIconManager
@@ -41,11 +42,11 @@
 }
 
 - (void)animateIfNeeded {
-    
-//    if (!self.shouldAnimate) {
-//        return;
-//    }
-//    
+    [self.animationTimer invalidate];
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(animate) userInfo:nil repeats:NO];
+}
+
+- (void)animate {
     [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         for (UIView *mask in self.masks) {
