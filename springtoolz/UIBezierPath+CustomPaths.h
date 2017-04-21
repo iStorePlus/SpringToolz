@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIBezierPath (CustomPaths)
-+ (UIBezierPath *)gearPathWithNumberOfSides:(NSUInteger)sides radiusDeviation:(CGFloat)radDeviation baseRadius:(CGFloat)baseRadius;
++ (UIBezierPath *)gearPathWithNumberOfSides:(NSUInteger)sides radiusDeviation:(CGFloat)radDeviation iconSize:(CGRect)iconSize;
 @end

@@ -13,11 +13,10 @@
 
 @property (nonatomic, strong) NSMutableArray<UIView *> *masks;
 @property (nonatomic, assign) NSUInteger viewTagHelper;
+
 @end
 
-@implementation CustomMasksAnimationManager {
-    UIBezierPath *_currentMask;
-}
+@implementation CustomMasksAnimationManager
 
 #pragma mark - Singleton Refference
 
@@ -77,25 +76,21 @@
 
 - (UIBezierPath *)maskForName:(NSString *)name {
     
-    if (_currentMask) {
-        return _currentMask;
-    }
-    
     if ([name isEqualToString:@"default"]) {
-        _currentMask = nil;
+        return nil;
     } else if ([name isEqualToString:@"circle"]) {
-        _currentMask = [UIBezierPath bezierPathWithOvalInRect:self.iconSize];
+        return [UIBezierPath bezierPathWithOvalInRect:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_1"]) {
-        _currentMask = [UIBezierPath gearPathWithNumberOfSides:4 radiusDeviation:5 baseRadius:self.iconSize.size.width / 2.0];
+        return [UIBezierPath gearPathWithNumberOfSides:4 radiusDeviation:5 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_2"]) {
-        _currentMask = [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:2 baseRadius:self.iconSize.size.width / 2.0];
+        return [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:2 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_3"]) {
-        _currentMask = [UIBezierPath gearPathWithNumberOfSides:100 radiusDeviation:6 baseRadius:self.iconSize.size.width / 2.0];
+        return [UIBezierPath gearPathWithNumberOfSides:100 radiusDeviation:6 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle_radius_deviation"]) {
-        _currentMask = [UIBezierPath gearPathWithNumberOfSides:3 radiusDeviation:5 baseRadius:self.iconSize.size.width / 2.0];
+        return [UIBezierPath gearPathWithNumberOfSides:3 radiusDeviation:5 iconSize:self.iconSize];
     }
     
-    return _currentMask;
+    return nil;
 }
 
 /*

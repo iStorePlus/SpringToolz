@@ -10,12 +10,13 @@
 
 @implementation UIBezierPath (CustomPaths)
 
-+ (UIBezierPath *)gearPathWithNumberOfSides:(NSUInteger)sides radiusDeviation:(CGFloat)radDeviation baseRadius:(CGFloat)baseRadius {
++ (UIBezierPath *)gearPathWithNumberOfSides:(NSUInteger)sides radiusDeviation:(CGFloat)radDeviation iconSize:(CGRect)iconSize {
 
     if (sides == 0) {
         return nil;
     }
     
+    CGFloat baseRadius = iconSize.size.height / 2.0;
     UIBezierPath *bPath = [UIBezierPath bezierPath];
     
     for (NSInteger i = 1; i <= sides; i++) {
@@ -26,6 +27,7 @@
         [bPath addArcWithCenter:CGPointZero radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     }
     [bPath closePath];
+    [bPath applyTransform:CGAffineTransformMakeTranslation(baseRadius + iconSize.origin.x, baseRadius + iconSize.origin.y)];
     return bPath;
 }
 
