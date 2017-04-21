@@ -1,5 +1,5 @@
 //
-//  CustomMasksAnimationManager.h
+//  SPGTLZIconManager.h
 //  SpringToolzSampleProject
 //
 //  Created by Stoyan Stoyanov on 4/19/17.
@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface CustomMasksAnimationManager : NSObject
+@interface SPGTLZIconManager : NSObject
 
-+ (CustomMasksAnimationManager *)sharedInstance;
++ (SPGTLZIconManager *)sharedInstance;
 
 @property (nonatomic, assign) CGRect iconSize;
 @property (nonatomic, assign, readonly) BOOL isIconSizeSet;
