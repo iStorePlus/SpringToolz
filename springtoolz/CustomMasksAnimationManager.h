@@ -14,11 +14,16 @@
 + (CustomMasksAnimationManager *)sharedInstance;
 
 @property (nonatomic, assign) CGRect iconSize;
+@property (nonatomic, assign, readonly) BOOL isIconSizeSet;
+
+- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName;
+- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName;
+
+- (UIBezierPath *)shapeForPageIcons;
+- (UIBezierPath *)shapeForDockIcons;
 
 - (void)addMaskView:(UIView *)mask;
-- (void)removeMaskView:(UIView *)mask;
-- (void)animate;
+- (void)animateIfNeeded;
 
-- (UIBezierPath *)maskForName:(NSString *)name;
 - (UIColor *)shadowColorForName:(NSString *)name;
 @end

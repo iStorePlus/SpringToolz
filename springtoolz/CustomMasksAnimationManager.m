@@ -11,8 +11,12 @@
 
 @interface CustomMasksAnimationManager()
 
+@property (nonatomic, assign) BOOL isIconSizeSet;
+
 @property (nonatomic, strong) NSMutableArray<UIView *> *masks;
-@property (nonatomic, assign) NSUInteger viewTagHelper;
+
+@property (nonatomic, strong) UIBezierPath *pageIconsShape;
+@property (nonatomic, strong) UIBezierPath *dockIconsShape;
 
 @end
 
@@ -26,8 +30,6 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[CustomMasksAnimationManager alloc] init];
         sharedInstance.masks = [NSMutableArray new];
-        sharedInstance.viewTagHelper = 0;
-        
     });
     return sharedInstance;
 }
@@ -40,20 +42,19 @@
     CGFloat yDelta = iconSize.size.height - newLenght;
     
     _iconSize = CGRectMake( xDelta / 2.0, yDelta / 2.0, newLenght, newLenght);
+    self.isIconSizeSet = YES;
 }
 
 - (void)addMaskView:(UIView *)mask {
-    mask.tag = self.viewTagHelper;
-    self.viewTagHelper++;
-    
     [self.masks addObject:mask];
 }
 
-- (void)removeMaskView:(UIView *)mask {
-    [self.masks removeObject:mask];
-}
-
-- (void)animate {
+- (void)animateIfNeeded {
+    
+//    if (!self.shouldAnimate) {
+//        return;
+//    }
+//    
     [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         for (UIView *mask in self.masks) {
@@ -62,6 +63,22 @@
         [self.masks removeAllObjects];
         
     } completion:nil];
+}
+
+- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName {
+    self.pageIconsShape = [self shapeForName:pageIconsShapeName];
+}
+
+- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName {
+    self.dockIconsShape = [self shapeForName:dockIconsShapeName];
+}
+
+- (UIBezierPath *)shapeForPageIcons {
+    return self.pageIconsShape;
+}
+
+- (UIBezierPath *)shapeForDockIcons {
+    return self.dockIconsShape;
 }
 
 /*
@@ -74,7 +91,7 @@
  circle_radius_deviation
  */
 
-- (UIBezierPath *)maskForName:(NSString *)name {
+- (UIBezierPath *)shapeForName:(NSString *)name {
     
     if ([name isEqualToString:@"default"]) {
         return nil;

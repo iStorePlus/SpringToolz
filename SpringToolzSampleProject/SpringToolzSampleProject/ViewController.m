@@ -24,8 +24,8 @@
     
     
     [self.iconView
-     applyIconOptions:@{
-                        @"shape" : @"default",
+     applyPageIconOptions:@{
+                        @"shape" : @"circle",
                         @"shadows" : @(YES),
                         @"animations" : @(NO)}
      withShadowOptions:@{
