@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "UIView+Round.h"
 #import "SBIconView.h"
-#import "CustomMasksAnimationManager.h"
+#import "SPGTLZIconManager.h"
 
 #pragma mark - Settings Defaults
 
@@ -77,7 +77,7 @@ static void loadPrefs() {
 
 - (void)prepareForReuse {
     %orig;
-    [[CustomMasksAnimationManager sharedInstance] animateIfNeeded];
+    [[SPGTLZIconManager sharedInstance] animateIfNeeded];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -88,7 +88,7 @@ static void loadPrefs() {
         //     if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
         //         [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
                     
-        //         [[CustomMasksAnimationManager sharedInstance] removeMaskView:subview.maskView];
+        //         [[SPGTLZIconManager sharedInstance] removeMaskView:subview.maskView];
         //     }
         // }
 
@@ -111,7 +111,7 @@ static void loadPrefs() {
 - (void)unlockUIFromSource:(int)arg1 withOptions:(id)arg2 {
     %orig;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[CustomMasksAnimationManager sharedInstance] animateIfNeeded];
+        [[SPGTLZIconManager sharedInstance] animateIfNeeded];
     });
 }
 

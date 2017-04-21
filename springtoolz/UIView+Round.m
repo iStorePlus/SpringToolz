@@ -7,14 +7,14 @@
 //
 
 #import "UIView+Round.h"
-#import "UIBezierPath+CustomPaths.h"
-#import "CABasicAnimation+Rotation.h"
-#import "CustomMasksAnimationManager.h"
+#import "SPGTLZIconManager.h"
 
 #define SHADOW_TAG 0x00123f
 
 @implementation UIView (Round)
 
+
+#pragma mark - Public Methods
 
 - (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
 
@@ -24,19 +24,19 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        if (![[CustomMasksAnimationManager sharedInstance] isIconSizeSet]) {
+        if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
             for (UIView *subview in [self subviews]) {
                 if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
                     [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
                     
-                    [[CustomMasksAnimationManager sharedInstance] setIconSize:subview.bounds];
+                    [[SPGTLZIconManager sharedInstance] setIconSize:subview.bounds];
                     break;
                 }
             }
         }
         
         NSString *pageIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
-        [[CustomMasksAnimationManager sharedInstance] setPageIconsShapeName:pageIconShape];
+        [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape];
     });
     
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
@@ -50,12 +50,12 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 
-        if (![[CustomMasksAnimationManager sharedInstance] isIconSizeSet]) {
+        if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
             for (UIView *subview in [self subviews]) {
                 if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
                     [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
                     
-                    [[CustomMasksAnimationManager sharedInstance] setIconSize:subview.bounds];
+                    [[SPGTLZIconManager sharedInstance] setIconSize:subview.bounds];
                     break;
                 }
             }
@@ -63,11 +63,13 @@
         
         
         NSString *dockIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
-        [[CustomMasksAnimationManager sharedInstance] setDockIconsShapeName:dockIconShape];
+        [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape];
     });
     
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
+
+#pragma mark - Internal Helpers
 
 - (void)applyIconOptions:(NSMutableDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
     
@@ -85,9 +87,9 @@
 
     UIBezierPath *shape = nil;
     if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"page_icon"]) {
-        shape = [[CustomMasksAnimationManager sharedInstance] shapeForPageIcons];
+        shape = [[SPGTLZIconManager sharedInstance] shapeForPageIcons];
     } else if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"dock_icon"]) {
-        shape = [[CustomMasksAnimationManager sharedInstance] shapeForDockIcons];
+        shape = [[SPGTLZIconManager sharedInstance] shapeForDockIcons];
     }
     
     for (UIView *subview in [self subviews]) {
@@ -105,8 +107,6 @@
         }
     }
 }
-
-#pragma mark - Internal Helpers
 
 - (void)applyIconShape:(UIBezierPath *)shape shouldAnimate:(BOOL)shouldAnimate {
     
@@ -126,13 +126,13 @@
     self.superview.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     if (shouldAnimate) {
-        [[CustomMasksAnimationManager sharedInstance] addMaskView:mask];
+        [[SPGTLZIconManager sharedInstance] addMaskView:mask];
     }
 }
 
 - (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName {
     
-    UIColor *color = [[CustomMasksAnimationManager sharedInstance] shadowColorForName:colorName];
+    UIColor *color = [[SPGTLZIconManager sharedInstance] shadowColorForName:colorName];
     
     if (shadowEnabled == NO || color == nil || self.superview == nil) {
         return;

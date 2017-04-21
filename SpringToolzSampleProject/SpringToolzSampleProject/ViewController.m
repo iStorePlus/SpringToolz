@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "UIView+Round.h"
 #import "SBIconView.h"
-#import "CustomMasksAnimationManager.h"
+#import "SPGTLZIconManager.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet SBIconView *iconView;
@@ -36,7 +36,7 @@
     
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [[CustomMasksAnimationManager sharedInstance] animate];
+//        [[SPGTLZIconManager sharedInstance] animate];
 //    });
 }
 
