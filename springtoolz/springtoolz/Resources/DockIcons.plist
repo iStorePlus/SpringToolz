@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>detail</key>
+			<string>SPGTLZRootListItemsController</string>
+			<key>key</key>
+			<string>dock_icon_shape</string>
+			<key>label</key>
+			<string>Choose Shape</string>
+			<key>validTitles</key>
+			<array>
+				<string>Default</string>
+				<string>Circle</string>
+				<string>Gear Wheel 1</string>
+				<string>Gear Wheel 2</string>
+				<string>Gear Wheel 3</string>
+				<string>Circle Radius Deviation</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>default</string>
+				<string>circle</string>
+				<string>gear_wheel_1</string>
+				<string>gear_wheel_2</string>
+				<string>gear_wheel_3</string>
+				<string>circle_radius_deviation</string>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>dock_icons_shadows_enabled</string>
+			<key>label</key>
+			<string>Enable Shadows</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>dock_icons_animations_enabled</string>
+			<key>label</key>
+			<string>Animate Shape</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Dock Icons</string>
+</dict>
+</plist>

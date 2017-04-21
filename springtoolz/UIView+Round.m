@@ -7,90 +7,160 @@
 //
 
 #import "UIView+Round.h"
+#import "SPGTLZIconManager.h"
+
 #define SHADOW_TAG 0x00123f
 
 @implementation UIView (Round)
 
-- (void)makeSubviewsCurcular:(BOOL)circular andWithShadow:(BOOL)shadow andShadowOptions:(NSDictionary *)options {
-    for (UIView *subview in [self subviews]) {
-        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-            [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
-            
-            if (circular) {
-                [subview makeCircular];
-            }
-            
-            if (shadow) {
-                if (circular) {
-                    [self dropCircularShadowWithTag:SHADOW_TAG andOptions:options behind:subview];
-                } else {
-                    [subview dropShadowWithOptions:options];
+
+#pragma mark - Public Methods
+
+- (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+
+    NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
+    [mutableIconOptions setValue:@"page_icon" forKey:@"icon_type"];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
+            for (UIView *subview in [self subviews]) {
+                if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+                    
+                    [[SPGTLZIconManager sharedInstance] setIconSize:subview.bounds];
+                    break;
                 }
             }
         }
-    }
+        
+        NSString *pageIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
+        [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape];
+    });
+    
+    [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
+}
+
+- (void)applyDockIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+    
+    NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
+    [mutableIconOptions setValue:@"dock_icon" forKey:@"icon_type"];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
+            for (UIView *subview in [self subviews]) {
+                if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+                    
+                    [[SPGTLZIconManager sharedInstance] setIconSize:subview.bounds];
+                    break;
+                }
+            }
+        }
+        
+        
+        NSString *dockIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
+        [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape];
+    });
+    
+    [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
 
 #pragma mark - Internal Helpers
 
-- (void)makeCircular {
-    UIView *superView = [self superview];
-    [self removeFromSuperview];
+- (void)applyIconOptions:(NSMutableDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
     
-    CGFloat diameter = self.frame.size.width * 0.965;
-    CGRect smallerFrame = CGRectMake(0, 0, diameter, diameter);
-    UIView *container = [[UIView alloc] initWithFrame:smallerFrame];
+    NSNumber *shadowEnabled = (NSNumber *)[iconOptions valueForKey:@"shadows"];
+    NSNumber *animationsEnabled = (NSNumber *)[iconOptions valueForKey:@"animations"];
+    NSString *shadowColorName = (NSString *)[shadowOptions valueForKey:@"color"];
+    NSNumber *shadowIntensity = (NSNumber *)[shadowOptions valueForKey:@"intensity"];
+    NSNumber *shadowHorDeviation = (NSNumber *)[shadowOptions valueForKey:@"hor_deviation"];
+    NSNumber *shadowVerDeviation = (NSNumber *)[shadowOptions valueForKey:@"ver_deviation"];
     
-    [container addSubview:self];
-    [superView addSubview:container];
-    [superView sendSubviewToBack:container];
     
-    container.clipsToBounds = TRUE;
-    container.layer.cornerRadius = container.frame.size.width / 2.0;
+    if (shadowEnabled == nil || animationsEnabled == nil || shadowColorName == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil) {
+        return;
+    }
 
-    self.layer.opaque = TRUE;
-    container.layer.opaque = TRUE;
+    UIBezierPath *shape = nil;
+    if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"page_icon"]) {
+        shape = [[SPGTLZIconManager sharedInstance] shapeForPageIcons];
+    } else if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"dock_icon"]) {
+        shape = [[SPGTLZIconManager sharedInstance] shapeForDockIcons];
+    }
+    
+    for (UIView *subview in [self subviews]) {
+        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+            [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+
+            [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
+            
+            [subview applyShadow:shadowEnabled.boolValue
+                       withShape:shape
+          andHorizontalDeviation:shadowHorDeviation.floatValue
+               verticalDeviation:shadowVerDeviation.floatValue
+                       intensity:shadowIntensity.floatValue
+                       colorName:shadowColorName];
+        }
+    }
 }
 
-- (void)dropShadowWithOptions:(NSDictionary *)options {
+- (void)applyIconShape:(UIBezierPath *)shape shouldAnimate:(BOOL)shouldAnimate {
     
-    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.bounds];
-    [self dropShadowWithPath:shadowPath options:options];
-    [[self superview] sendSubviewToBack:self];
+    if (shape == nil) {
+        self.maskView = nil;
+        return;
+    }
+
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.path = shape.CGPath;
+    
+    UIView *mask = [[UIView alloc] initWithFrame:self.bounds];
+    [mask.layer addSublayer:maskLayer];
+    
+    self.maskView = mask;
+    self.superview.layer.shouldRasterize = TRUE;
+    self.superview.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
+    if (shouldAnimate) {
+        [[SPGTLZIconManager sharedInstance] addMaskView:mask];
+    }
 }
 
-- (void)dropCircularShadowWithTag:(NSInteger)tag andOptions:(NSDictionary *)options behind:(UIView *)subview {
+- (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName {
     
-    for (UIView *subview in self.subviews) {
-        if(subview.tag == tag) {
+    UIColor *color = [[SPGTLZIconManager sharedInstance] shadowColorForName:colorName];
+    
+    if (shadowEnabled == NO || color == nil || self.superview == nil) {
+        return;
+    }
+    
+    for (UIView *subview in self.superview.subviews) {
+        if(subview.tag == SHADOW_TAG) {
             return;
         }
     }
     
-    UIView *shadowView = [[UIView alloc] initWithFrame:subview.frame];
-    [shadowView setBackgroundColor:[UIColor clearColor]];
+    if (shape == nil) {
+        shape = [UIBezierPath bezierPathWithRect:self.bounds];
+    }
     
-    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithOvalInRect:subview.bounds];
-    [self dropShadowWithPath:shadowPath options:options];
+    UIView *shadowView = [[UIView alloc] initWithFrame:self.frame];
+    shadowView.tag = SHADOW_TAG;
     
-    shadowView.tag = tag;
-    [self addSubview:shadowView];
-    [self sendSubviewToBack:shadowView];
-}
-
-- (void)dropShadowWithPath:(UIBezierPath *)shadowPath options:(NSDictionary *)options {
+    shadowView.layer.shadowPath = [shape CGPath];
+    shadowView.layer.masksToBounds = NO;
+    shadowView.layer.shadowOffset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
+    shadowView.layer.shadowRadius = 10;
     
-    CGFloat verDeviation = [options valueForKey:@"ver_deviation"] ? [(NSNumber *)[options valueForKey:@"ver_deviation"] floatValue] : 0;
-    CGFloat horDeviation = [options valueForKey:@"hor_deviation"] ? [(NSNumber *)[options valueForKey:@"hor_deviation"] floatValue] : 0;
-    CGFloat intensity = [options valueForKey:@"intensity"] ? [(NSNumber *)[options valueForKey:@"intensity"] floatValue] : 1;
+    shadowView.layer.shadowOpacity = intensity;
+    shadowView.layer.shadowColor = color.CGColor;
     
-    self.layer.shadowPath = [shadowPath CGPath];
-    self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
-    self.layer.shadowRadius = 10;
-
-    self.layer.shadowOpacity = intensity;
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    [self.superview addSubview:shadowView];
+    [self.superview sendSubviewToBack:shadowView];
 }
 
 @end

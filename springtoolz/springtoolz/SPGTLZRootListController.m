@@ -19,10 +19,7 @@
 }
 
 -(void)respring {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        sleep(5);
-        system("killall -9 SpringBoard");
-    });
+    system("killall -9 SpringBoard");
 }
 
 @end

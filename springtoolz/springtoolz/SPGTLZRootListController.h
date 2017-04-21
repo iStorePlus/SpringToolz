@@ -1,5 +1,5 @@
-#import <Preferences/PSListController.h>
+#import "SPGTLZBaseListController.h"
 
-@interface SPGTLZRootListController : PSListController
+@interface SPGTLZRootListController : SPGTLZBaseListController
 
 @end

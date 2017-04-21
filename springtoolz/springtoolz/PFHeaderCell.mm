@@ -2,43 +2,43 @@
 @class NSMutableDictionary, NSDictionary, NSString, NSArray;
 
 typedef enum PSCellType {
-	PSGroupCell,
-	PSLinkCell,
-	PSLinkListCell,
-	PSListItemCell,
-	PSTitleValueCell,
-	PSSliderCell,
-	PSSwitchCell,
-	PSStaticTextCell,
-	PSEditTextCell,
-	PSSegmentCell,
-	PSGiantIconCell,
-	PSGiantCell,
-	PSSecureEditTextCell,
-	PSButtonCell,
-	PSEditTextViewCell,
+    PSGroupCell,
+    PSLinkCell,
+    PSLinkListCell,
+    PSListItemCell,
+    PSTitleValueCell,
+    PSSliderCell,
+    PSSwitchCell,
+    PSStaticTextCell,
+    PSEditTextCell,
+    PSSegmentCell,
+    PSGiantIconCell,
+    PSGiantCell,
+    PSSecureEditTextCell,
+    PSButtonCell,
+    PSEditTextViewCell,
 } PSCellType;
 
 @interface PSSpecifier : NSObject {
 @public
-	id target;
-	SEL getter;
-	SEL setter;
-	SEL action;
-	Class detailControllerClass;
-	PSCellType cellType;
-	Class editPaneClass;
-	UIKeyboardType keyboardType;
-	UITextAutocapitalizationType autoCapsType;
-	UITextAutocorrectionType autoCorrectionType;
-	int textFieldType;
+    id target;
+    SEL getter;
+    SEL setter;
+    SEL action;
+    Class detailControllerClass;
+    PSCellType cellType;
+    Class editPaneClass;
+    UIKeyboardType keyboardType;
+    UITextAutocapitalizationType autoCapsType;
+    UITextAutocorrectionType autoCorrectionType;
+    int textFieldType;
 @private
-	NSString* _name;
-	NSArray* _values;
-	NSDictionary* _titleDict;
-	NSDictionary* _shortTitleDict;
-	id _userInfo;
-	NSMutableDictionary* _properties;
+    NSString* _name;
+    NSArray* _values;
+    NSDictionary* _titleDict;
+    NSDictionary* _shortTitleDict;
+    id _userInfo;
+    NSMutableDictionary* _properties;
 }
 @property(retain) NSMutableDictionary* properties;
 @property(retain) NSString* name;
@@ -85,8 +85,8 @@ typedef enum PSCellType {
 
 @interface PFHeaderCell()
 {
-	UIView *headerImageViewContainer;
-	UIImageView *headerImageView;
+    UIView *headerImageViewContainer;
+    UIImageView *headerImageView;
 }
 - (void)prepareHeaderImage:(PSSpecifier *)specifier;
 - (void)applyHeaderImage;
@@ -100,43 +100,50 @@ typedef enum PSCellType {
     unsigned rgbValue = 0;
     if ([hexString hasPrefix:@"#"]) hexString = [hexString substringFromIndex:1];
     if (hexString) {
-    NSScanner *scanner = [NSScanner scannerWithString:hexString];
-    [scanner setScanLocation:0]; // bypass '#' character
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+        NSScanner *scanner = [NSScanner scannerWithString:hexString];
+        [scanner setScanLocation:0]; // bypass '#' character
+        [scanner scanHexInt:&rgbValue];
+        return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
     }
     else return [UIColor grayColor];
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(id)identifier specifier:(PSSpecifier *)specifier
 {
-	self = [super initWithStyle:style reuseIdentifier:identifier specifier:specifier];
- 	
-	[self prepareHeaderImage:specifier];
-	[self applyHeaderImage];
-
-	return self;
+    self = [super initWithStyle:style reuseIdentifier:identifier specifier:specifier];
+    
+    [self prepareHeaderImage:specifier];
+    [self applyHeaderImage];
+    
+    return self;
 }
 
 - (void)prepareHeaderImage:(PSSpecifier *)specifier
 {
-	headerImageViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-	headerImageViewContainer.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) headerImageViewContainer.layer.cornerRadius = 5;
+    headerImageViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    headerImageViewContainer.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) headerImageViewContainer.layer.cornerRadius = 5;
+    
+    if(specifier.properties[@"image"] && specifier.properties[@"background"])
+    {
+        headerImageView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:specifier.properties[@"image"]]];
 
- 	if(specifier.properties[@"image"] && specifier.properties[@"background"]) 
- 	{
-	headerImageView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:specifier.properties[@"image"]]];
- 	
-	headerImageViewContainer.backgroundColor = [PFHeaderCell colorFromHex:specifier.properties[@"background"]];
- 
-	[headerImageViewContainer addSubview:headerImageView];
-	}
+        headerImageViewContainer.backgroundColor = [PFHeaderCell colorFromHex:specifier.properties[@"background"]];
+        
+        [headerImageViewContainer addSubview:headerImageView];
+        [headerImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        NSLayoutConstraint *horCenter = [NSLayoutConstraint constraintWithItem:headerImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:headerImageViewContainer attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+        
+        NSLayoutConstraint *vertCenter = [NSLayoutConstraint constraintWithItem:headerImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:headerImageViewContainer attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+        
+        [headerImageViewContainer addConstraints:@[horCenter, vertCenter]];
+    }
 }
- 
+
 - (void)applyHeaderImage
 {
-	[self addSubview:headerImageViewContainer];
+    [self addSubview:headerImageViewContainer];
 }
 
 @end
