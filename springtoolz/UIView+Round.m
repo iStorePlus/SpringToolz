@@ -114,41 +114,4 @@
     [self.superview sendSubviewToBack:shadowView];
 }
 
-//- (void)dropShadowWithOptions:(NSDictionary *)options {
-//    
-//    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.bounds];
-//    [self dropShadowWithPath:shadowPath options:options];
-//    [[self superview] sendSubviewToBack:self];
-//}
-//
-//- (void)dropShadowIfNeededWithPath:(UIBezierPath *)path andOptions:(NSDictionary *)options behind:(UIView *)subview {
-//    
-//    for (UIView *subview in self.subviews) {
-//        if(subview.tag == SHADOW_TAG) {
-//            return;
-//        }
-//    }
-//    
-//    UIView *shadowView = [[UIView alloc] initWithFrame:subview.frame];
-//    [shadowView setBackgroundColor:[UIColor clearColor]];
-//    
-//    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithOvalInRect:subview.bounds];
-//    [self dropShadowWithPath:shadowPath options:options];
-//    
-//    shadowView.tag = SHADOW_TAG;
-//    [self addSubview:shadowView];
-//    [self sendSubviewToBack:shadowView];
-//}
-//
-//- (void)dropShadowWithPath:(UIBezierPath *)shadowPath options:(NSDictionary *)options {
-//    
-//    self.layer.shadowPath = [shadowPath CGPath];
-//    self.layer.masksToBounds = NO;
-//    self.layer.shadowOffset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
-//    self.layer.shadowRadius = 10;
-//
-//    self.layer.shadowOpacity = intensity;
-//    self.layer.shadowColor = [UIColor blackColor].CGColor;
-//}
-
 @end
