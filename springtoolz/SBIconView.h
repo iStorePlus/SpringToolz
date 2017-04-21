@@ -9,30 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SBIconView: UIView
-
 @end
 
 @implementation SBIconView
-
-
-@end
-
-@interface SBIconImageView: UIImageView
-
-@end
-
-@implementation SBIconImageView
-
-
-@end
-
-
-@interface SBDockIconListView: UIView
-
-@end
-
-@implementation SBDockIconListView
-
-
 @end
 
