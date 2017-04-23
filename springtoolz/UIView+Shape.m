@@ -11,6 +11,8 @@
 
 @implementation UIView (Shape)
 
+// will be called by SBIconImageView or SBClockApplicationIconImageView that certainly has superview
+
 - (void)applyIconShape:(UIBezierPath *)shape shouldAnimate:(BOOL)shouldAnimate {
     
     if (shape == nil) {
