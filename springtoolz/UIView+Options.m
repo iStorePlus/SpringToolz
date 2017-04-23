@@ -15,7 +15,7 @@
 
 #pragma mark - Public Methods
 
-- (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+- (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions inRegardsTo:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
     
     NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
     [mutableIconOptions setValue:@"page_icon" forKey:@"icon_type"];
@@ -37,11 +37,11 @@
         NSString *pageIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
         [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape];
     });
-    
+    [self updateShapeForNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
 
-- (void)applyDockIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+- (void)applyDockIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions inRegardsTo:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
     
     NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
     [mutableIconOptions setValue:@"dock_icon" forKey:@"icon_type"];
@@ -64,7 +64,7 @@
         NSString *dockIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
         [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape];
     });
-    
+    [self updateShapeForNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
 
@@ -83,6 +83,7 @@
     if (shadowEnabled == nil || animationsEnabled == nil || shadowColorName == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil) {
         return;
     }
+    
     
     UIBezierPath *shape = nil;
     if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"page_icon"]) {
@@ -112,6 +113,39 @@
     
     [self insertSubview:shadowView atIndex:0];
     [self insertSubview:shapeContainerView atIndex:1];
+}
+
+- (void)updateShapeForNewSuperView:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
+    
+    NSString *newSuperViewClass = NSStringFromClass([newSuperView class]);
+    NSString *oldSuperViewClass = NSStringFromClass([self.superview class]);
+                                   
+    BOOL shouldRemoveShape = NO;
+    if (newWindow == nil) {
+        shouldRemoveShape = true;
+    } else if (![newSuperViewClass isEqualToString:oldSuperViewClass] &&
+               ([newSuperViewClass isEqualToString:@"SBDockIconListView"] ||
+                [newSuperViewClass isEqualToString:@"SBRootIconListView"] ||
+               [newSuperViewClass isEqualToString:@"SBRecycledViewContainer"])) {
+        shouldRemoveShape = true;
+    }
+    
+    
+    if (shouldRemoveShape) {
+        UIView *oldShapeContainerView = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
+        
+        if (oldShapeContainerView != nil) {
+            
+            UIView *sbIconImageView = oldShapeContainerView.subviews.firstObject;
+            
+            if (sbIconImageView != nil) {
+                [sbIconImageView removeFromSuperview];
+                [oldShapeContainerView removeFromSuperview];
+                [self addSubview:sbIconImageView];
+            }
+        }
+    }
+    
 }
 
 @end

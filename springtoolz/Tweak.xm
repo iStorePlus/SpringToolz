@@ -75,29 +75,24 @@ static void loadPrefs() {
 
 %hook SBIconView
 
-- (void)prepareForReuse {
-    [self applyIconOptionsInRegardsToSuperView:self.superview];
-    %orig;
-}
-
 - (void)willMoveToSuperview:(UIView *)newSuperview {
-    [self applyIconOptionsInRegardsToSuperView:newSuperview];
+    [self applyIconOptionsInRegardsToSuperView:newSuperview andWindow:self.superview.window];
     %orig;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
-    [self applyIconOptionsInRegardsToSuperView:self.superview];
+    [self applyIconOptionsInRegardsToSuperView:self.superview andWindow:newWindow];
     %orig;
 }
 
 %new
-- (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView {
+- (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView andWindow:(UIWindow *)window {
     if (TweakEnabled) {
         if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
-            [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
+            [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
         } else {
-            [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
+            [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
         }
     }
