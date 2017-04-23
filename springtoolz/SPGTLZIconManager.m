@@ -62,7 +62,7 @@
 // supported icon shapes: default, circle, gear_wheel_1, gear_wheel_2, gear_wheel_3, circle_radius_deviation
 
 - (void)setIconSize:(CGRect)iconSize {
-    CGFloat newLenght = iconSize.size.width * 0.9;
+    CGFloat newLenght = iconSize.size.width * 0.88;
     CGFloat xDelta = iconSize.size.width - newLenght;
     CGFloat yDelta = iconSize.size.height - newLenght;
     
