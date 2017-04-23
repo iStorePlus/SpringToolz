@@ -44,8 +44,4 @@
     }
 }
 
-- (void)applyMask {
-    
-}
-
 @end

@@ -19,6 +19,7 @@
 		32E2F55A1EAC932F0052AE1D /* UIView+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5551EAC932F0052AE1D /* UIView+Options.m */; };
 		32E2F55B1EAC932F0052AE1D /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */; };
 		32E2F55C1EAC932F0052AE1D /* UIView+Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5591EAC932F0052AE1D /* UIView+Shape.m */; };
+		32E328261EAD3222004A88AE /* DummyImplementations.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E328251EAD3222004A88AE /* DummyImplementations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Shadow.m"; path = "../../springtoolz/UIView+Shadow.m"; sourceTree = "<group>"; };
 		32E2F5581EAC932F0052AE1D /* UIView+Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Shape.h"; path = "../../springtoolz/UIView+Shape.h"; sourceTree = "<group>"; };
 		32E2F5591EAC932F0052AE1D /* UIView+Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Shape.m"; path = "../../springtoolz/UIView+Shape.m"; sourceTree = "<group>"; };
+		32E328251EAD3222004A88AE /* DummyImplementations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyImplementations.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				32574C871EA779A500DC3AD8 /* SBIconView.h */,
+				32E328251EAD3222004A88AE /* DummyImplementations.m */,
 				32574C701EA7791E00DC3AD8 /* AppDelegate.h */,
 				32574C711EA7791E00DC3AD8 /* AppDelegate.m */,
 				32574C731EA7791E00DC3AD8 /* ViewController.h */,
@@ -217,6 +220,7 @@
 			files = (
 				32574C951EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m in Sources */,
 				32574C961EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m in Sources */,
+				32E328261EAD3222004A88AE /* DummyImplementations.m in Sources */,
 				32574C751EA7791E00DC3AD8 /* ViewController.m in Sources */,
 				32574C721EA7791E00DC3AD8 /* AppDelegate.m in Sources */,
 				32E2F55B1EAC932F0052AE1D /* UIView+Shadow.m in Sources */,
