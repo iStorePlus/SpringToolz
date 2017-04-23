@@ -75,25 +75,25 @@ static void loadPrefs() {
 
 %hook SBIconView
 
+- (void)prepareForReuse {
+    [self applyIconOptionsInRegardsToSuperView:self.superview];
+    %orig;
+}
+
 - (void)willMoveToSuperview:(UIView *)newSuperview {
-
-    if (TweakEnabled) {
-        if ([NSStringFromClass([newSuperview class]) isEqualToString:@"SBDockIconListView"]) {
-            [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
-            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-        } else {
-            [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
-            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-        }
-    }
-
+    [self applyIconOptionsInRegardsToSuperView:newSuperview];
     %orig;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
+    [self applyIconOptionsInRegardsToSuperView:self.superview];
+    %orig;
+}
 
+%new
+- (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView {
     if (TweakEnabled) {
-        if ([NSStringFromClass([self.superview class]) isEqualToString:@"SBDockIconListView"]) {
+        if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
             [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
         } else {
@@ -101,8 +101,6 @@ static void loadPrefs() {
             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
         }
     }
-
-    %orig;
 }
 
 %end

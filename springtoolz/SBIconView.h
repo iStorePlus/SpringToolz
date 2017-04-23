@@ -9,13 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SBIconView: UIView
+- (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView;
 @end
 
-@implementation SBIconView
-@end
 
 @interface SBIconImageView: UIImageView
 @end
 
-@implementation SBIconImageView
-@end
