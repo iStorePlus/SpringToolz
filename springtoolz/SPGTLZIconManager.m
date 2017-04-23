@@ -43,7 +43,7 @@
 
 - (void)animateIfNeeded {
     [self.animationTimer invalidate];
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(animate) userInfo:nil repeats:NO];
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animate) userInfo:nil repeats:NO];
 }
 
 - (void)animate {

@@ -19,20 +19,33 @@
         self.maskView = nil;
         return;
     }
+
+    UIView *sbIconView = self.superview;
+    [self removeFromSuperview];
+    
+    UIView *containerView = [[UIView alloc] initWithFrame:self.frame];
+    [sbIconView addSubview:containerView];
+
+    [containerView addSubview:self];
     
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.path = shape.CGPath;
-    
+
     UIView *mask = [[UIView alloc] initWithFrame:self.bounds];
     [mask.layer addSublayer:maskLayer];
-    
+
     self.maskView = mask;
-    self.superview.layer.shouldRasterize = TRUE;
-    self.superview.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    containerView.layer.shouldRasterize = TRUE;
+    containerView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    [sbIconView sendSubviewToBack:containerView];
     
     if (shouldAnimate) {
         [[SPGTLZIconManager sharedInstance] addMaskView:mask];
     }
+}
+
+- (void)applyMask {
+    
 }
 
 @end
