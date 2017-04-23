@@ -58,6 +58,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3215CDC31EAC964A00604FC7 /* SBIconView Customizations */ = {
+			isa = PBXGroup;
+			children = (
+				32E2F5541EAC932F0052AE1D /* UIView+Options.h */,
+				32E2F5551EAC932F0052AE1D /* UIView+Options.m */,
+				3215CDC51EAC967F00604FC7 /* Shadow Helpers */,
+				3215CDC41EAC966700604FC7 /* Shape Helpers */,
+				3215CDC61EAC968700604FC7 /* Common Helpers */,
+			);
+			name = "SBIconView Customizations";
+			sourceTree = "<group>";
+		};
+		3215CDC41EAC966700604FC7 /* Shape Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				32E2F5581EAC932F0052AE1D /* UIView+Shape.h */,
+				32E2F5591EAC932F0052AE1D /* UIView+Shape.m */,
+			);
+			name = "Shape Helpers";
+			sourceTree = "<group>";
+		};
+		3215CDC51EAC967F00604FC7 /* Shadow Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				32E2F5561EAC932F0052AE1D /* UIView+Shadow.h */,
+				32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */,
+			);
+			name = "Shadow Helpers";
+			sourceTree = "<group>";
+		};
+		3215CDC61EAC968700604FC7 /* Common Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				32574C911EA78BE900DC3AD8 /* CABasicAnimation+Rotation.h */,
+				32574C921EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m */,
+				32574C931EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.h */,
+				32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */,
+			);
+			name = "Common Helpers";
+			sourceTree = "<group>";
+		};
 		32574C611EA7791E00DC3AD8 = {
 			isa = PBXGroup;
 			children = (
@@ -84,16 +125,7 @@
 				32574C741EA7791E00DC3AD8 /* ViewController.m */,
 				32574C9A1EA7BB9D00DC3AD8 /* SPGTLZIconManager.h */,
 				32574C9B1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m */,
-				32E2F5541EAC932F0052AE1D /* UIView+Options.h */,
-				32E2F5551EAC932F0052AE1D /* UIView+Options.m */,
-				32E2F5561EAC932F0052AE1D /* UIView+Shadow.h */,
-				32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */,
-				32E2F5581EAC932F0052AE1D /* UIView+Shape.h */,
-				32E2F5591EAC932F0052AE1D /* UIView+Shape.m */,
-				32574C911EA78BE900DC3AD8 /* CABasicAnimation+Rotation.h */,
-				32574C921EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m */,
-				32574C931EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.h */,
-				32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */,
+				3215CDC31EAC964A00604FC7 /* SBIconView Customizations */,
 				32574C761EA7791E00DC3AD8 /* Main.storyboard */,
 				32574C791EA7791E00DC3AD8 /* Assets.xcassets */,
 				32574C7B1EA7791E00DC3AD8 /* LaunchScreen.storyboard */,
