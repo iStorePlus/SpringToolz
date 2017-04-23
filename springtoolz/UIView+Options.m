@@ -1,23 +1,22 @@
 //
-//  UIView+Round.m
-//  IconsWithShadowsTestProject
+//  UIView+Options.m
+//  SpringToolzSampleProject
 //
-//  Created by Stoyan Stoyanov on 4/12/17.
+//  Created by Stoyan Stoyanov on 4/23/17.
 //  Copyright © 2017 Stoyan Stoyanov. All rights reserved.
 //
 
-#import "UIView+Round.h"
+#import "UIView+Options.h"
 #import "SPGTLZIconManager.h"
+#import "UIView+Shape.h"
+#import "UIView+Shadow.h"
 
-#define SHADOW_TAG 0x00123f
-
-@implementation UIView (Round)
-
+@implementation UIView (Options)
 
 #pragma mark - Public Methods
 
 - (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
-
+    
     NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
     [mutableIconOptions setValue:@"page_icon" forKey:@"icon_type"];
     
@@ -49,7 +48,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-
+        
         if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
             for (UIView *subview in [self subviews]) {
                 if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
@@ -84,7 +83,7 @@
     if (shadowEnabled == nil || animationsEnabled == nil || shadowColorName == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil) {
         return;
     }
-
+    
     UIBezierPath *shape = nil;
     if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"page_icon"]) {
         shape = [[SPGTLZIconManager sharedInstance] shapeForPageIcons];
@@ -95,7 +94,7 @@
     for (UIView *subview in [self subviews]) {
         if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
             [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
-
+            
             [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
             
             [subview applyShadow:shadowEnabled.boolValue
@@ -106,61 +105,6 @@
                        colorName:shadowColorName];
         }
     }
-}
-
-- (void)applyIconShape:(UIBezierPath *)shape shouldAnimate:(BOOL)shouldAnimate {
-    
-    if (shape == nil) {
-        self.maskView = nil;
-        return;
-    }
-
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.path = shape.CGPath;
-    
-    UIView *mask = [[UIView alloc] initWithFrame:self.bounds];
-    [mask.layer addSublayer:maskLayer];
-    
-    self.maskView = mask;
-    self.superview.layer.shouldRasterize = TRUE;
-    self.superview.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    
-    if (shouldAnimate) {
-        [[SPGTLZIconManager sharedInstance] addMaskView:mask];
-    }
-}
-
-- (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName {
-    
-    UIColor *color = [[SPGTLZIconManager sharedInstance] shadowColorForName:colorName];
-    
-    if (shadowEnabled == NO || color == nil || self.superview == nil) {
-        return;
-    }
-    
-    for (UIView *subview in self.superview.subviews) {
-        if(subview.tag == SHADOW_TAG) {
-            return;
-        }
-    }
-    
-    if (shape == nil) {
-        shape = [UIBezierPath bezierPathWithRect:self.bounds];
-    }
-    
-    UIView *shadowView = [[UIView alloc] initWithFrame:self.frame];
-    shadowView.tag = SHADOW_TAG;
-    
-    shadowView.layer.shadowPath = [shape CGPath];
-    shadowView.layer.masksToBounds = NO;
-    shadowView.layer.shadowOffset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
-    shadowView.layer.shadowRadius = 10;
-    
-    shadowView.layer.shadowOpacity = intensity;
-    shadowView.layer.shadowColor = color.CGColor;
-    
-    [self.superview addSubview:shadowView];
-    [self.superview sendSubviewToBack:shadowView];
 }
 
 @end
