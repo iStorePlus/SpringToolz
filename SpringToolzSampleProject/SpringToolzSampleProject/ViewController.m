@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "UIView+Round.h"
+#import "UIView+Options.h"
 #import "SBIconView.h"
 #import "SPGTLZIconManager.h"
 

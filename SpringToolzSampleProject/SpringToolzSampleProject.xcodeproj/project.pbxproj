@@ -13,10 +13,12 @@
 		32574C781EA7791E00DC3AD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32574C761EA7791E00DC3AD8 /* Main.storyboard */; };
 		32574C7A1EA7791E00DC3AD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32574C791EA7791E00DC3AD8 /* Assets.xcassets */; };
 		32574C7D1EA7791E00DC3AD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32574C7B1EA7791E00DC3AD8 /* LaunchScreen.storyboard */; };
-		32574C861EA7797700DC3AD8 /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C851EA7797700DC3AD8 /* UIView+Round.m */; };
 		32574C951EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C921EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m */; };
 		32574C961EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */; };
 		32574C9C1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C9B1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m */; };
+		32E2F55A1EAC932F0052AE1D /* UIView+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5551EAC932F0052AE1D /* UIView+Options.m */; };
+		32E2F55B1EAC932F0052AE1D /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */; };
+		32E2F55C1EAC932F0052AE1D /* UIView+Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5591EAC932F0052AE1D /* UIView+Shape.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +32,6 @@
 		32574C791EA7791E00DC3AD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32574C7C1EA7791E00DC3AD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32574C7E1EA7791E00DC3AD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32574C841EA7797700DC3AD8 /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Round.h"; path = "../../springtoolz/UIView+Round.h"; sourceTree = "<group>"; };
-		32574C851EA7797700DC3AD8 /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Round.m"; path = "../../springtoolz/UIView+Round.m"; sourceTree = "<group>"; };
 		32574C871EA779A500DC3AD8 /* SBIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SBIconView.h; path = ../../springtoolz/SBIconView.h; sourceTree = "<group>"; };
 		32574C911EA78BE900DC3AD8 /* CABasicAnimation+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CABasicAnimation+Rotation.h"; path = "../../springtoolz/CABasicAnimation+Rotation.h"; sourceTree = "<group>"; };
 		32574C921EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CABasicAnimation+Rotation.m"; path = "../../springtoolz/CABasicAnimation+Rotation.m"; sourceTree = "<group>"; };
@@ -39,6 +39,12 @@
 		32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBezierPath+CustomPaths.m"; path = "../../springtoolz/UIBezierPath+CustomPaths.m"; sourceTree = "<group>"; };
 		32574C9A1EA7BB9D00DC3AD8 /* SPGTLZIconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPGTLZIconManager.h; path = ../../springtoolz/SPGTLZIconManager.h; sourceTree = "<group>"; };
 		32574C9B1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPGTLZIconManager.m; path = ../../springtoolz/SPGTLZIconManager.m; sourceTree = "<group>"; };
+		32E2F5541EAC932F0052AE1D /* UIView+Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Options.h"; path = "../../springtoolz/UIView+Options.h"; sourceTree = "<group>"; };
+		32E2F5551EAC932F0052AE1D /* UIView+Options.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Options.m"; path = "../../springtoolz/UIView+Options.m"; sourceTree = "<group>"; };
+		32E2F5561EAC932F0052AE1D /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Shadow.h"; path = "../../springtoolz/UIView+Shadow.h"; sourceTree = "<group>"; };
+		32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Shadow.m"; path = "../../springtoolz/UIView+Shadow.m"; sourceTree = "<group>"; };
+		32E2F5581EAC932F0052AE1D /* UIView+Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Shape.h"; path = "../../springtoolz/UIView+Shape.h"; sourceTree = "<group>"; };
+		32E2F5591EAC932F0052AE1D /* UIView+Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Shape.m"; path = "../../springtoolz/UIView+Shape.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3215CDC31EAC964A00604FC7 /* SBIconView Customizations */ = {
+			isa = PBXGroup;
+			children = (
+				32E2F5541EAC932F0052AE1D /* UIView+Options.h */,
+				32E2F5551EAC932F0052AE1D /* UIView+Options.m */,
+				3215CDC51EAC967F00604FC7 /* Shadow Helpers */,
+				3215CDC41EAC966700604FC7 /* Shape Helpers */,
+				3215CDC61EAC968700604FC7 /* Common Helpers */,
+			);
+			name = "SBIconView Customizations";
+			sourceTree = "<group>";
+		};
+		3215CDC41EAC966700604FC7 /* Shape Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				32E2F5581EAC932F0052AE1D /* UIView+Shape.h */,
+				32E2F5591EAC932F0052AE1D /* UIView+Shape.m */,
+			);
+			name = "Shape Helpers";
+			sourceTree = "<group>";
+		};
+		3215CDC51EAC967F00604FC7 /* Shadow Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				32E2F5561EAC932F0052AE1D /* UIView+Shadow.h */,
+				32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */,
+			);
+			name = "Shadow Helpers";
+			sourceTree = "<group>";
+		};
+		3215CDC61EAC968700604FC7 /* Common Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				32574C911EA78BE900DC3AD8 /* CABasicAnimation+Rotation.h */,
+				32574C921EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m */,
+				32574C931EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.h */,
+				32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */,
+			);
+			name = "Common Helpers";
+			sourceTree = "<group>";
+		};
 		32574C611EA7791E00DC3AD8 = {
 			isa = PBXGroup;
 			children = (
@@ -76,14 +123,9 @@
 				32574C711EA7791E00DC3AD8 /* AppDelegate.m */,
 				32574C731EA7791E00DC3AD8 /* ViewController.h */,
 				32574C741EA7791E00DC3AD8 /* ViewController.m */,
-				32574C841EA7797700DC3AD8 /* UIView+Round.h */,
-				32574C851EA7797700DC3AD8 /* UIView+Round.m */,
 				32574C9A1EA7BB9D00DC3AD8 /* SPGTLZIconManager.h */,
 				32574C9B1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m */,
-				32574C911EA78BE900DC3AD8 /* CABasicAnimation+Rotation.h */,
-				32574C921EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m */,
-				32574C931EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.h */,
-				32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */,
+				3215CDC31EAC964A00604FC7 /* SBIconView Customizations */,
 				32574C761EA7791E00DC3AD8 /* Main.storyboard */,
 				32574C791EA7791E00DC3AD8 /* Assets.xcassets */,
 				32574C7B1EA7791E00DC3AD8 /* LaunchScreen.storyboard */,
@@ -176,8 +218,10 @@
 				32574C951EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m in Sources */,
 				32574C961EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m in Sources */,
 				32574C751EA7791E00DC3AD8 /* ViewController.m in Sources */,
-				32574C861EA7797700DC3AD8 /* UIView+Round.m in Sources */,
 				32574C721EA7791E00DC3AD8 /* AppDelegate.m in Sources */,
+				32E2F55B1EAC932F0052AE1D /* UIView+Shadow.m in Sources */,
+				32E2F55C1EAC932F0052AE1D /* UIView+Shape.m in Sources */,
+				32E2F55A1EAC932F0052AE1D /* UIView+Options.m in Sources */,
 				32574C6F1EA7791E00DC3AD8 /* main.m in Sources */,
 				32574C9C1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m in Sources */,
 			);
