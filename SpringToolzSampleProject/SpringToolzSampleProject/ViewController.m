@@ -10,6 +10,7 @@
 #import "UIView+Options.h"
 #import "SBIconView.h"
 #import "SPGTLZIconManager.h"
+#import "UIView+DominantColor.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet SBIconView *iconView;
@@ -23,17 +24,22 @@
     
     
     
-    [self.iconView
-     applyPageIconOptions:@{
-                        @"shape" : @"circle",
-                        @"shadows" : @(YES),
-                        @"animations" : @(NO)}
-     withShadowOptions:@{
-                         @"color"            : @"black",
-                         @"intensity"        : @1,
-                         @"hor_deviation"    : @0,
-                         @"ver_deviation"    : @0}];
+//    [self.iconView
+//     applyPageIconOptions:@{
+//                        @"shape" : @"circle",
+//                        @"shadows" : @(YES),
+//                        @"animations" : @(NO)}
+//     withShadowOptions:@{
+//                         @"color"            : @"black",
+//                         @"intensity"        : @1,
+//                         @"hor_deviation"    : @0,
+//                         @"ver_deviation"    : @0}];
     
+    NSLog(@"start");
+    UIColor *dominantColor = [self.iconView dominantColorInRect:self.iconView.frame];
+    
+    NSLog(@"dominant color, %@", dominantColor);
+    self.view.backgroundColor = dominantColor;
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [[SPGTLZIconManager sharedInstance] animate];

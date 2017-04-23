@@ -8,6 +8,7 @@
 
 #import "SPGTLZIconManager.h"
 #import "UIBezierPath+CustomPaths.h"
+#import "UIView+DominantColor.h"
 
 @interface SPGTLZIconManager()
 
@@ -109,7 +110,7 @@
 
 // supported color names: black, green, blue, yellow, white, gray
 
-- (UIColor *)shadowColorForName:(NSString *)name {
+- (UIColor *)shadowColorWithName:(NSString *)name forView:(UIView *)view {
     
     if ([name isEqualToString:@"black"]) {
         return [UIColor blackColor];
@@ -123,7 +124,10 @@
         return [UIColor whiteColor];
     } else if ([name isEqualToString:@"gray"]) {
         return [UIColor grayColor];
+    } else if ([name isEqualToString:@"dominant"]) {
+        return [view dominantColorInRect:view.frame];
     }
     return nil;
 }
+
 @end

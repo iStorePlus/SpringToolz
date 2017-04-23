@@ -25,5 +25,5 @@
 - (void)addMaskView:(UIView *)mask;
 - (void)animateIfNeeded;
 
-- (UIColor *)shadowColorForName:(NSString *)name;
+- (UIColor *)shadowColorWithName:(NSString *)name forView:(UIView *)view;
 @end

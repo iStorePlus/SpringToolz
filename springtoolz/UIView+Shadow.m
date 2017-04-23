@@ -13,7 +13,7 @@
 
 - (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName {
     
-    UIColor *color = [[SPGTLZIconManager sharedInstance] shadowColorForName:colorName];
+    UIColor *color = [[SPGTLZIconManager sharedInstance] shadowColorWithName:colorName forView:self];
     
     if (shadowEnabled == NO || color == nil || self.superview == nil) {
         return;
