@@ -95,16 +95,23 @@
         if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
             [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
             
-            [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
-            
             [subview applyShadow:shadowEnabled.boolValue
                        withShape:shape
           andHorizontalDeviation:shadowHorDeviation.floatValue
                verticalDeviation:shadowVerDeviation.floatValue
                        intensity:shadowIntensity.floatValue
                        colorName:shadowColorName];
+
+            [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
+            break;
         }
     }
+    
+    UIView *shadowView = [self viewWithTag:SHADOW_TAG];
+    UIView *shapeContainerView = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
+    
+    [self insertSubview:shadowView atIndex:0];
+    [self insertSubview:shapeContainerView atIndex:1];
 }
 
 @end

@@ -9,8 +9,6 @@
 #import "UIView+Shadow.h"
 #import "SPGTLZIconManager.h"
 
-#define SHADOW_TAG 0x00123f
-
 @implementation UIView (Shadow)
 
 - (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName {
@@ -43,7 +41,6 @@
     shadowView.layer.shadowColor = color.CGColor;
     
     [self.superview addSubview:shadowView];
-    [self.superview sendSubviewToBack:shadowView];
 }
 
 @end

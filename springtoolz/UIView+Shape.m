@@ -37,7 +37,7 @@
     self.maskView = mask;
     containerView.layer.shouldRasterize = TRUE;
     containerView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    [sbIconView sendSubviewToBack:containerView];
+    containerView.tag = CONTAINER_SHAPE_VIEW_TAG;
     
     if (shouldAnimate) {
         [[SPGTLZIconManager sharedInstance] addMaskView:mask];

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define SHADOW_TAG 0x00123f
+
 @interface UIView (Shadow)
 
 - (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName;
