@@ -136,6 +136,12 @@
         return [UIBezierPath circleWithNotchWidth:M_PI_4 / 2.0 notchDepth:4 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle_with_notch_3"]) {
         return [UIBezierPath circleWithNotchWidth:M_PI_4 notchDepth:3 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"circle_with_two_notches_1"]) {
+        return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 / 3.0 notchesDepth:5 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"circle_with_two_notches_2"]) {
+        return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 / 7.0 notchesDepth:self.iconSize.size.width * 0.4 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"circle_with_two_notches_3"]) {
+        return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 notchesDepth:5 iconSize:self.iconSize];
     }
     
     
