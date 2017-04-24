@@ -59,7 +59,7 @@
 
 #pragma mark - Icon Shapes
 
-// supported icon shapes: default, circle, gear_wheel_1, gear_wheel_2, gear_wheel_3, circle_radius_deviation
+// supported icon shapes: default, circle, gear_wheel_1, gear_wheel_2, gear_wheel_3, circle_radius_deviation, sine_circle_1, sine_circle_2, sine_circle_3, sine_circle_4, sine_circle_5, sine_circle_6
 
 - (void)setIconSize:(CGRect)iconSize {
     CGFloat newLenght = iconSize.size.width * 0.88;
@@ -70,12 +70,20 @@
     self.isIconSizeSet = YES;
 }
 
-- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName {
-    self.pageIconsShape = [self shapeForName:pageIconsShapeName];
+- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName withRotation:(NSNumber *)rotation {
+    UIBezierPath *shape = [self shapeForName:pageIconsShapeName];
+    [shape applyTransform:CGAffineTransformMakeRotation(rotation.floatValue)];
+    [shape applyTransform:CGAffineTransformMakeTranslation(self.iconSize.size.width / 2.0 + self.iconSize.origin.x,
+                                                           self.iconSize.size.width / 2.0 + self.iconSize.origin.y)];
+    self.pageIconsShape = shape;
 }
 
-- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName {
-    self.dockIconsShape = [self shapeForName:dockIconsShapeName];
+- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName withRotation:(NSNumber *)rotation {
+    UIBezierPath *shape = [self shapeForName:dockIconsShapeName];
+    [shape applyTransform:CGAffineTransformMakeRotation(rotation.floatValue)];
+    [shape applyTransform:CGAffineTransformMakeTranslation(self.iconSize.size.width / 2.0 + self.iconSize.origin.x,
+                                                           self.iconSize.size.width / 2.0 + self.iconSize.origin.y)];
+    self.dockIconsShape = shape;
 }
 
 - (UIBezierPath *)shapeForPageIcons {

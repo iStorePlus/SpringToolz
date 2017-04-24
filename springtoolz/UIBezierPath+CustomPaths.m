@@ -27,7 +27,6 @@
         [bPath addArcWithCenter:CGPointZero radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     }
     [bPath closePath];
-    [bPath applyTransform:CGAffineTransformMakeTranslation(baseRadius + iconSize.origin.x, baseRadius + iconSize.origin.y)];
     return bPath;
 }
 
@@ -50,7 +49,6 @@
     }
     
     [bPath closePath];
-    [bPath applyTransform:CGAffineTransformMakeTranslation(baseRadius + iconSize.origin.x, baseRadius + iconSize.origin.y)];
     return bPath;
 }
 
