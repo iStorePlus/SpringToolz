@@ -52,4 +52,52 @@
     return bPath;
 }
 
++ (UIBezierPath *)regularPolygonWithCountOfSides:(NSUInteger)countOfSides iconSize:(CGRect)iconSize {
+    
+    CGFloat baseRadius = iconSize.size.height / 2.0;
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    [bPath moveToPoint:CGPointZero];
+    
+    for (NSUInteger i = 0; i <= countOfSides; i++) {
+        CGFloat currentAngle = (double)i / (double)countOfSides * 2.0 * M_PI;
+        
+        CGFloat xCoord = baseRadius * sin(currentAngle);
+        CGFloat yCoord = baseRadius * cos(currentAngle);
+        
+        [bPath addLineToPoint:CGPointMake(xCoord, yCoord)];
+    }
+    
+    [bPath closePath];
+    
+    // rotate the octagon to make it like a stop sign
+    if (countOfSides == 8) {
+        [bPath applyTransform:CGAffineTransformMakeRotation(1.0 / countOfSides * M_PI)];
+    }
+    return bPath;
+}
+
++ (UIBezierPath *)circleWithNotchWidth:(CGFloat)notchWidth notchDepth:(CGFloat)depth iconSize:(CGRect)iconSize {
+    CGFloat baseRadius = iconSize.size.height / 2.0;
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    [bPath moveToPoint:CGPointZero];
+    
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius - depth startAngle:0 endAngle:notchWidth clockwise:YES];
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius startAngle:notchWidth endAngle:2 * M_PI clockwise:YES];
+    [bPath closePath];
+    return bPath;
+}
+
++ (UIBezierPath *)circleWithTwoNotchesWidth:(CGFloat)notchesWidth notchesDepth:(CGFloat)depth iconSize:(CGRect)iconSize {
+    CGFloat baseRadius = iconSize.size.height / 2.0;
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    [bPath moveToPoint:CGPointZero];
+    
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius - depth startAngle:0 endAngle:notchesWidth clockwise:YES];
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius startAngle:notchesWidth endAngle:M_PI clockwise:YES];
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius - depth startAngle:M_PI endAngle:M_PI + notchesWidth clockwise:YES];
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius startAngle:M_PI + notchesWidth endAngle:2 * M_PI clockwise:YES];
+    [bPath closePath];
+    return bPath;
+}
+
 @end

@@ -21,11 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.view.backgroundColor = [UIColor greenColor];
     
     [self.iconView
      applyPageIconOptions:@{
-                        @"shape" : @"circle_radius_deviation",
+                        @"shape" : @"circle_with_two_notches_2",
                         @"shape_rotation" : @(M_PI_2),
                         @"shadows" : @(YES),
                         @"animations" : @(NO)}
