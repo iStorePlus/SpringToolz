@@ -8,10 +8,12 @@
 static BOOL TweakEnabled = YES;
 
 static NSString *DEFAULT_PAGE_ICON_SHAPE = @"default";
+static CGFloat DEFAULT_PAGE_ICON_SHAPE_ROTATION = 0.0;
 static BOOL DEFAULT_PAGE_ICON_SHADOWS_ENABLED = YES;
 static BOOL DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED = NO;
 
 static NSString *DEFAULT_DOCK_ICON_SHAPE = @"default";
+static CGFloat DEFAULT_DOCK_ICON_SHAPE_ROTATION = 0.0;
 static BOOL DEFAULT_DOCK_ICON_SHADOWS_ENABLED = YES;
 static BOOL DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED = NO;
 
@@ -33,21 +35,25 @@ static void loadPrefs() {
         TweakEnabled = [prefs objectForKey:@"tweak_enabled"] ? [[prefs objectForKey:@"tweak_enabled"] boolValue] : TweakEnabled;
 
         NSString *pageIconShape = [prefs objectForKey:@"page_icon_shape"] ? (NSString *)[prefs objectForKey:@"page_icon_shape"] : DEFAULT_PAGE_ICON_SHAPE;
+        NSNumber *pageIconShapeRotation = [prefs objectForKey:@"page_icon_shape_rotation"] ? [prefs objectForKey:@"page_icon_shape_rotation"] : @(DEFAULT_PAGE_ICON_SHAPE_ROTATION);
         BOOL pageIconsShadowsEnabled = [prefs objectForKey:@"page_icons_shadows_enabled"] ? [[prefs objectForKey:@"page_icons_shadows_enabled"] boolValue] : DEFAULT_PAGE_ICON_SHADOWS_ENABLED;
         BOOL pageIconsAnimationEnabled = [prefs objectForKey:@"page_icons_animations_enabled"] ? [[prefs objectForKey:@"page_icons_animations_enabled"] boolValue] : DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED;
 
         PageIconOptions = @{
             @"shape" : pageIconShape,
+            @"shape_rotation" : pageIconShapeRotation,
             @"shadows" : @(pageIconsShadowsEnabled),
             @"animations" : @(pageIconsAnimationEnabled)
         };
 
         NSString *dockIconShape = [prefs objectForKey:@"dock_icon_shape"] ? (NSString *)[prefs objectForKey:@"dock_icon_shape"] : DEFAULT_DOCK_ICON_SHAPE;
+        NSNumber *dockIconShapeRotation = [prefs objectForKey:@"dock_icon_shape_rotation"] ? [prefs objectForKey:@"dock_icon_shape_rotation"] : @(DEFAULT_DOCK_ICON_SHAPE_ROTATION);
         BOOL dockIconsShadowsEnabled = [prefs objectForKey:@"dock_icons_shadows_enabled"] ? [[prefs objectForKey:@"dock_icons_shadows_enabled"] boolValue] : DEFAULT_DOCK_ICON_SHADOWS_ENABLED;
         BOOL dockIconsAnimationEnabled = [prefs objectForKey:@"dock_icons_animations_enabled"] ? [[prefs objectForKey:@"dock_icons_animations_enabled"] boolValue] : DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED;
-
+        
         DockIconOptions = @{
             @"shape"        : dockIconShape,
+            @"shape_rotation" : dockIconShapeRotation,
             @"shadows"      : @(dockIconsShadowsEnabled),
             @"animations"   : @(dockIconsAnimationEnabled)
         };
