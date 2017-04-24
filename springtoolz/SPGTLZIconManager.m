@@ -139,7 +139,7 @@
     } else if ([name isEqualToString:@"circle_with_two_notches_1"]) {
         return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 / 3.0 notchesDepth:5 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle_with_two_notches_2"]) {
-        return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 / 7.0 notchesDepth:self.iconSize.size.width * 0.4 iconSize:self.iconSize];
+        return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 / 4 notchesDepth:self.iconSize.size.height * 0.2 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle_with_two_notches_3"]) {
         return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 notchesDepth:5 iconSize:self.iconSize];
     }
