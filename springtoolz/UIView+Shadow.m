@@ -30,14 +30,21 @@
     }
     
     CGSize offset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
-    UIView *shadowView = [self shadowViewForFrame:self.frame withOffset:offset shape:shape intensity:intensity color:color];
+    
+    UIView *shadowView = [[UIView alloc] initWithFrame:self.frame];
+    shadowView.tag = SHADOW_TAG;
+    
+    for (NSUInteger i = 0; i < 2; i++) {
+        UIView *shadowSubview = [self shadowViewForFrame:shadowView.bounds withOffset:offset shape:shape intensity:intensity color:color];
+        [shadowView addSubview:shadowSubview];
+    }
+    
     [self.superview addSubview:shadowView];
 }
 
 - (UIView *)shadowViewForFrame:(CGRect)frame withOffset:(CGSize)offset shape:(UIBezierPath *)shape intensity:(CGFloat)intensity color:(UIColor *)color {
     
     UIView *shadowView = [[UIView alloc] initWithFrame:frame];
-    shadowView.tag = SHADOW_TAG;
     
     shadowView.layer.shadowPath = [shape CGPath];
     shadowView.layer.masksToBounds = NO;
