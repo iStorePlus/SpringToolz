@@ -40,6 +40,13 @@
 		32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBezierPath+CustomPaths.m"; path = "../../springtoolz/UIBezierPath+CustomPaths.m"; sourceTree = "<group>"; };
 		32574C9A1EA7BB9D00DC3AD8 /* SPGTLZIconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPGTLZIconManager.h; path = ../../springtoolz/SPGTLZIconManager.h; sourceTree = "<group>"; };
 		32574C9B1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPGTLZIconManager.m; path = ../../springtoolz/SPGTLZIconManager.m; sourceTree = "<group>"; };
+		327B4AEC1EAE512B00B91155 /* Tweak.xm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Tweak.xm; path = ../springtoolz/Tweak.xm; sourceTree = "<group>"; };
+		327B4AEE1EAE513600B91155 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../springtoolz/Makefile; sourceTree = "<group>"; };
+		327B4AF01EAE513C00B91155 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = control; path = ../springtoolz/control; sourceTree = "<group>"; };
+		327B4AF21EAE516000B91155 /* DockIcons.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DockIcons.plist; path = ../springtoolz/springtoolz/Resources/DockIcons.plist; sourceTree = "<group>"; };
+		327B4AF31EAE516000B91155 /* PageIcons.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = PageIcons.plist; path = ../springtoolz/springtoolz/Resources/PageIcons.plist; sourceTree = "<group>"; };
+		327B4AF41EAE516000B91155 /* Root.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Root.plist; path = ../springtoolz/springtoolz/Resources/Root.plist; sourceTree = "<group>"; };
+		327B4AF51EAE516000B91155 /* ShadowOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ShadowOptions.plist; path = ../springtoolz/springtoolz/Resources/ShadowOptions.plist; sourceTree = "<group>"; };
 		32E2F5541EAC932F0052AE1D /* UIView+Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Options.h"; path = "../../springtoolz/UIView+Options.h"; sourceTree = "<group>"; };
 		32E2F5551EAC932F0052AE1D /* UIView+Options.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Options.m"; path = "../../springtoolz/UIView+Options.m"; sourceTree = "<group>"; };
 		32E2F5561EAC932F0052AE1D /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Shadow.h"; path = "../../springtoolz/UIView+Shadow.h"; sourceTree = "<group>"; };
@@ -105,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				32574C6C1EA7791E00DC3AD8 /* SpringToolzSampleProject */,
+				327B4AEB1EAE510F00B91155 /* Theos Files */,
 				32574C6B1EA7791E00DC3AD8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -144,6 +152,28 @@
 				32574C6E1EA7791E00DC3AD8 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		327B4AEB1EAE510F00B91155 /* Theos Files */ = {
+			isa = PBXGroup;
+			children = (
+				327B4AEC1EAE512B00B91155 /* Tweak.xm */,
+				327B4AEE1EAE513600B91155 /* Makefile */,
+				327B4AF01EAE513C00B91155 /* control */,
+				327B4AF61EAE516600B91155 /* Settings Pane */,
+			);
+			name = "Theos Files";
+			sourceTree = "<group>";
+		};
+		327B4AF61EAE516600B91155 /* Settings Pane */ = {
+			isa = PBXGroup;
+			children = (
+				327B4AF21EAE516000B91155 /* DockIcons.plist */,
+				327B4AF31EAE516000B91155 /* PageIcons.plist */,
+				327B4AF41EAE516000B91155 /* Root.plist */,
+				327B4AF51EAE516000B91155 /* ShadowOptions.plist */,
+			);
+			name = "Settings Pane";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -101,11 +101,17 @@
     } else if ([name isEqualToString:@"circle"]) {
         return [UIBezierPath bezierPathWithOvalInRect:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_1"]) {
-        return [UIBezierPath gearPathWithNumberOfSides:4 radiusDeviation:5 iconSize:self.iconSize];
+        return [UIBezierPath gearPathWithNumberOfSides:24 radiusDeviation:2.5 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_2"]) {
-        return [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:2 iconSize:self.iconSize];
+        return [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:4 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_3"]) {
-        return [UIBezierPath gearPathWithNumberOfSides:100 radiusDeviation:6 iconSize:self.iconSize];
+        return [UIBezierPath gearPathWithNumberOfSides:100 radiusDeviation:2 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"gear_wheel_4"]) {
+        return [UIBezierPath gearPathWithNumberOfSides:6 radiusDeviation:5 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"gear_wheel_5"]) {
+        return [UIBezierPath gearPathWithNumberOfSides:12 radiusDeviation:5 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"gear_wheel_6"]) {
+        return [UIBezierPath gearPathWithNumberOfSides:100 radiusDeviation:4 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle_radius_deviation"]) {
         return [UIBezierPath gearPathWithNumberOfSides:3 radiusDeviation:5 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"sine_circle_1"]) {
