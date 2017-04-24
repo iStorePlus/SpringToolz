@@ -100,6 +100,18 @@
         return [UIBezierPath gearPathWithNumberOfSides:100 radiusDeviation:6 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle_radius_deviation"]) {
         return [UIBezierPath gearPathWithNumberOfSides:3 radiusDeviation:5 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"sine_circle_1"]) {
+        return [UIBezierPath sineCircleWithCountOfBumps:16 andDeviation:3 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"sine_circle_2"]) {
+        return [UIBezierPath sineCircleWithCountOfBumps:10 andDeviation:3 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"sine_circle_3"]) {
+        return [UIBezierPath sineCircleWithCountOfBumps:32 andDeviation:3 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"sine_circle_4"]) {
+        return [UIBezierPath sineCircleWithCountOfBumps:16 andDeviation:1.8 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"sine_circle_5"]) {
+        return [UIBezierPath sineCircleWithCountOfBumps:10 andDeviation:1.8 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"sine_circle_6"]) {
+        return [UIBezierPath sineCircleWithCountOfBumps:32 andDeviation:1.8 iconSize:self.iconSize];
     }
     
     return nil;

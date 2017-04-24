@@ -31,4 +31,27 @@
     return bPath;
 }
 
++ (UIBezierPath *)sineCircleWithCountOfBumps:(NSUInteger)bumpsCount andDeviation:(CGFloat)deviation iconSize:(CGRect)iconSize {
+    
+    CGFloat baseRadius = iconSize.size.height / 2.0;
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    [bPath moveToPoint:CGPointZero];
+    
+    NSUInteger approximationSteps = 200;
+    
+    for (NSUInteger i = 0; i <= approximationSteps; i++) {
+        CGFloat currentAngle = (double)i / (double)approximationSteps * 2.0 * M_PI;
+        CGFloat radius = deviation * sin(bumpsCount * currentAngle) + baseRadius;
+        
+        CGFloat xCoord = radius * sin(currentAngle);
+        CGFloat yCoord = radius * cos(currentAngle);
+        
+        [bPath addLineToPoint:CGPointMake(xCoord, yCoord)];
+    }
+    
+    [bPath closePath];
+    [bPath applyTransform:CGAffineTransformMakeTranslation(baseRadius + iconSize.origin.x, baseRadius + iconSize.origin.y)];
+    return bPath;
+}
+
 @end
