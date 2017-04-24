@@ -23,6 +23,12 @@
 				<string>Gear Wheel 2</string>
 				<string>Gear Wheel 3</string>
 				<string>Circle Radius Deviation</string>
+				<string>Sine Circle 1</string>
+				<string>Sine Circle 2</string>
+				<string>Sine Circle 3</string>
+				<string>Sine Circle 4</string>
+				<string>Sine Circle 5</string>
+				<string>Sine Circle 6</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -32,6 +38,12 @@
 				<string>gear_wheel_2</string>
 				<string>gear_wheel_3</string>
 				<string>circle_radius_deviation</string>
+				<string>sine_circle_1</string>
+				<string>sine_circle_2</string>
+				<string>sine_circle_3</string>
+				<string>sine_circle_4</string>
+				<string>sine_circle_5</string>
+				<string>sine_circle_6</string>
 			</array>
 		</dict>
 		<dict>
