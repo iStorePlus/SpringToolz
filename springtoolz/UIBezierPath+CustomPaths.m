@@ -52,4 +52,28 @@
     return bPath;
 }
 
++ (UIBezierPath *)regularPolygonWithCountOfSides:(NSUInteger)countOfSides iconSize:(CGRect)iconSize {
+    
+    CGFloat baseRadius = iconSize.size.height / 2.0;
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    [bPath moveToPoint:CGPointZero];
+    
+    for (NSUInteger i = 0; i <= countOfSides; i++) {
+        CGFloat currentAngle = (double)i / (double)countOfSides * 2.0 * M_PI;
+        
+        CGFloat xCoord = baseRadius * sin(currentAngle);
+        CGFloat yCoord = baseRadius * cos(currentAngle);
+        
+        [bPath addLineToPoint:CGPointMake(xCoord, yCoord)];
+    }
+    
+    [bPath closePath];
+    
+    // rotate the octagon to make it like a stop sign
+    if (countOfSides == 8) {
+        [bPath applyTransform:CGAffineTransformMakeRotation(1.0 / countOfSides * M_PI)];
+    }
+    return bPath;
+}
+
 @end

@@ -126,7 +126,12 @@
         return [UIBezierPath sineCircleWithCountOfBumps:10 andDeviation:1.8 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"sine_circle_6"]) {
         return [UIBezierPath sineCircleWithCountOfBumps:32 andDeviation:1.8 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"hexagon"]) {
+        return [UIBezierPath regularPolygonWithCountOfSides:6 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"octagon"]) {
+        return [UIBezierPath regularPolygonWithCountOfSides:8 iconSize:self.iconSize];
     }
+    
     
     return nil;
 }

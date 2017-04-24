@@ -25,7 +25,7 @@
     
     [self.iconView
      applyPageIconOptions:@{
-                        @"shape" : @"gear_wheel_6",
+                        @"shape" : @"hexagon",
                         @"shape_rotation" : @(M_PI_2),
                         @"shadows" : @(YES),
                         @"animations" : @(NO)}

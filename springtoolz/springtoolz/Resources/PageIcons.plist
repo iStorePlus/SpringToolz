@@ -32,6 +32,8 @@
 				<string>Sine Circle 5</string>
 				<string>Sine Circle 6</string>
 				<string>Circle Radius Deviation</string>
+				<string>Hexagon</string>
+				<string>Octagon</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -50,6 +52,8 @@
 				<string>sine_circle_5</string>
 				<string>sine_circle_6</string>
 				<string>circle_radius_deviation</string>
+				<string>hexagon</string>
+				<string>octagon</string>
 			</array>
 		</dict>
 		<dict>
