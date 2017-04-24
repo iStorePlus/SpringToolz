@@ -16,8 +16,8 @@
 @property (nonatomic, assign) CGRect iconSize;
 @property (nonatomic, assign, readonly) BOOL isIconSizeSet;
 
-- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName;
-- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName;
+- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName withRotation:(NSNumber *)rotation;
+- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName withRotation:(NSNumber *)rotation;
 
 - (UIBezierPath *)shapeForPageIcons;
 - (UIBezierPath *)shapeForDockIcons;

@@ -35,7 +35,8 @@
         }
         
         NSString *pageIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
-        [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape];
+        NSNumber *pageIconShapeRotation = (NSNumber *)[iconOptions valueForKey:@"shape_rotation"];
+        [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape withRotation:pageIconShapeRotation];
     });
     [self updateShapeForNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
@@ -62,7 +63,8 @@
         
         
         NSString *dockIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
-        [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape];
+        NSNumber *dockIconShapeRotation = (NSNumber *)[iconOptions valueForKey:@"shape_rotation"];
+        [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape withRotation:dockIconShapeRotation];
     });
     [self updateShapeForNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];

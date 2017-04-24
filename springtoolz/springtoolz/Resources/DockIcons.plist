@@ -76,6 +76,32 @@
 			<key>label</key>
 			<string>Animate Shape</string>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>SHAPE ROTATION</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>max</key>
+			<real>6.28</real>
+			<key>min</key>
+			<integer>0</integer>
+			<key>showValue</key>
+			<false/>
+			<key>isSegmented</key>
+			<false/>
+			<key>segmentCount</key>
+			<integer>0</integer>
+			<key>key</key>
+			<string>dock_icon_shape_rotation</string>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>default</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>Dock Icons</string>
