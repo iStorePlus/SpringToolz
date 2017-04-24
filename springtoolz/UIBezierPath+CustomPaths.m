@@ -76,4 +76,15 @@
     return bPath;
 }
 
++ (UIBezierPath *)circleWithNotchWidth:(CGFloat)notchWidth notchDepth:(CGFloat)depth iconSize:(CGRect)iconSize {
+    CGFloat baseRadius = iconSize.size.height / 2.0;
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    [bPath moveToPoint:CGPointZero];
+    
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius - depth startAngle:0 endAngle:notchWidth clockwise:YES];
+    [bPath addArcWithCenter:CGPointZero radius:baseRadius startAngle:notchWidth endAngle:2 * M_PI clockwise:YES];
+    [bPath closePath];
+    return bPath;
+}
+
 @end

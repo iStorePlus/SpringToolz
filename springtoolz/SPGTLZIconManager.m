@@ -130,6 +130,8 @@
         return [UIBezierPath regularPolygonWithCountOfSides:6 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"octagon"]) {
         return [UIBezierPath regularPolygonWithCountOfSides:8 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"circle_with_notch"]) {
+        return [UIBezierPath circleWithNotchWidth:M_PI_4 / 2.0 notchDepth:10 iconSize:self.iconSize];
     }
     
     

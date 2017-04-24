@@ -12,4 +12,5 @@
 + (UIBezierPath *)gearPathWithNumberOfSides:(NSUInteger)sides radiusDeviation:(CGFloat)radDeviation iconSize:(CGRect)iconSize;
 + (UIBezierPath *)sineCircleWithCountOfBumps:(NSUInteger)bumpsCount andDeviation:(CGFloat)deviation iconSize:(CGRect)iconSize;
 + (UIBezierPath *)regularPolygonWithCountOfSides:(NSUInteger)countOfSides iconSize:(CGRect)iconSize;
++ (UIBezierPath *)circleWithNotchWidth:(CGFloat)notchWidth notchDepth:(CGFloat)depth iconSize:(CGRect)iconSize;
 @end

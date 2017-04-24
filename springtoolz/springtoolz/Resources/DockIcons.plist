@@ -34,6 +34,7 @@
 				<string>Circle Radius Deviation</string>
 				<string>Hexagon</string>
 				<string>Octagon</string>
+				<string>Circle with Notch</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -54,6 +55,7 @@
 				<string>circle_radius_deviation</string>
 				<string>hexagon</string>
 				<string>octagon</string>
+				<string>circle_with_notch</string>
 			</array>
 		</dict>
 		<dict>

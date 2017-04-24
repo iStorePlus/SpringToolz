@@ -25,7 +25,7 @@
     
     [self.iconView
      applyPageIconOptions:@{
-                        @"shape" : @"hexagon",
+                        @"shape" : @"circle_with_notch",
                         @"shape_rotation" : @(M_PI_2),
                         @"shadows" : @(YES),
                         @"animations" : @(NO)}
