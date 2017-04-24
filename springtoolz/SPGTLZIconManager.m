@@ -130,8 +130,12 @@
         return [UIBezierPath regularPolygonWithCountOfSides:6 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"octagon"]) {
         return [UIBezierPath regularPolygonWithCountOfSides:8 iconSize:self.iconSize];
-    } else if ([name isEqualToString:@"circle_with_notch"]) {
+    } else if ([name isEqualToString:@"circle_with_notch_1"]) {
         return [UIBezierPath circleWithNotchWidth:M_PI_4 / 2.0 notchDepth:10 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"circle_with_notch_2"]) {
+        return [UIBezierPath circleWithNotchWidth:M_PI_4 / 2.0 notchDepth:4 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"circle_with_notch_3"]) {
+        return [UIBezierPath circleWithNotchWidth:M_PI_4 notchDepth:3 iconSize:self.iconSize];
     }
     
     
