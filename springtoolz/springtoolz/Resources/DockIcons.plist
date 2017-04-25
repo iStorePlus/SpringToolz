@@ -39,6 +39,9 @@
 				<string>Circle with Two Notches 1</string>
 				<string>Circle with Two Notches 2</string>
 				<string>Circle with Two Notches 3</string>
+				<string>Bloated Square 1</string>
+				<string>Bloated Square 2</string>
+				<string>Bloated Square 3</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -64,6 +67,9 @@
 				<string>circle_with_two_notches_1</string>
 				<string>circle_with_two_notches_2</string>
 				<string>circle_with_two_notches_3</string>
+				<string>bloated_square_1</string>
+				<string>bloated_square_2</string>
+				<string>bloated_square_3</string>
 			</array>
 		</dict>
 		<dict>

@@ -25,8 +25,8 @@
     
     [self.iconView
      applyPageIconOptions:@{
-                        @"shape" : @"circle_with_two_notches_2",
-                        @"shape_rotation" : @(M_PI_2),
+                        @"shape" : @"bloated_square_3",
+                        @"shape_rotation" : @(0),
                         @"shadows" : @(YES),
                         @"animations" : @(NO)}
      withShadowOptions:@{
