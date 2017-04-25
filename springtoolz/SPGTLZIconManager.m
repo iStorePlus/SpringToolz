@@ -142,6 +142,12 @@
         return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 / 4 notchesDepth:self.iconSize.size.height * 0.2 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle_with_two_notches_3"]) {
         return [UIBezierPath circleWithTwoNotchesWidth:M_PI_4 notchesDepth:5 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"bloated_square_1"]) {
+        return [UIBezierPath bloatedSquareWithNormalizedDeviation:0.7 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"bloated_square_2"]) {
+        return [UIBezierPath bloatedSquareWithNormalizedDeviation:0.8 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"bloated_square_3"]) {
+        return [UIBezierPath bloatedSquareWithNormalizedDeviation:0.9 iconSize:self.iconSize];
     }
     
     

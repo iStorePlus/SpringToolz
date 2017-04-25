@@ -100,4 +100,31 @@
     return bPath;
 }
 
++ (UIBezierPath *)bloatedSquareWithNormalizedDeviation:(CGFloat)deviation iconSize:(CGRect)iconSize {
+    CGFloat baseRadius = iconSize.size.height / 2.0;
+    CGFloat croppedRadius = baseRadius * deviation;
+    
+    CGPoint firstPoint = CGPointMake(-croppedRadius, croppedRadius);
+    CGPoint secondPoint = CGPointMake(croppedRadius, croppedRadius);
+    CGPoint thirdPoint = CGPointMake(croppedRadius, -croppedRadius);
+    CGPoint fourthPoint = CGPointMake(-croppedRadius, -croppedRadius);
+    
+    CGPoint topAnchorPoint = CGPointMake(0, baseRadius);
+    CGPoint rightAnchorPoint = CGPointMake(baseRadius, 0);
+    CGPoint bottomAnchorPoint = CGPointMake(0, -baseRadius);
+    CGPoint leftAnchorPoint = CGPointMake(-baseRadius, 0);
+    
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    
+    
+    [bPath moveToPoint:firstPoint];
+    [bPath addCurveToPoint:secondPoint controlPoint1:topAnchorPoint controlPoint2:topAnchorPoint];
+    [bPath addCurveToPoint:thirdPoint controlPoint1:rightAnchorPoint controlPoint2:rightAnchorPoint];
+    [bPath addCurveToPoint:fourthPoint controlPoint1:bottomAnchorPoint controlPoint2:bottomAnchorPoint];
+    [bPath addCurveToPoint:firstPoint controlPoint1:leftAnchorPoint controlPoint2:leftAnchorPoint];
+    
+    [bPath closePath];
+    return bPath;
+}
+
 @end

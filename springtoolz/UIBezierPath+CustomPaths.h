@@ -14,4 +14,5 @@
 + (UIBezierPath *)regularPolygonWithCountOfSides:(NSUInteger)countOfSides iconSize:(CGRect)iconSize;
 + (UIBezierPath *)circleWithNotchWidth:(CGFloat)notchWidth notchDepth:(CGFloat)depth iconSize:(CGRect)iconSize;
 + (UIBezierPath *)circleWithTwoNotchesWidth:(CGFloat)notchesWidth notchesDepth:(CGFloat)depth iconSize:(CGRect)iconSize;
++ (UIBezierPath *)bloatedSquareWithNormalizedDeviation:(CGFloat)deviation iconSize:(CGRect)iconSize;
 @end
