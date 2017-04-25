@@ -16,6 +16,7 @@
 		32574C951EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C921EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m */; };
 		32574C961EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */; };
 		32574C9C1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C9B1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m */; };
+		32575B271EAF7C540004C0BD /* UIView+Satelite.m in Sources */ = {isa = PBXBuildFile; fileRef = 32575B261EAF7C540004C0BD /* UIView+Satelite.m */; };
 		32E2F55A1EAC932F0052AE1D /* UIView+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5551EAC932F0052AE1D /* UIView+Options.m */; };
 		32E2F55B1EAC932F0052AE1D /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5571EAC932F0052AE1D /* UIView+Shadow.m */; };
 		32E2F55C1EAC932F0052AE1D /* UIView+Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E2F5591EAC932F0052AE1D /* UIView+Shape.m */; };
@@ -40,6 +41,8 @@
 		32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBezierPath+CustomPaths.m"; path = "../../springtoolz/UIBezierPath+CustomPaths.m"; sourceTree = "<group>"; };
 		32574C9A1EA7BB9D00DC3AD8 /* SPGTLZIconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPGTLZIconManager.h; path = ../../springtoolz/SPGTLZIconManager.h; sourceTree = "<group>"; };
 		32574C9B1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPGTLZIconManager.m; path = ../../springtoolz/SPGTLZIconManager.m; sourceTree = "<group>"; };
+		32575B251EAF7C540004C0BD /* UIView+Satelite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Satelite.h"; path = "../../springtoolz/UIView+Satelite.h"; sourceTree = "<group>"; };
+		32575B261EAF7C540004C0BD /* UIView+Satelite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Satelite.m"; path = "../../springtoolz/UIView+Satelite.m"; sourceTree = "<group>"; };
 		327B4AEC1EAE512B00B91155 /* Tweak.xm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Tweak.xm; path = ../springtoolz/Tweak.xm; sourceTree = "<group>"; };
 		327B4AEE1EAE513600B91155 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../springtoolz/Makefile; sourceTree = "<group>"; };
 		327B4AF01EAE513C00B91155 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = control; path = ../springtoolz/control; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 			children = (
 				32E2F5541EAC932F0052AE1D /* UIView+Options.h */,
 				32E2F5551EAC932F0052AE1D /* UIView+Options.m */,
+				32575B241EAF7C110004C0BD /* Satellite */,
 				3215CDC51EAC967F00604FC7 /* Shadow Helpers */,
 				3215CDC41EAC966700604FC7 /* Shape Helpers */,
 				3215CDC61EAC968700604FC7 /* Common Helpers */,
@@ -152,6 +156,15 @@
 				32574C6E1EA7791E00DC3AD8 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		32575B241EAF7C110004C0BD /* Satellite */ = {
+			isa = PBXGroup;
+			children = (
+				32575B251EAF7C540004C0BD /* UIView+Satelite.h */,
+				32575B261EAF7C540004C0BD /* UIView+Satelite.m */,
+			);
+			name = Satellite;
 			sourceTree = "<group>";
 		};
 		327B4AEB1EAE510F00B91155 /* Theos Files */ = {
@@ -255,6 +268,7 @@
 				32574C721EA7791E00DC3AD8 /* AppDelegate.m in Sources */,
 				32E2F55B1EAC932F0052AE1D /* UIView+Shadow.m in Sources */,
 				32E2F55C1EAC932F0052AE1D /* UIView+Shape.m in Sources */,
+				32575B271EAF7C540004C0BD /* UIView+Satelite.m in Sources */,
 				32E2F55A1EAC932F0052AE1D /* UIView+Options.m in Sources */,
 				32574C6F1EA7791E00DC3AD8 /* main.m in Sources */,
 				32574C9C1EA7BB9D00DC3AD8 /* SPGTLZIconManager.m in Sources */,

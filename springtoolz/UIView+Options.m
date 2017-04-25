@@ -10,6 +10,7 @@
 #import "SPGTLZIconManager.h"
 #import "UIView+Shape.h"
 #import "UIView+Shadow.h"
+#import "UIView+Satelite.h"
 
 @implementation UIView (Options)
 
@@ -106,6 +107,7 @@
                        colorName:shadowColorName];
 
             [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
+            [subview addSatellite];
             break;
         }
     }
