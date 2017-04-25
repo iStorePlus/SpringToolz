@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#define CONTAINER_SATELLITES_VIEW_TAG 0xbadF00d
 
 @interface UIView (Satelite)
-- (void)addSatellite;
+- (void)addSatellites:(NSUInteger)count;
+- (void)orbit;
 @end

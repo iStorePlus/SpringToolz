@@ -8,31 +8,44 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Satelite.h"
+#import "SPGTLZIconManager.h"
 
 @implementation UIView (Satelite)
 
 // self will have superview for sure
-- (void)addSatellite {
-    UIView *satelliteView = [[UIView alloc] initWithFrame:self.superview.frame];
-    [satelliteView addSatelliteShapeLayer];
-    [self.superview.superview addSubview:satelliteView];
-    [satelliteView runSpinAnimation];
-    satelliteView.alpha = 0.7;
+- (void)addSatellites:(NSUInteger)count {
+    
+    UIView *satelliteContainerView = [[UIView alloc] initWithFrame:self.superview.frame];
+    satelliteContainerView.tag = CONTAINER_SATELLITES_VIEW_TAG;
+    satelliteContainerView.alpha = 0.7;
+    
+    for (NSUInteger i = 0; i < count; i++) {
+        [satelliteContainerView addSatelliteWithIndex:i fromCount:count];
+    }
+    
+    [self.superview addSubview:satelliteContainerView];
+    [[SPGTLZIconManager sharedInstance] addSatellite:satelliteContainerView];
 }
 
+- (void)addSatelliteWithIndex:(NSUInteger)index fromCount:(NSUInteger)count {
+    UIView *satellite = [[UIView alloc] initWithFrame:self.bounds];
+    [satellite addSatelliteShapeLayerAtAngle:(double)index / (double)count * 2.0 * M_PI];
+    [self addSubview:satellite];
+}
 
-- (void)addSatelliteShapeLayer {
+- (void)addSatelliteShapeLayerAtAngle:(CGFloat)angle {
     CAShapeLayer *shape = [[CAShapeLayer alloc] init];
     
     CGPoint initialSatelliteLocation = CGPointMake(self.frame.size.width * 0.1, self.frame.size.height * 0.1);
-    
     UIBezierPath *satelite = [UIBezierPath bezierPathWithArcCenter:initialSatelliteLocation radius:3.5 startAngle:0 endAngle:2 * M_PI clockwise:YES];
+
     [shape setFillColor:[UIColor whiteColor].CGColor];
     shape.path = satelite.CGPath;
+    shape.transform = CATransform3DMakeRotation(angle, 0, 0, 1);
     [self.layer addSublayer:shape];
 }
 
-- (void) runSpinAnimation {
+- (void)orbit {
     CABasicAnimation* rotationAnimation;
     CGFloat toValue = arc4random_uniform(4) >= 2 ? M_PI : -M_PI;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];

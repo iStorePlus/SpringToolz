@@ -8,12 +8,14 @@
 
 #import "SPGTLZIconManager.h"
 #import "UIBezierPath+CustomPaths.h"
+#import "UIView+Satelite.h"
 
 @interface SPGTLZIconManager()
 
 @property (nonatomic, assign) BOOL isIconSizeSet;
 
 @property (nonatomic, strong) NSMutableArray<UIView *> *masks;
+@property (nonatomic, strong) NSMutableArray<UIView *> *satellites;
 
 @property (nonatomic, strong) UIBezierPath *pageIconsShape;
 @property (nonatomic, strong) UIBezierPath *dockIconsShape;
@@ -41,6 +43,10 @@
     [self.masks addObject:mask];
 }
 
+- (void)addSatellite:(UIView *)satellite {
+    [self.satellites addObject:satellite];
+}
+
 - (void)animateIfNeeded {
     [self.animationTimer invalidate];
     self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animate) userInfo:nil repeats:NO];
@@ -54,7 +60,13 @@
         }
         [self.masks removeAllObjects];
         
+        
     } completion:nil];
+
+    for (UIView *satellite in self.satellites) {
+        [satellite orbit];
+    }
+    [self.satellites removeAllObjects];
 }
 
 #pragma mark - Icon Shapes

@@ -106,8 +106,8 @@
                        intensity:shadowIntensity.floatValue
                        colorName:shadowColorName];
 
+//            [subview addSatellite];
             [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
-            [subview addSatellite];
             break;
         }
     }

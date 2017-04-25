@@ -23,6 +23,7 @@
 - (UIBezierPath *)shapeForDockIcons;
 
 - (void)addMaskView:(UIView *)mask;
+- (void)addSatellite:(UIView *)mask;
 - (void)animateIfNeeded;
 
 - (UIColor *)shadowColorForName:(NSString *)name;
