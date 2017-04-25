@@ -99,7 +99,7 @@
     if ([name isEqualToString:@"default"]) {
         return nil;
     } else if ([name isEqualToString:@"circle"]) {
-        return [UIBezierPath bezierPathWithOvalInRect:self.iconSize];
+        return [UIBezierPath bezierPathWithArcCenter:CGPointZero radius:self.iconSize.size.width / 2.0 startAngle:0 endAngle:2 * M_PI clockwise:YES];
     } else if ([name isEqualToString:@"gear_wheel_1"]) {
         return [UIBezierPath gearPathWithNumberOfSides:24 radiusDeviation:2.5 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_2"]) {
