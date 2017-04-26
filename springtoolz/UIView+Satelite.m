@@ -15,7 +15,7 @@
 // self will have superview for sure
 - (void)addSatellites:(NSUInteger)count {
     
-    UIView *satelliteContainerView = [[UIView alloc] initWithFrame:self.superview.frame];
+    UIView *satelliteContainerView = [[UIView alloc] initWithFrame:self.bounds];
     satelliteContainerView.tag = CONTAINER_SATELLITES_VIEW_TAG;
     satelliteContainerView.alpha = 0.7;
     
@@ -41,7 +41,8 @@
 
     [shape setFillColor:[UIColor whiteColor].CGColor];
     shape.path = satelite.CGPath;
-    shape.transform = CATransform3DMakeRotation(angle, 0, 0, 1);
+
+    self.layer.transform = CATransform3DMakeRotation(angle + M_PI_4, 0, 0, 1);
     [self.layer addSublayer:shape];
 }
 

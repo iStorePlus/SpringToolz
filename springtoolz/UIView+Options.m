@@ -39,7 +39,7 @@
         NSNumber *pageIconShapeRotation = (NSNumber *)[iconOptions valueForKey:@"shape_rotation"];
         [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape withRotation:pageIconShapeRotation];
     });
-    [self updateShapeForNewSuperView:newSuperView andNewWindow:newWindow];
+    [self prepareForReuseBecauseOfNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
 
@@ -67,7 +67,7 @@
         NSNumber *dockIconShapeRotation = (NSNumber *)[iconOptions valueForKey:@"shape_rotation"];
         [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape withRotation:dockIconShapeRotation];
     });
-    [self updateShapeForNewSuperView:newSuperView andNewWindow:newWindow];
+    [self prepareForReuseBecauseOfNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
 
@@ -106,7 +106,7 @@
                        intensity:shadowIntensity.floatValue
                        colorName:shadowColorName];
 
-//            [subview addSatellite];
+            [subview addSatellites:3];
             [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
             break;
         }
@@ -114,12 +114,14 @@
     
     UIView *shadowView = [self viewWithTag:SHADOW_TAG];
     UIView *shapeContainerView = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
+    UIView *satellitesContainerView = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
     
     [self insertSubview:shadowView atIndex:0];
     [self insertSubview:shapeContainerView atIndex:1];
+    [self insertSubview:satellitesContainerView atIndex:2];
 }
 
-- (void)updateShapeForNewSuperView:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
+- (void)prepareForReuseBecauseOfNewSuperView:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
     
     NSString *newSuperViewClass = NSStringFromClass([newSuperView class]);
     NSString *oldSuperViewClass = NSStringFromClass([self.superview class]);
@@ -147,6 +149,12 @@
                 [oldShapeContainerView removeFromSuperview];
                 [self addSubview:sbIconImageView];
             }
+        }
+        
+        UIView *oldSatellitesContainerView = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
+        
+        if (oldSatellitesContainerView != nil) {
+            [oldSatellitesContainerView removeFromSuperview];
         }
     }
     
