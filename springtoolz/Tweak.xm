@@ -11,11 +11,15 @@ static NSString *DEFAULT_PAGE_ICON_SHAPE = @"default";
 static CGFloat DEFAULT_PAGE_ICON_SHAPE_ROTATION = 0.0;
 static BOOL DEFAULT_PAGE_ICON_SHADOWS_ENABLED = YES;
 static BOOL DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED = NO;
+static BOOL DEFAULT_PAGE_ICON_SATELLITES_ENABLED = NO;
+static NSUInteger DEFAULT_PAGE_ICON_SATELLITES_COUNT = 1;
 
 static NSString *DEFAULT_DOCK_ICON_SHAPE = @"default";
 static CGFloat DEFAULT_DOCK_ICON_SHAPE_ROTATION = 0.0;
 static BOOL DEFAULT_DOCK_ICON_SHADOWS_ENABLED = YES;
 static BOOL DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED = NO;
+static BOOL DEFAULT_DOCK_ICON_SATELLITES_ENABLED = NO;
+static NSUInteger DEFAULT_DOCK_ICON_SATELLITES_COUNT = 1;
 
 static NSString *DEFAULT_SHADOW_COLOR = @"black";
 static CGFloat DEFAULT_SHADOW_INTENSITY = 1.0;
@@ -38,10 +42,14 @@ static void loadPrefs() {
         NSNumber *pageIconShapeRotation = [prefs objectForKey:@"page_icon_shape_rotation"] ? [prefs objectForKey:@"page_icon_shape_rotation"] : @(DEFAULT_PAGE_ICON_SHAPE_ROTATION);
         BOOL pageIconsShadowsEnabled = [prefs objectForKey:@"page_icons_shadows_enabled"] ? [[prefs objectForKey:@"page_icons_shadows_enabled"] boolValue] : DEFAULT_PAGE_ICON_SHADOWS_ENABLED;
         BOOL pageIconsAnimationEnabled = [prefs objectForKey:@"page_icons_animations_enabled"] ? [[prefs objectForKey:@"page_icons_animations_enabled"] boolValue] : DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED;
+        BOOL pageIconsSatellitesEnabled = [prefs objectForKey:@"page_icons_satellites_enabled"] ? [[prefs objectForKey:@"page_icons_satellites_enabled"] boolValue] : DEFAULT_PAGE_ICON_SATELLITES_ENABLED;
+        NSNumber *pageIconSatellitesCount = [prefs objectForKey:@"page_icon_satellites_count"] ? [prefs objectForKey:@"page_icon_satellites_count"] : @(DEFAULT_PAGE_ICON_SATELLITES_COUNT);
 
         PageIconOptions = @{
             @"shape" : pageIconShape,
             @"shape_rotation" : pageIconShapeRotation,
+            @"satellites_enabled" : @(pageIconsSatellitesEnabled),
+            @"satellites_count" : pageIconSatellitesCount,
             @"shadows" : @(pageIconsShadowsEnabled),
             @"animations" : @(pageIconsAnimationEnabled)
         };
@@ -50,10 +58,14 @@ static void loadPrefs() {
         NSNumber *dockIconShapeRotation = [prefs objectForKey:@"dock_icon_shape_rotation"] ? [prefs objectForKey:@"dock_icon_shape_rotation"] : @(DEFAULT_DOCK_ICON_SHAPE_ROTATION);
         BOOL dockIconsShadowsEnabled = [prefs objectForKey:@"dock_icons_shadows_enabled"] ? [[prefs objectForKey:@"dock_icons_shadows_enabled"] boolValue] : DEFAULT_DOCK_ICON_SHADOWS_ENABLED;
         BOOL dockIconsAnimationEnabled = [prefs objectForKey:@"dock_icons_animations_enabled"] ? [[prefs objectForKey:@"dock_icons_animations_enabled"] boolValue] : DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED;
-        
+        BOOL dockIconsSatellitesEnabled = [prefs objectForKey:@"dock_icons_satellites_enabled"] ? [[prefs objectForKey:@"dock_icons_satellites_enabled"] boolValue] : DEFAULT_DOCK_ICON_SATELLITES_ENABLED;
+        NSNumber *dockIconSatellitesCount = [prefs objectForKey:@"dock_icon_satellites_count"] ? [prefs objectForKey:@"dock_icon_satellites_count"] : @(DEFAULT_DOCK_ICON_SATELLITES_COUNT);
+                
         DockIconOptions = @{
             @"shape"        : dockIconShape,
             @"shape_rotation" : dockIconShapeRotation,
+            @"satellites_enabled" : @(dockIconsSatellitesEnabled),
+            @"satellites_count" : dockIconSatellitesCount,
             @"shadows"      : @(dockIconsShadowsEnabled),
             @"animations"   : @(dockIconsAnimationEnabled)
         };
