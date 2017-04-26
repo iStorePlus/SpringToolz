@@ -15,10 +15,9 @@
 // self will have superview for sure
 - (void)addSatellites:(NSUInteger)count {
     
-    UIView *satelliteContainerView = [[UIView alloc] initWithFrame:self.bounds];
+    UIView *satelliteContainerView = [[UIView alloc] initWithFrame:CGRectMake(-2, -2, self.frame.size.width, self.frame.size.height)];
     satelliteContainerView.tag = CONTAINER_SATELLITES_VIEW_TAG;
     satelliteContainerView.alpha = 0;
-    
     for (NSUInteger i = 0; i < count; i++) {
         [satelliteContainerView addSatelliteWithIndex:i fromCount:count];
     }
