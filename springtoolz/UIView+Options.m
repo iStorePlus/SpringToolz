@@ -77,13 +77,13 @@
     
     NSNumber *shadowEnabled = (NSNumber *)[iconOptions valueForKey:@"shadows"];
     NSNumber *animationsEnabled = (NSNumber *)[iconOptions valueForKey:@"animations"];
+    NSNumber *satellitesCount = (NSNumber *)[iconOptions valueForKey:@"satellites_count"];
     NSString *shadowColorName = (NSString *)[shadowOptions valueForKey:@"color"];
     NSNumber *shadowIntensity = (NSNumber *)[shadowOptions valueForKey:@"intensity"];
     NSNumber *shadowHorDeviation = (NSNumber *)[shadowOptions valueForKey:@"hor_deviation"];
     NSNumber *shadowVerDeviation = (NSNumber *)[shadowOptions valueForKey:@"ver_deviation"];
     
-    
-    if (shadowEnabled == nil || animationsEnabled == nil || shadowColorName == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil) {
+    if (shadowEnabled == nil || animationsEnabled == nil || shadowColorName == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil || satellitesCount == nil) {
         return;
     }
     
@@ -106,7 +106,7 @@
                        intensity:shadowIntensity.floatValue
                        colorName:shadowColorName];
 
-            [subview addSatellites:3];
+            [subview addSatellites:satellitesCount.unsignedIntegerValue];
             [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
             break;
         }

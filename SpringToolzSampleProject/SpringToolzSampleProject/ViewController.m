@@ -27,6 +27,7 @@
      applyPageIconOptions:@{
                         @"shape" : @"bloated_square_3",
                         @"shape_rotation" : @(0),
+                        @"satellites_count" : @(20),
                         @"shadows" : @(YES),
                         @"animations" : @(NO)}
      withShadowOptions:@{
@@ -35,7 +36,7 @@
                          @"hor_deviation"    : @0,
                          @"ver_deviation"    : @0} inRegardsTo:self.iconView.superview andNewWindow:self.iconView.superview.window];
     
-    
+    [[SPGTLZIconManager sharedInstance] animateIfNeeded];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [[SPGTLZIconManager sharedInstance] animate];
 //    });
