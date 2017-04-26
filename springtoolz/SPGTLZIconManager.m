@@ -8,17 +8,20 @@
 
 #import "SPGTLZIconManager.h"
 #import "UIBezierPath+CustomPaths.h"
+#import "UIView+Satelite.h"
 
 @interface SPGTLZIconManager()
 
 @property (nonatomic, assign) BOOL isIconSizeSet;
 
 @property (nonatomic, strong) NSMutableArray<UIView *> *masks;
+@property (nonatomic, strong) NSMutableArray<UIView *> *satellites;
 
 @property (nonatomic, strong) UIBezierPath *pageIconsShape;
 @property (nonatomic, strong) UIBezierPath *dockIconsShape;
 
-@property (nonatomic, strong) NSTimer *animationTimer;
+@property (nonatomic, strong) NSTimer *shapeAlternationTimer;
+@property (nonatomic, strong) NSTimer *satellitesTimer;
 @end
 
 @implementation SPGTLZIconManager
@@ -31,6 +34,7 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[SPGTLZIconManager alloc] init];
         sharedInstance.masks = [NSMutableArray new];
+        sharedInstance.satellites = [NSMutableArray new];
     });
     return sharedInstance;
 }
@@ -41,12 +45,18 @@
     [self.masks addObject:mask];
 }
 
-- (void)animateIfNeeded {
-    [self.animationTimer invalidate];
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animate) userInfo:nil repeats:NO];
+- (void)addSatellite:(UIView *)satellite {
+    [self.satellites addObject:satellite];
 }
 
-- (void)animate {
+- (void)animateIfNeeded {
+    [self.shapeAlternationTimer invalidate];
+    self.shapeAlternationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animateShapes) userInfo:nil repeats:NO];
+    [self.satellitesTimer invalidate];
+    self.satellitesTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(animateSatellites) userInfo:nil repeats:NO];
+}
+
+- (void)animateShapes {
     [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         for (UIView *mask in self.masks) {
@@ -57,9 +67,14 @@
     } completion:nil];
 }
 
-#pragma mark - Icon Shapes
+- (void)animateSatellites {
+    for (UIView *satellite in self.satellites) {
+        [satellite orbit];
+    }
+    [self.satellites removeAllObjects];
+}
 
-// supported icon shapes: default, circle, gear_wheel_1, gear_wheel_2, gear_wheel_3, circle_radius_deviation, sine_circle_1, sine_circle_2, sine_circle_3, sine_circle_4, sine_circle_5, sine_circle_6
+#pragma mark - Icon Shapes
 
 - (void)setIconSize:(CGRect)iconSize {
     CGFloat newLenght = iconSize.size.width * 0.88;
@@ -155,8 +170,6 @@
 }
 
 #pragma mark - Icon Shadows
-
-// supported color names: black, green, blue, yellow, white, gray
 
 - (UIColor *)shadowColorForName:(NSString *)name {
     

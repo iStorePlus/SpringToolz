@@ -128,6 +128,52 @@
 			<key>default</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>dock_icons_satellites_enabled</string>
+			<key>label</key>
+			<string>Enable Satellite Dots</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>defaults</key>
+			<string>com.stoqn4opm.springtoolz</string>
+			<key>key</key>
+			<string>dock_icon_satellites_count</string>
+			<key>validTitles</key>
+			<array>
+				<string>1</string>
+				<string>2</string>
+				<string>3</string>
+				<string>4</string>
+				<string>5</string>
+				<string>10</string>
+				<string>20</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>1</string>
+				<string>2</string>
+				<string>3</string>
+				<string>4</string>
+				<string>5</string>
+				<string>10</string>
+				<string>20</string>
+			</array>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>Dock Icons</string>
