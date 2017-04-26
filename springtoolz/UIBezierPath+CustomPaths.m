@@ -84,7 +84,7 @@
     
     [bPath addArcWithCenter:CGPointZero radius:baseRadius - depth startAngle:0 endAngle:notchWidth clockwise:YES];
     [bPath addArcWithCenter:CGPointZero radius:baseRadius startAngle:notchWidth endAngle:2 * M_PI clockwise:YES];
-    [bPath applyTransform:CGAffineTransformMakeRotation(-M_PI / notchWidth)];
+    [bPath applyTransform:CGAffineTransformMakeRotation(-notchWidth / 2.0)];
     [bPath closePath];
     return bPath;
 }
@@ -98,6 +98,7 @@
     [bPath addArcWithCenter:CGPointZero radius:baseRadius startAngle:notchesWidth endAngle:M_PI clockwise:YES];
     [bPath addArcWithCenter:CGPointZero radius:baseRadius - depth startAngle:M_PI endAngle:M_PI + notchesWidth clockwise:YES];
     [bPath addArcWithCenter:CGPointZero radius:baseRadius startAngle:M_PI + notchesWidth endAngle:2 * M_PI clockwise:YES];
+    [bPath applyTransform:CGAffineTransformMakeRotation(-notchesWidth / 2.0)];
     [bPath closePath];
     return bPath;
 }
