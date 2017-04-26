@@ -72,8 +72,6 @@
 
 #pragma mark - Icon Shapes
 
-// supported icon shapes: default, circle, gear_wheel_1, gear_wheel_2, gear_wheel_3, circle_radius_deviation, sine_circle_1, sine_circle_2, sine_circle_3, sine_circle_4, sine_circle_5, sine_circle_6
-
 - (void)setIconSize:(CGRect)iconSize {
     CGFloat newLenght = iconSize.size.width * 0.88;
     CGFloat xDelta = iconSize.size.width - newLenght;
@@ -168,8 +166,6 @@
 }
 
 #pragma mark - Icon Shadows
-
-// supported color names: black, green, blue, yellow, white, gray
 
 - (UIColor *)shadowColorForName:(NSString *)name {
     
