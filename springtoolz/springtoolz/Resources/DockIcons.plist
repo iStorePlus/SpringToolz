@@ -158,7 +158,10 @@
 				<string>1</string>
 				<string>2</string>
 				<string>3</string>
-				<string>&lt; 4</string>
+				<string>4</string>
+				<string>5</string>
+				<string>10</string>
+				<string>20</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -166,6 +169,9 @@
 				<string>2</string>
 				<string>3</string>
 				<string>4</string>
+				<string>5</string>
+				<string>10</string>
+				<string>20</string>
 			</array>
 		</dict>
 	</array>
