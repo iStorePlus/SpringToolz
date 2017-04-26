@@ -26,6 +26,7 @@
         CGFloat radius = i % 2 == 0 ? baseRadius - radDeviation / 2.0 : baseRadius + radDeviation / 2.0;
         [bPath addArcWithCenter:CGPointZero radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     }
+    [bPath applyTransform:CGAffineTransformMakeRotation(-M_PI / sides)];
     [bPath closePath];
     return bPath;
 }
