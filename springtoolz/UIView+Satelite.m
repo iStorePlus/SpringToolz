@@ -15,7 +15,7 @@
 // self will have superview for sure
 - (void)addSatellites:(NSUInteger)count {
     
-    UIView *satelliteContainerView = [[UIView alloc] initWithFrame:CGRectMake(-2, -2, self.frame.size.width, self.frame.size.height)];
+    UIView *satelliteContainerView = [[UIView alloc] initWithFrame:CGRectMake(-1.5, -1.5, self.frame.size.width, self.frame.size.height)];
     satelliteContainerView.tag = CONTAINER_SATELLITES_VIEW_TAG;
     satelliteContainerView.alpha = 0;
     for (NSUInteger i = 0; i < count; i++) {
@@ -48,9 +48,9 @@
 - (void)orbit {
     
     [UIView animateWithDuration:1 animations:^{
-        self.alpha = 0.7;
+        self.alpha = 0.5;
     } completion:^(BOOL finished) {
-        self.alpha = 0.7;
+        self.alpha = 0.5;
     }];
     
     CABasicAnimation* rotationAnimation;
