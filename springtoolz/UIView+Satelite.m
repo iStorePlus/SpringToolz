@@ -17,7 +17,7 @@
     
     UIView *satelliteContainerView = [[UIView alloc] initWithFrame:self.bounds];
     satelliteContainerView.tag = CONTAINER_SATELLITES_VIEW_TAG;
-    satelliteContainerView.alpha = 0.7;
+    satelliteContainerView.alpha = 0;
     
     for (NSUInteger i = 0; i < count; i++) {
         [satelliteContainerView addSatelliteWithIndex:i fromCount:count];
@@ -47,10 +47,18 @@
 }
 
 - (void)orbit {
+    
+    [UIView animateWithDuration:2 animations:^{
+        self.alpha = 0.7;
+    } completion:^(BOOL finished) {
+        self.alpha = 0.7;
+    }];
+    
     CABasicAnimation* rotationAnimation;
     CGFloat toValue = arc4random_uniform(4) >= 2 ? M_PI : -M_PI;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: toValue];
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    rotationAnimation.fromValue = [NSValue valueWithCATransform3D:self.layer.transform];
+    rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform, toValue, 0, 0, 1)];
     rotationAnimation.duration = 3 + arc4random_uniform(10);
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = HUGE_VALF;

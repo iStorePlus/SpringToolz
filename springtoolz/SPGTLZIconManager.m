@@ -33,6 +33,7 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[SPGTLZIconManager alloc] init];
         sharedInstance.masks = [NSMutableArray new];
+        sharedInstance.satellites = [NSMutableArray new];
     });
     return sharedInstance;
 }
