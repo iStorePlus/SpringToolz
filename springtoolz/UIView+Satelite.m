@@ -47,7 +47,7 @@
 
 - (void)orbit {
     
-    [UIView animateWithDuration:2 animations:^{
+    [UIView animateWithDuration:1 animations:^{
         self.alpha = 0.7;
     } completion:^(BOOL finished) {
         self.alpha = 0.7;
@@ -55,9 +55,8 @@
     
     CABasicAnimation* rotationAnimation;
     CGFloat toValue = arc4random_uniform(4) >= 2 ? M_PI : -M_PI;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-    rotationAnimation.fromValue = [NSValue valueWithCATransform3D:self.layer.transform];
-    rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform, toValue, 0, 0, 1)];
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: toValue];
     rotationAnimation.duration = 3 + arc4random_uniform(10);
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = HUGE_VALF;

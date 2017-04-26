@@ -20,7 +20,8 @@
 @property (nonatomic, strong) UIBezierPath *pageIconsShape;
 @property (nonatomic, strong) UIBezierPath *dockIconsShape;
 
-@property (nonatomic, strong) NSTimer *animationTimer;
+@property (nonatomic, strong) NSTimer *shapeAlternationTimer;
+@property (nonatomic, strong) NSTimer *satellitesTimer;
 @end
 
 @implementation SPGTLZIconManager
@@ -49,11 +50,13 @@
 }
 
 - (void)animateIfNeeded {
-    [self.animationTimer invalidate];
-    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animate) userInfo:nil repeats:NO];
+    [self.shapeAlternationTimer invalidate];
+    self.shapeAlternationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animateShapes) userInfo:nil repeats:NO];
+    [self.satellitesTimer invalidate];
+    self.satellitesTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(animateSatellites) userInfo:nil repeats:NO];
 }
 
-- (void)animate {
+- (void)animateShapes {
     [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         for (UIView *mask in self.masks) {
@@ -61,9 +64,10 @@
         }
         [self.masks removeAllObjects];
         
-        
     } completion:nil];
+}
 
+- (void)animateSatellites {
     for (UIView *satellite in self.satellites) {
         [satellite orbit];
     }
