@@ -71,14 +71,14 @@
 }
 
 - (void)animateShapes {
-    [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
-        
-        for (UIView *mask in self.masks) {
-            mask.transform = CGAffineTransformMakeRotation(M_PI);
-        }
-        [self.masks removeAllObjects];
-        
-    } completion:nil];
+//    [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
+//        
+//        for (UIView *mask in self.masks) {
+//            mask.transform = CGAffineTransformMakeRotation(M_PI);
+//        }
+//        [self.masks removeAllObjects];
+//        
+//    } completion:nil];
 }
 
 #pragma mark - Icon Shapes
