@@ -16,6 +16,10 @@
 @property (nonatomic, assign) CGRect iconSize;
 @property (nonatomic, assign, readonly) BOOL isIconSizeSet;
 
+@property (nonatomic, assign, readonly) NSTimeInterval animationDelay;
+- (void)setAnimationDelayInstantly:(NSTimeInterval)delay;
+- (void)setAnimationDelayWithDelay:(NSTimeInterval)animationDelay;
+
 - (void)setPageIconsShapeName:(NSString *)pageIconsShapeName withRotation:(NSNumber *)rotation;
 - (void)setDockIconsShapeName:(NSString *)dockIconsShapeName withRotation:(NSNumber *)rotation;
 
