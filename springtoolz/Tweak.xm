@@ -111,7 +111,7 @@ static void loadPrefs() {
         if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
             [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-        } else {
+        } else if ([NSStringFromClass([superView class]) isEqualToString:@"SBRootIconListView"]) {
             [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
         }
