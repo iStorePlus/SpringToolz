@@ -119,3 +119,17 @@ static void loadPrefs() {
 }
 
 %end
+
+
+%hook SBLockScreenManager
+
+-(void)unlockUIFromSource:(int)source withOptions:(id)options {
+    %orig;
+}
+
+-(void)lockUIFromSource:(int)source withOptions:(id)options {
+    %orig;
+    [[SPGTLZIconManager sharedInstance] setAnimationDelayInstantly:4];
+}
+
+%end
