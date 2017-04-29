@@ -93,29 +93,45 @@ static void loadPrefs() {
 
 #pragma mark - Hooking
 
-%hook SBIconView
+%hook SBRootIconListView
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-    [self applyIconOptionsInRegardsToSuperView:newSuperview andWindow:self.superview.window];
+- (void)addSubview:(UIView *)view {
     %orig;
-}
-
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [self applyIconOptionsInRegardsToSuperView:self.superview andWindow:newWindow];
-    %orig;
-}
-
-%new
-- (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView andWindow:(UIWindow *)window {
     if (TweakEnabled) {
-        if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
-            [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
-            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-        } else {
-            [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
-            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+        if ([NSStringFromClass([view class]) isEqualToString:@"SBIconView"]) {
+
+            if ([NSStringFromClass([self class]) isEqualToString:@"SBDockIconListView"]) {
+                [view applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:self andNewWindow:self.window];
+                [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+            } else if ([NSStringFromClass([self class]) isEqualToString:@"SBRootIconListView"]) {
+                [view applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:self andNewWindow:self.window];
+                [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+            }
         }
     }
 }
+
+// - (void)willMoveToSuperview:(UIView *)newSuperview {
+//     [self applyIconOptionsInRegardsToSuperView:newSuperview andWindow:self.superview.window];
+//     %orig;
+// }
+
+// - (void)willMoveToWindow:(UIWindow *)newWindow {
+//     [self applyIconOptionsInRegardsToSuperView:self.superview andWindow:newWindow];
+//     %orig;
+// }
+
+// %new
+// - (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView andWindow:(UIWindow *)window {
+//     if (TweakEnabled) {
+//         if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
+//             [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
+//             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+//         } else {
+//             [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
+//             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
+//         }
+//     }
+// }
 
 %end
