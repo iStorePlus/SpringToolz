@@ -55,7 +55,7 @@
             self.transform = CGAffineTransformMakeRotation(M_PI);
             
         } completion:nil];
-        [[SPGTLZIconManager sharedInstance] setAnimationDelayWithDelay:1];
+        [[SPGTLZIconManager sharedInstance] setAnimationDelayWithDelay:2];
     });
     
 }

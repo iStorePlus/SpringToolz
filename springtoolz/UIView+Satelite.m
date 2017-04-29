@@ -28,7 +28,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [satelliteContainerView orbit];
-        [[SPGTLZIconManager sharedInstance] setAnimationDelayWithDelay:1];
+        [[SPGTLZIconManager sharedInstance] setAnimationDelayWithDelay:2];
     });
 }
 
