@@ -46,8 +46,8 @@
     if (shadowEnabled == nil || animationsEnabled == nil || shadowColorName == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil || satellitesCount == nil || satellitesEnabled == nil) {
         return;
     }
-    
-    
+
+    [self prepareForReuseByRemovingAdditionalLayers];
     UIBezierPath *shape = nil;
     if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"page_icon"]) {
         shape = [[SPGTLZIconManager sharedInstance] shapeForPageIcons];
@@ -69,7 +69,7 @@
             if (satellitesEnabled.boolValue) {
                 [subview addSatellites:satellitesCount.unsignedIntegerValue];
             }
-            [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
+            [subview applyIconShape:shape];
             break;
         }
     }
@@ -83,43 +83,26 @@
     [self insertSubview:satellitesContainerView atIndex:2];
 }
 
-- (void)prepareForReuseBecauseOfNewSuperView:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
+- (void)prepareForReuseByRemovingAdditionalLayers {
     
-    NSString *newSuperViewClass = NSStringFromClass([newSuperView class]);
-    NSString *oldSuperViewClass = NSStringFromClass([self.superview class]);
-                                   
-    BOOL shouldRemoveShape = NO;
-    if (newWindow == nil) {
-        shouldRemoveShape = true;
-    } else if (![newSuperViewClass isEqualToString:oldSuperViewClass] &&
-               ([newSuperViewClass isEqualToString:@"SBDockIconListView"] ||
-                [newSuperViewClass isEqualToString:@"SBRootIconListView"] ||
-               [newSuperViewClass isEqualToString:@"SBRecycledViewContainer"])) {
-        shouldRemoveShape = true;
-    }
+    UIView *oldShapeContainerView = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
     
-    
-    if (shouldRemoveShape) {
-        UIView *oldShapeContainerView = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
+    if (oldShapeContainerView != nil) {
         
-        if (oldShapeContainerView != nil) {
-            
-            UIView *sbIconImageView = oldShapeContainerView.subviews.firstObject;
-            
-            if (sbIconImageView != nil) {
-                [sbIconImageView removeFromSuperview];
-                [oldShapeContainerView removeFromSuperview];
-                [self addSubview:sbIconImageView];
-            }
-        }
+        UIView *sbIconImageView = oldShapeContainerView.subviews.firstObject;
         
-        UIView *oldSatellitesContainerView = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
-        
-        if (oldSatellitesContainerView != nil) {
-            [oldSatellitesContainerView removeFromSuperview];
+        if (sbIconImageView != nil) {
+            [sbIconImageView removeFromSuperview];
+            [oldShapeContainerView removeFromSuperview];
+            [self addSubview:sbIconImageView];
         }
     }
     
+    UIView *oldSatellitesContainerView = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
+    
+    if (oldSatellitesContainerView != nil) {
+        [oldSatellitesContainerView removeFromSuperview];
+    }
 }
 
 @end

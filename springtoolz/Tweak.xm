@@ -2,6 +2,8 @@
 #import "UIView+Options.h"
 #import "SBIconView.h"
 #import "SPGTLZIconManager.h"
+#import "UIView+Shape.h"
+#import "UIView+Satelite.h"
 
 #pragma mark - Settings Defaults
 
@@ -140,8 +142,8 @@ static void loadPrefs() {
         });
 
         [icon applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
-        
-    } else {
+
+    } else if ([NSStringFromClass([icon.superview class]) isEqualToString:@"SBRootIconListView"]) {
         
         static dispatch_once_t onceTokenPage;
         dispatch_once(&onceTokenPage, ^{
@@ -154,4 +156,22 @@ static void loadPrefs() {
     }
 }
 
+%end
+
+%hook UIView
+
+- (void)addSubview:(UIView *)view {
+    %orig;
+
+    if (view.tag == CONTAINER_SHAPE_VIEW_TAG) {
+            
+        [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
+            view.transform = CGAffineTransformMakeRotation(M_PI);
+        } completion:nil];
+
+    }
+    else if (view.tag == CONTAINER_SATELLITES_VIEW_TAG) {
+        [view orbit];
+    }
+}
 %end

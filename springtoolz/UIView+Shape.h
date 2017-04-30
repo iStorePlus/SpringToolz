@@ -10,5 +10,5 @@
 #define CONTAINER_SHAPE_VIEW_TAG 0x234FFAC
 
 @interface UIView (Shape)
-- (void)applyIconShape:(UIBezierPath *)shape shouldAnimate:(BOOL)shouldAnimate;
+- (void)applyIconShape:(UIBezierPath *)shape;
 @end
