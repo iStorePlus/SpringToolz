@@ -95,20 +95,82 @@ static void loadPrefs() {
 
 %hook SBRootIconListView
 
-- (void)addSubview:(UIView *)view {
+- (void)didMoveToWindow {
+    
     %orig;
-    if (TweakEnabled) {
-        if ([NSStringFromClass([view class]) isEqualToString:@"SBIconView"]) {
 
-            if ([NSStringFromClass([self class]) isEqualToString:@"SBDockIconListView"]) {
-                [view applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:self andNewWindow:self.window];
-                [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-            } else if ([NSStringFromClass([self class]) isEqualToString:@"SBRootIconListView"]) {
-                [view applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:self andNewWindow:self.window];
-                [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-            }
+    if (self.window == nil) {
+        return;
+    }
+
+    
+    for (UIView *iconView in self.subviews) {
+         if ([NSStringFromClass([iconView class]) isEqualToString:@"SBIconView"]) {
+
+            for (UIView *subview in iconView.subviews) {
+                if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+
+                    CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
+                    rotationAnimation.keyPath = @"transform";
+                    rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(subview.layer.transform, M_PI, 0, 0, 1.0)];
+                    rotationAnimation.duration = 3;
+                    rotationAnimation.repeatCount = HUGE_VALF;
+
+                    [subview.layer addAnimation:rotationAnimation forKey:@"transform"];
+                
+                }
+            }    
         }
     }
+}
+
+- (void)addSubview:(UIView *)view {
+    %orig;
+
+    // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if (TweakEnabled) {
+            if ([NSStringFromClass([view class]) isEqualToString:@"SBIconView"]) {
+
+                if ([NSStringFromClass([self class]) isEqualToString:@"SBDockIconListView"]) {
+                    
+                    
+                        for (UIView *subview in view.subviews) {
+                            if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+                                [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+        
+                                CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
+                                rotationAnimation.keyPath = @"transform";
+                                rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(subview.layer.transform, M_PI, 0, 0, 1.0)];
+                                rotationAnimation.duration = 3;
+                                rotationAnimation.repeatCount = HUGE_VALF;
+
+                                [subview.layer addAnimation:rotationAnimation forKey:@"transform"];
+                            
+                            }
+                        }    
+                    
+                } else if ([NSStringFromClass([self class]) isEqualToString:@"SBRootIconListView"]) {
+
+                    for (UIView *subview in view.subviews) {
+                        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
+                            [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+    
+                            CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
+                            rotationAnimation.keyPath = @"transform";
+                            rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(subview.layer.transform, M_PI, 0, 0, 1.0)];
+                            rotationAnimation.duration = 3;
+                            rotationAnimation.repeatCount = HUGE_VALF;
+
+                            [subview.layer addAnimation:rotationAnimation forKey:@"transform"];
+                        
+                       }
+                    }
+                }
+            }
+        }
+    // });
 }
 
 // - (void)willMoveToSuperview:(UIView *)newSuperview {

@@ -51,9 +51,9 @@
 
 - (void)animateIfNeeded {
     [self.shapeAlternationTimer invalidate];
-    self.shapeAlternationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animateShapes) userInfo:nil repeats:NO];
+    self.shapeAlternationTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animateShapes) userInfo:nil repeats:NO];
     [self.satellitesTimer invalidate];
-    self.satellitesTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(animateSatellites) userInfo:nil repeats:NO];
+    self.satellitesTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animateSatellites) userInfo:nil repeats:NO];
 }
 
 - (void)animateShapes {
