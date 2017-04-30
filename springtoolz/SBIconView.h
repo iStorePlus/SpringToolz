@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SBIconView: UIView
-- (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView andWindow:(UIWindow *)window;
-- (BOOL)isInDock;
+- (BOOL)isInDock; // not working properly for now
+- (struct CGPoint)iconImageCenter;
+- (struct CGRect)iconImageFrame;
 @end
 
 
@@ -19,4 +20,5 @@
 
 
 @interface SBRootIconListView: UIView
+- (void)applyOptionsForIcon:(SBIconView *)icon;
 @end

@@ -57,6 +57,8 @@
 }
 
 - (void)animateShapes {
+    
+    
     [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         for (UIView *mask in self.masks) {

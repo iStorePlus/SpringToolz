@@ -16,58 +16,17 @@
 
 #pragma mark - Public Methods
 
-- (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions inRegardsTo:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
+- (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
     
     NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
     [mutableIconOptions setValue:@"page_icon" forKey:@"icon_type"];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
-            for (UIView *subview in [self subviews]) {
-                if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
-                    
-                    [[SPGTLZIconManager sharedInstance] setIconSize:subview.bounds];
-                    break;
-                }
-            }
-        }
-        
-        NSString *pageIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
-        NSNumber *pageIconShapeRotation = (NSNumber *)[iconOptions valueForKey:@"shape_rotation"];
-        [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape withRotation:pageIconShapeRotation];
-    });
-    [self prepareForReuseBecauseOfNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
 
-- (void)applyDockIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions inRegardsTo:(UIView *)newSuperView andNewWindow:(UIWindow *)newWindow {
+- (void)applyDockIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
     
     NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
     [mutableIconOptions setValue:@"dock_icon" forKey:@"icon_type"];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
-            for (UIView *subview in [self subviews]) {
-                if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
-                    
-                    [[SPGTLZIconManager sharedInstance] setIconSize:subview.bounds];
-                    break;
-                }
-            }
-        }
-        
-        
-        NSString *dockIconShape = (NSString *)[iconOptions valueForKey:@"shape"];
-        NSNumber *dockIconShapeRotation = (NSNumber *)[iconOptions valueForKey:@"shape_rotation"];
-        [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape withRotation:dockIconShapeRotation];
-    });
-    [self prepareForReuseBecauseOfNewSuperView:newSuperView andNewWindow:newWindow];
     [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
 }
 

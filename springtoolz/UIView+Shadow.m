@@ -21,7 +21,7 @@
     
     for (UIView *subview in self.superview.subviews) {
         if(subview.tag == SHADOW_TAG) {
-            return;
+            [subview removeFromSuperview];
         }
     }
     

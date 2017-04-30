@@ -96,104 +96,62 @@ static void loadPrefs() {
 %hook SBRootIconListView
 
 - (void)didMoveToWindow {
-    
     %orig;
 
     if (self.window == nil) {
-        return;
+        return; // may need to perform cleanup
     }
 
-    
     for (UIView *iconView in self.subviews) {
          if ([NSStringFromClass([iconView class]) isEqualToString:@"SBIconView"]) {
-
-            for (UIView *subview in iconView.subviews) {
-                if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
-
-                    CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
-                    rotationAnimation.keyPath = @"transform";
-                    rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(subview.layer.transform, M_PI, 0, 0, 1.0)];
-                    rotationAnimation.duration = 3;
-                    rotationAnimation.repeatCount = HUGE_VALF;
-
-                    [subview.layer addAnimation:rotationAnimation forKey:@"transform"];
-                
-                }
-            }    
+            SBIconView *icon = (SBIconView *)iconView;
+            [self applyOptionsForIcon:icon];
         }
     }
 }
 
 - (void)addSubview:(UIView *)view {
     %orig;
-
-    // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        if (TweakEnabled) {
-            if ([NSStringFromClass([view class]) isEqualToString:@"SBIconView"]) {
-
-                if ([NSStringFromClass([self class]) isEqualToString:@"SBDockIconListView"]) {
-                    
-                    
-                        for (UIView *subview in view.subviews) {
-                            if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-                                [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
-        
-                                CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
-                                rotationAnimation.keyPath = @"transform";
-                                rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(subview.layer.transform, M_PI, 0, 0, 1.0)];
-                                rotationAnimation.duration = 3;
-                                rotationAnimation.repeatCount = HUGE_VALF;
-
-                                [subview.layer addAnimation:rotationAnimation forKey:@"transform"];
-                            
-                            }
-                        }    
-                    
-                } else if ([NSStringFromClass([self class]) isEqualToString:@"SBRootIconListView"]) {
-
-                    for (UIView *subview in view.subviews) {
-                        if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-                            [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
     
-                            CABasicAnimation *rotationAnimation = [CABasicAnimation animation];
-                            rotationAnimation.keyPath = @"transform";
-                            rotationAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(subview.layer.transform, M_PI, 0, 0, 1.0)];
-                            rotationAnimation.duration = 3;
-                            rotationAnimation.repeatCount = HUGE_VALF;
-
-                            [subview.layer addAnimation:rotationAnimation forKey:@"transform"];
-                        
-                       }
-                    }
-                }
-            }
+    if (TweakEnabled) {
+        if ([NSStringFromClass([view class]) isEqualToString:@"SBIconView"]) {
+            SBIconView *icon = (SBIconView *)view;
+            [self applyOptionsForIcon:icon];
         }
-    // });
+    }
 }
 
-// - (void)willMoveToSuperview:(UIView *)newSuperview {
-//     [self applyIconOptionsInRegardsToSuperView:newSuperview andWindow:self.superview.window];
-//     %orig;
-// }
+%new 
 
-// - (void)willMoveToWindow:(UIWindow *)newWindow {
-//     [self applyIconOptionsInRegardsToSuperView:self.superview andWindow:newWindow];
-//     %orig;
-// }
+- (void)applyOptionsForIcon:(SBIconView *)icon {
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[SPGTLZIconManager sharedInstance] setIconSize:[icon iconImageFrame]];
+    });
 
-// %new
-// - (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView andWindow:(UIWindow *)window {
-//     if (TweakEnabled) {
-//         if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
-//             [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
-//             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-//         } else {
-//             [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
-//             [[SPGTLZIconManager sharedInstance] animateIfNeeded];
-//         }
-//     }
-// }
+    if ([NSStringFromClass([icon.superview class]) isEqualToString:@"SBDockIconListView"]) {
+
+        static dispatch_once_t onceTokenDock;
+        dispatch_once(&onceTokenDock, ^{
+            NSString *dockIconShape = (NSString *)[DockIconOptions valueForKey:@"shape"];
+            NSNumber *dockIconShapeRotation = (NSNumber *)[DockIconOptions valueForKey:@"shape_rotation"];
+            [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape withRotation:dockIconShapeRotation];
+        });
+
+        [icon applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
+        
+    } else {
+        
+        static dispatch_once_t onceTokenPage;
+        dispatch_once(&onceTokenPage, ^{
+            NSString *pageIconShape = (NSString *)[PageIconOptions valueForKey:@"shape"];
+            NSNumber *pageIconShapeRotation = (NSNumber *)[PageIconOptions valueForKey:@"shape_rotation"];
+            [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape withRotation:pageIconShapeRotation];
+        });
+
+       [icon applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
+    }
+}
 
 %end
