@@ -65,6 +65,8 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>HORIZONTAL SHADOW DEVIATION</string>
+			<key>footerText</key>
+			<string>Move shadow left to right. Defaults to centered.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -91,6 +93,8 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>VERTICAL SHADOW DEVIATION</string>
+			<key>footerText</key>
+			<string>Move shadow up to down. Defaults to centered.</string>
 		</dict>
 		<dict>
 			<key>cell</key>

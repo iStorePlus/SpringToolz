@@ -61,6 +61,10 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerAlignment</key>
+			<string>1</string>
+			<key>footerText</key>
+			<string>2017 - stoqn4o_pm - stoqn.stoqnov.93@gmail.com</string>
 		</dict>
 		<dict>
 			<key>cell</key>
