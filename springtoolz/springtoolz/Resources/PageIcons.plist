@@ -75,6 +75,8 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>&quot;Animate Shape&quot; is experimental feature. Enabling it on Page Icons may make your device lag a bit. Try it and send me a feedback if you like.</string>
 			<key>label</key>
 			<string></string>
 		</dict>
@@ -133,6 +135,8 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string></string>
+			<key>footerText</key>
+			<string>&quot;Satellite Dots&quot; is experimental feature with which you may have issues (sometimes may their animation may fail). Try it and send me a feedback if you like.</string>
 		</dict>
 		<dict>
 			<key>cell</key>

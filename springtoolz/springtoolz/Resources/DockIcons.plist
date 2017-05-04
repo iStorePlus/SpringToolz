@@ -75,6 +75,8 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>&quot;Animate Shape&quot; is experimental feature. You may experience some issues with it (sometimes may fail to start). Try it and send me a feedback if you like.</string>
 			<key>label</key>
 			<string></string>
 		</dict>
@@ -131,6 +133,8 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>&quot;Satellite Dots&quot; is experimental feature with which you may have issues (sometimes may fail to animate). Try it and send me a feedback if you like.</string>
 			<key>label</key>
 			<string></string>
 		</dict>

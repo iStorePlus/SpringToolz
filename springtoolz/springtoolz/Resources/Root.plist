@@ -31,8 +31,8 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string></string>
+			<key>footerText</key>
+			<string>Thanks for using my tweak 😉! I hope you like it. Don&apos;t hesitate to contact me if you are having questions, feature requests or some suggestions about it.</string>
 		</dict>
 		<dict>
 			<key>detail</key>
