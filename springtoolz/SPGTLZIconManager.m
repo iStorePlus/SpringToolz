@@ -13,15 +13,13 @@
 @interface SPGTLZIconManager()
 
 @property (nonatomic, assign) BOOL isIconSizeSet;
-
-@property (nonatomic, strong) NSMutableArray<UIView *> *masks;
-@property (nonatomic, strong) NSMutableArray<UIView *> *satellites;
+@property (nonatomic, assign) NSTimeInterval animationDelay;
 
 @property (nonatomic, strong) UIBezierPath *pageIconsShape;
 @property (nonatomic, strong) UIBezierPath *dockIconsShape;
 
 @property (nonatomic, strong) NSTimer *shapeAlternationTimer;
-@property (nonatomic, strong) NSTimer *satellitesTimer;
+@property (nonatomic, strong) NSTimer *animationDelayTimer;
 @end
 
 @implementation SPGTLZIconManager
@@ -33,45 +31,25 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[SPGTLZIconManager alloc] init];
-        sharedInstance.masks = [NSMutableArray new];
-        sharedInstance.satellites = [NSMutableArray new];
+        sharedInstance.animationDelay = 4;
     });
     return sharedInstance;
 }
 
 #pragma mark - Shape Animation
 
-- (void)addMaskView:(UIView *)mask {
-    [self.masks addObject:mask];
+- (void)setAnimationDelayInstantly:(NSTimeInterval)delay {
+    _animationDelay = delay;
 }
 
-- (void)addSatellite:(UIView *)satellite {
-    [self.satellites addObject:satellite];
+- (void)setAnimationDelayWithDelay:(NSTimeInterval)animationDelay {
+    
+    [self.animationDelayTimer invalidate];
+    self.animationDelayTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateAnimationDelay:) userInfo:@{@"updateValue" : @(animationDelay)} repeats:NO];
 }
 
-- (void)animateIfNeeded {
-    [self.shapeAlternationTimer invalidate];
-    self.shapeAlternationTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(animateShapes) userInfo:nil repeats:NO];
-    [self.satellitesTimer invalidate];
-    self.satellitesTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(animateSatellites) userInfo:nil repeats:NO];
-}
-
-- (void)animateShapes {
-    [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
-        
-        for (UIView *mask in self.masks) {
-            mask.transform = CGAffineTransformMakeRotation(M_PI);
-        }
-        [self.masks removeAllObjects];
-        
-    } completion:nil];
-}
-
-- (void)animateSatellites {
-    for (UIView *satellite in self.satellites) {
-        [satellite orbit];
-    }
-    [self.satellites removeAllObjects];
+- (void)updateAnimationDelay:(NSTimer *)timer {
+    self.animationDelay = [(NSNumber *)[timer.userInfo valueForKey:@"updateValue"] floatValue];
 }
 
 #pragma mark - Icon Shapes

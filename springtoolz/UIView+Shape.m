@@ -40,8 +40,24 @@
     containerView.tag = CONTAINER_SHAPE_VIEW_TAG;
     
     if (shouldAnimate) {
-        [[SPGTLZIconManager sharedInstance] addMaskView:mask];
+        [mask animateShape];
     }
+}
+
+
+- (void)animateShape {
+    
+    NSTimeInterval delay = [[SPGTLZIconManager sharedInstance] animationDelay];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
+            
+            self.transform = CGAffineTransformMakeRotation(M_PI);
+            
+        } completion:nil];
+        [[SPGTLZIconManager sharedInstance] setAnimationDelayWithDelay:2];
+    });
+    
 }
 
 @end

@@ -110,12 +110,20 @@ static void loadPrefs() {
     if (TweakEnabled) {
         if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
             [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
-            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
         } else if ([NSStringFromClass([superView class]) isEqualToString:@"SBRootIconListView"]) {
             [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
-            [[SPGTLZIconManager sharedInstance] animateIfNeeded];
         }
     }
+}
+
+%end
+
+
+%hook SBLockScreenManager
+
+-(void)lockUIFromSource:(int)source withOptions:(id)options {
+    %orig;
+    [[SPGTLZIconManager sharedInstance] setAnimationDelayInstantly:4];
 }
 
 %end

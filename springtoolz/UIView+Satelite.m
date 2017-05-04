@@ -23,7 +23,13 @@
     }
     
     [self.superview addSubview:satelliteContainerView];
-    [[SPGTLZIconManager sharedInstance] addSatellite:satelliteContainerView];
+    
+    NSTimeInterval delay = [[SPGTLZIconManager sharedInstance] animationDelay];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [satelliteContainerView orbit];
+        [[SPGTLZIconManager sharedInstance] setAnimationDelayWithDelay:2];
+    });
 }
 
 - (void)addSatelliteWithIndex:(NSUInteger)index fromCount:(NSUInteger)count {
