@@ -3,7 +3,7 @@ Name: SpringToolz
 Depends: mobilesubstrate
 Version: 0.0.1
 Architecture: iphoneos-arm
-Description: An awesome MobileSubstrate tweak!
+Description: An awesome free UI tweak for SpringBoard! It lets you choose the shape of your icon from 20+ icon shapes listed inside Settings app > SpringToolz. It can add shadow with various options to your icons. This version includes some experimental features like "Shape Animations" and "Icon Satellites", which at this point fail to start some time, but will be improved in future versions.
 Maintainer: Stoyan Stoyanov
-Author: Stoyan Stoyanov
+Author: Stoyan Stoyanov (stoqn.stoqnov.93@gmail.com)
 Section: Tweaks
