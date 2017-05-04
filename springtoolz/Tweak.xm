@@ -121,24 +121,9 @@ static void loadPrefs() {
 
 %hook SBLockScreenManager
 
--(void)unlockUIFromSource:(int)source withOptions:(id)options {
-    %orig;
-}
-
 -(void)lockUIFromSource:(int)source withOptions:(id)options {
     %orig;
     [[SPGTLZIconManager sharedInstance] setAnimationDelayInstantly:4];
-}
-
-%end
-
-
-%hook SBRootIconListView
-
-- (void)addSubview:(UIView *)view {
-
-    %orig;
-//    [[[UIAlertView alloc] initWithTitle:@"animation did stop" message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil] show];
 }
 
 %end
