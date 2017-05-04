@@ -12,18 +12,13 @@
 @interface SPGTLZIconManager : NSObject
 
 + (SPGTLZIconManager *)sharedInstance;
+@property (nonatomic, strong) NSDictionary *pageIconOptions;
+@property (nonatomic, strong) NSDictionary *dockIconOptions;
+@property (nonatomic, strong) NSDictionary *shadowOptions;
 
 @property (nonatomic, assign) CGRect iconSize;
 
-- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName withRotation:(NSNumber *)rotation;
-- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName withRotation:(NSNumber *)rotation;
-
-- (UIBezierPath *)shapeForPageIcons;
-- (UIBezierPath *)shapeForDockIcons;
-
-- (void)addMaskView:(UIView *)mask;
-- (void)addSatellite:(UIView *)mask;
-- (void)animateIfNeeded;
+- (UIBezierPath *)iconShapeForOptions:(NSDictionary *)options;
 
 - (UIColor *)shadowColorForName:(NSString *)name;
 @end

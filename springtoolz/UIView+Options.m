@@ -14,94 +14,85 @@
 
 @implementation UIView (Options)
 
-#pragma mark - Public Methods
+#pragma mark - Public Methods for SBIconView
 
-- (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+- (void)applyPageIconOptions {
+    NSDictionary *pageIconOptions = [[SPGTLZIconManager sharedInstance] pageIconOptions];
+    UIBezierPath *shape = [[SPGTLZIconManager sharedInstance] iconShapeForOptions:pageIconOptions];
     
-    NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
-    [mutableIconOptions setValue:@"page_icon" forKey:@"icon_type"];
-    [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
+//    [self applyIconShapeOnImageView:shape];
+    
+    if ([(NSNumber *)pageIconOptions[@"shadow_enabled"] boolValue]) {
+        [self removeSatellites];
+        [self setShadowWithShape:shape];
+    } else {
+        [self removeShadow];
+    }
+
+    if ([(NSNumber *)pageIconOptions[@"satellites_enabled"] boolValue]) {
+        NSUInteger satellitesCount = [(NSNumber *)pageIconOptions[@"satellites_count"] floatValue];
+        [self addSatellites:satellitesCount];
+    } else {
+        [self removeSatellites];
+    }
+
+    [self applyOrder];
 }
 
-- (void)applyDockIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+- (void)applyDockIconOptions {
+    NSDictionary *dockIconOptions = [[SPGTLZIconManager sharedInstance] dockIconOptions];
+    UIBezierPath *shape = [[SPGTLZIconManager sharedInstance] iconShapeForOptions:dockIconOptions];
+//    [self applyIconShapeOnImageView:shape];
     
-    NSMutableDictionary *mutableIconOptions = [NSMutableDictionary dictionaryWithDictionary:iconOptions];
-    [mutableIconOptions setValue:@"dock_icon" forKey:@"icon_type"];
-    [self applyIconOptions:mutableIconOptions withShadowOptions:shadowOptions];
+    if ([(NSNumber *)dockIconOptions[@"shadow_enabled"] boolValue]) {
+        [self setShadowWithShape:shape];
+    } else {
+        [self removeShadow];
+    }
+    
+    if ([(NSNumber *)dockIconOptions[@"satellites_enabled"] boolValue]) {
+        NSUInteger satellitesCount = [(NSNumber *)dockIconOptions[@"satellites_count"] floatValue];
+        [self removeSatellites];
+        [self addSatellites:satellitesCount];
+    } else {
+        [self removeSatellites];
+    }
+    
+    
+    [self applyOrder];
 }
 
 #pragma mark - Internal Helpers
 
-- (void)applyIconOptions:(NSMutableDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions {
+- (void)applyIconShapeOnImageView:(UIBezierPath *)shape {
     
-    NSNumber *shadowEnabled = (NSNumber *)[iconOptions valueForKey:@"shadows"];
-    NSNumber *animationsEnabled = (NSNumber *)[iconOptions valueForKey:@"animations"];
-    NSNumber *satellitesEnabled = (NSNumber *)[iconOptions valueForKey:@"satellites_enabled"];
-    NSNumber *satellitesCount = (NSNumber *)[iconOptions valueForKey:@"satellites_count"];
-    NSString *shadowColorName = (NSString *)[shadowOptions valueForKey:@"color"];
-    NSNumber *shadowIntensity = (NSNumber *)[shadowOptions valueForKey:@"intensity"];
-    NSNumber *shadowHorDeviation = (NSNumber *)[shadowOptions valueForKey:@"hor_deviation"];
-    NSNumber *shadowVerDeviation = (NSNumber *)[shadowOptions valueForKey:@"ver_deviation"];
-    
-    if (shadowEnabled == nil || animationsEnabled == nil || shadowColorName == nil || shadowIntensity == nil || shadowHorDeviation == nil || shadowVerDeviation == nil || satellitesCount == nil || satellitesEnabled == nil) {
-        return;
-    }
-
-    [self prepareForReuseByRemovingAdditionalLayers];
-    UIBezierPath *shape = nil;
-    if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"page_icon"]) {
-        shape = [[SPGTLZIconManager sharedInstance] shapeForPageIcons];
-    } else if ([(NSString *)[iconOptions valueForKey:@"icon_type"] isEqualToString:@"dock_icon"]) {
-        shape = [[SPGTLZIconManager sharedInstance] shapeForDockIcons];
-    }
+    [self removeIconShape];
     
     for (UIView *subview in [self subviews]) {
         if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
             [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
             
-            [subview applyShadow:shadowEnabled.boolValue
-                       withShape:shape
-          andHorizontalDeviation:shadowHorDeviation.floatValue
-               verticalDeviation:shadowVerDeviation.floatValue
-                       intensity:shadowIntensity.floatValue
-                       colorName:shadowColorName];
-            
-            if (satellitesEnabled.boolValue) {
-                [subview addSatellites:satellitesCount.unsignedIntegerValue];
-            }
-            [subview applyIconShape:shape];
+            [subview setIconShape:shape];
             break;
         }
     }
-    
-    UIView *shadowView = [self viewWithTag:SHADOW_TAG];
-    UIView *shapeContainerView = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
-    UIView *satellitesContainerView = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
-    
-    [self insertSubview:shadowView atIndex:0];
-    [self insertSubview:shapeContainerView atIndex:1];
-    [self insertSubview:satellitesContainerView atIndex:2];
 }
 
-- (void)prepareForReuseByRemovingAdditionalLayers {
+- (void)applyOrder {
+    UIView *shapeContainer = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
+    UIView *satellitesContainer = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
+    UIView *shadowContainer = [self viewWithTag:SHADOW_TAG];
     
-    UIView *oldShapeContainerView = [self viewWithTag:CONTAINER_SHAPE_VIEW_TAG];
-    
-    if (oldShapeContainerView != nil) {
-        
-        UIView *sbIconImageView = oldShapeContainerView.subviews.firstObject;
-        
-        if (sbIconImageView != nil) {
-            [sbIconImageView removeFromSuperview];
-            [oldShapeContainerView removeFromSuperview];
-            [self addSubview:sbIconImageView];
-        }
+    if (shapeContainer) {
+        [self sendSubviewToBack:shapeContainer];
     }
     
-    UIView *oldSatellitesContainerView = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
+    if (satellitesContainer) {
+        [self sendSubviewToBack:satellitesContainer];
+    }
     
-    if (oldSatellitesContainerView != nil) {
-        [oldSatellitesContainerView removeFromSuperview];
+    if (shadowContainer) {
+        [self sendSubviewToBack:shadowContainer];
     }
 }
 

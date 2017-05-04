@@ -11,25 +11,27 @@
 
 @implementation UIView (Shadow)
 
-- (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName {
+#pragma mark - Setting Shadow
+
+- (void)setShadowWithShape:(UIBezierPath *)shape {
     
-    UIColor *color = [[SPGTLZIconManager sharedInstance] shadowColorForName:colorName];
-    
-    if (shadowEnabled == NO || color == nil || self.superview == nil) {
-        return;
+    if ([self viewWithTag:SHADOW_TAG]) {
+        return; // bacause shadow is already set and it can change only on respring
     }
     
-    for (UIView *subview in self.superview.subviews) {
-        if(subview.tag == SHADOW_TAG) {
-            [subview removeFromSuperview];
-        }
-    }
+    NSDictionary *shadowOpt = [[SPGTLZIconManager sharedInstance] shadowOptions];
+    NSString *shadowColorName = (NSString *)[shadowOpt valueForKey:@"color"];
+    CGFloat intensity = [(NSNumber *)[shadowOpt valueForKey:@"intensity"] floatValue];
+    CGFloat horDeviation = [(NSNumber *)[shadowOpt valueForKey:@"hor_deviation"] floatValue];
+    CGFloat verDeviation = [(NSNumber *)[shadowOpt valueForKey:@"ver_deviation"] floatValue];
+    
+    UIColor *color = [[SPGTLZIconManager sharedInstance] shadowColorForName:shadowColorName];
     
     if (shape == nil) {
         shape = [UIBezierPath bezierPathWithRect:self.bounds];
     }
     
-    CGSize offset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.height);
+    CGSize offset = CGSizeMake(horDeviation * self.frame.size.width, verDeviation * self.frame.size.width);
     
     UIView *shadowView = [[UIView alloc] initWithFrame:self.frame];
     shadowView.tag = SHADOW_TAG;
@@ -41,6 +43,8 @@
     
     [self.superview addSubview:shadowView];
 }
+
+#pragma mark - Setting Shadow Helper
 
 - (UIView *)shadowViewForFrame:(CGRect)frame withOffset:(CGSize)offset shape:(UIBezierPath *)shape intensity:(CGFloat)intensity color:(UIColor *)color {
     
@@ -55,6 +59,15 @@
     shadowView.layer.shadowColor = color.CGColor;
     
     return shadowView;
+}
+
+#pragma mark - Removing Shadow
+
+- (void)removeShadow {
+    UIView *shadowContainer = [self viewWithTag:SHADOW_TAG];
+    if (shadowContainer) {
+        [shadowContainer removeFromSuperview];
+    }
 }
 
 @end

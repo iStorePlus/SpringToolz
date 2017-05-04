@@ -10,5 +10,6 @@
 #define CONTAINER_SHAPE_VIEW_TAG 0x234FFAC
 
 @interface UIView (Shape)
-- (void)applyIconShape:(UIBezierPath *)shape;
+- (void)setIconShape:(UIBezierPath *)shape;
+- (void)removeIconShape;
 @end

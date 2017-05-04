@@ -12,6 +12,7 @@
 
 @interface UIView (Shadow)
 
-- (void)applyShadow:(BOOL)shadowEnabled withShape:(UIBezierPath *)shape andHorizontalDeviation:(CGFloat)horDeviation verticalDeviation:(CGFloat)verDeviation intensity:(CGFloat)intensity colorName:(NSString *)colorName;
+- (void)setShadowWithShape:(UIBezierPath *)shape;
+- (void)removeShadow;
 
 @end

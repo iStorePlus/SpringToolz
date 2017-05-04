@@ -11,5 +11,5 @@
 
 @interface UIView (Satelite)
 - (void)addSatellites:(NSUInteger)count;
-- (void)orbit;
+- (void)removeSatellites;
 @end

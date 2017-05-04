@@ -8,29 +8,28 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Satelite.h"
-#import "SPGTLZIconManager.h"
 
 @implementation UIView (Satelite)
 
-// self will have superview for sure
+#pragma mark - Add Satellites
+
 - (void)addSatellites:(NSUInteger)count {
     
     UIView *satelliteContainerView = [[UIView alloc] initWithFrame:CGRectMake(-1.5, -1.5, self.frame.size.width, self.frame.size.height)];
     satelliteContainerView.tag = CONTAINER_SATELLITES_VIEW_TAG;
     satelliteContainerView.alpha = 0;
+    
     for (NSUInteger i = 0; i < count; i++) {
-        [satelliteContainerView addSatelliteWithIndex:i fromCount:count];
+        
+        UIView *satellite = [[UIView alloc] initWithFrame:self.bounds];
+        [satellite addSatelliteShapeLayerAtAngle:(double)i / (double)count * 2.0 * M_PI];
+        [self addSubview:satellite];
     }
     
-    [self.superview addSubview:satelliteContainerView];
-    [[SPGTLZIconManager sharedInstance] addSatellite:satelliteContainerView];
+    [self addSubview:satelliteContainerView];
 }
 
-- (void)addSatelliteWithIndex:(NSUInteger)index fromCount:(NSUInteger)count {
-    UIView *satellite = [[UIView alloc] initWithFrame:self.bounds];
-    [satellite addSatelliteShapeLayerAtAngle:(double)index / (double)count * 2.0 * M_PI];
-    [self addSubview:satellite];
-}
+#pragma mark - Shape Layer Helper
 
 - (void)addSatelliteShapeLayerAtAngle:(CGFloat)angle {
     CAShapeLayer *shape = [[CAShapeLayer alloc] init];
@@ -45,23 +44,14 @@
     [self.layer addSublayer:shape];
 }
 
-- (void)orbit {
-    
-    [UIView animateWithDuration:1 animations:^{
-        self.alpha = 0.5;
-    } completion:^(BOOL finished) {
-        self.alpha = 0.5;
-    }];
-    
-    CABasicAnimation* rotationAnimation;
-    CGFloat toValue = arc4random_uniform(4) >= 2 ? M_PI : -M_PI;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: toValue];
-    rotationAnimation.duration = 3 + arc4random_uniform(10);
-    rotationAnimation.cumulative = YES;
-    rotationAnimation.repeatCount = HUGE_VALF;
-    rotationAnimation.timeOffset = arc4random_uniform(4);
-    [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+
+#pragma mark - Remove Satellites
+
+- (void)removeSatellites {
+    UIView *satellitesContainer = [self viewWithTag:CONTAINER_SATELLITES_VIEW_TAG];
+    if (satellitesContainer) {
+        [satellitesContainer removeFromSuperview];
+    }
 }
 
 @end

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (Options)
-- (void)applyPageIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions;
-- (void)applyDockIconOptions:(NSDictionary *)iconOptions withShadowOptions:(NSDictionary *)shadowOptions;
+- (void)applyPageIconOptions;
+- (void)applyDockIconOptions;
 @end

@@ -4,35 +4,9 @@
 #import "SPGTLZIconManager.h"
 #import "UIView+Shape.h"
 #import "UIView+Satelite.h"
-
-#pragma mark - Settings Defaults
-
-static BOOL TweakEnabled = YES;
-
-static NSString *DEFAULT_PAGE_ICON_SHAPE = @"default";
-static CGFloat DEFAULT_PAGE_ICON_SHAPE_ROTATION = 0.0;
-static BOOL DEFAULT_PAGE_ICON_SHADOWS_ENABLED = YES;
-static BOOL DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED = NO;
-static BOOL DEFAULT_PAGE_ICON_SATELLITES_ENABLED = NO;
-static NSUInteger DEFAULT_PAGE_ICON_SATELLITES_COUNT = 1;
-
-static NSString *DEFAULT_DOCK_ICON_SHAPE = @"default";
-static CGFloat DEFAULT_DOCK_ICON_SHAPE_ROTATION = 0.0;
-static BOOL DEFAULT_DOCK_ICON_SHADOWS_ENABLED = YES;
-static BOOL DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED = NO;
-static BOOL DEFAULT_DOCK_ICON_SATELLITES_ENABLED = NO;
-static NSUInteger DEFAULT_DOCK_ICON_SATELLITES_COUNT = 1;
-
-static NSString *DEFAULT_SHADOW_COLOR = @"black";
-static CGFloat DEFAULT_SHADOW_INTENSITY = 1.0;
-static CGFloat DEFAULT_SHADOW_HOR_DEVIATION = 0.0;
-static CGFloat DEFAULT_SHADOW_VER_DEVIATION = 0.0;
+#import "SPGTLZDefaultsSettings.h"
 
 #pragma mark - Settings Loading
-
-static NSDictionary *PageIconOptions = nil;
-static NSDictionary *DockIconOptions = nil;
-static NSDictionary *ShadowOptions = nil;
 
 static void loadPrefs() {
     NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.stoqn4opm.springtoolz.plist"];
@@ -47,13 +21,11 @@ static void loadPrefs() {
         BOOL pageIconsSatellitesEnabled = [prefs objectForKey:@"page_icons_satellites_enabled"] ? [[prefs objectForKey:@"page_icons_satellites_enabled"] boolValue] : DEFAULT_PAGE_ICON_SATELLITES_ENABLED;
         NSNumber *pageIconSatellitesCount = [prefs objectForKey:@"page_icon_satellites_count"] ? @([(NSString *)[prefs objectForKey:@"page_icon_satellites_count"] intValue]) : @(DEFAULT_PAGE_ICON_SATELLITES_COUNT);
 
-        PageIconOptions = @{
-            @"shape" : pageIconShape,
-            @"shape_rotation" : pageIconShapeRotation,
-            @"satellites_enabled" : @(pageIconsSatellitesEnabled),
-            @"satellites_count" : pageIconSatellitesCount,
-            @"shadows" : @(pageIconsShadowsEnabled),
-            @"animations" : @(pageIconsAnimationEnabled)
+        NSDictionary *pageIconOptions = @{
+            @"shape" : pageIconShape,                                   @"shape_rotation" : pageIconShapeRotation,
+            @"satellites_enabled" : @(pageIconsSatellitesEnabled),      @"satellites_count" : pageIconSatellitesCount,
+            @"shadows" : @(pageIconsShadowsEnabled),                    @"animations" : @(pageIconsAnimationEnabled),
+            @"icon_type" : @"page_icon"
         };
 
         NSString *dockIconShape = [prefs objectForKey:@"dock_icon_shape"] ? (NSString *)[prefs objectForKey:@"dock_icon_shape"] : DEFAULT_DOCK_ICON_SHAPE;
@@ -62,16 +34,12 @@ static void loadPrefs() {
         BOOL dockIconsAnimationEnabled = [prefs objectForKey:@"dock_icons_animations_enabled"] ? [[prefs objectForKey:@"dock_icons_animations_enabled"] boolValue] : DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED;
         BOOL dockIconsSatellitesEnabled = [prefs objectForKey:@"dock_icons_satellites_enabled"] ? [[prefs objectForKey:@"dock_icons_satellites_enabled"] boolValue] : DEFAULT_DOCK_ICON_SATELLITES_ENABLED;
         NSNumber *dockIconSatellitesCount = [prefs objectForKey:@"dock_icon_satellites_count"] ? @([(NSString *)[prefs objectForKey:@"dock_icon_satellites_count"] intValue]) : @(DEFAULT_DOCK_ICON_SATELLITES_COUNT);
-        
-        // NSLog(@"%lu %@", (unsigned long)DEFAULT_DOCK_ICON_SATELLITES_COUNT, dockIconSatellitesCount);
 
-        DockIconOptions = @{
-            @"shape"        : dockIconShape,
-            @"shape_rotation" : dockIconShapeRotation,
-            @"satellites_enabled" : @(dockIconsSatellitesEnabled),
-            @"satellites_count" : dockIconSatellitesCount,
-            @"shadows"      : @(dockIconsShadowsEnabled),
-            @"animations"   : @(dockIconsAnimationEnabled)
+        NSDictionary *dockIconOptions = @{
+            @"shape"        : dockIconShape,                        @"shape_rotation" : dockIconShapeRotation,
+            @"satellites_enabled" : @(dockIconsSatellitesEnabled),  @"satellites_count" : dockIconSatellitesCount,
+            @"shadows"      : @(dockIconsShadowsEnabled),           @"animations"   : @(dockIconsAnimationEnabled),
+            @"icon_type" : @"dock_icon"
         };
 
 
@@ -80,12 +48,14 @@ static void loadPrefs() {
         NSNumber *shadowHorDeviation = [prefs objectForKey:@"shadow_hor_deviation"] ? [prefs objectForKey:@"shadow_hor_deviation"] : @(DEFAULT_SHADOW_HOR_DEVIATION);
         NSNumber *shadowVerDeviation = [prefs objectForKey:@"shadow_ver_deviation"] ? [prefs objectForKey:@"shadow_ver_deviation"] : @(DEFAULT_SHADOW_VER_DEVIATION);
 
-        ShadowOptions = @{
-            @"color"            : shadowColor,
-            @"intensity"        : shadowIntensity,
-            @"hor_deviation"    : shadowHorDeviation,
-            @"ver_deviation"    : shadowVerDeviation
+        NSDictionary *shadowOptions = @{
+            @"color"            : shadowColor,          @"intensity"        : shadowIntensity,
+            @"hor_deviation"    : shadowHorDeviation,   @"ver_deviation"    : shadowVerDeviation
         };
+
+        [[SPGTLZIconManager sharedInstance] setPageIconOptions:pageIconOptions];
+        [[SPGTLZIconManager sharedInstance] setDockIconOptions:dockIconOptions];
+        [[SPGTLZIconManager sharedInstance] setShadowOptions:shadowOptions];
     }
 }
 
@@ -133,45 +103,28 @@ static void loadPrefs() {
     });
 
     if ([NSStringFromClass([icon.superview class]) isEqualToString:@"SBDockIconListView"]) {
-
-        static dispatch_once_t onceTokenDock;
-        dispatch_once(&onceTokenDock, ^{
-            NSString *dockIconShape = (NSString *)[DockIconOptions valueForKey:@"shape"];
-            NSNumber *dockIconShapeRotation = (NSNumber *)[DockIconOptions valueForKey:@"shape_rotation"];
-            [[SPGTLZIconManager sharedInstance] setDockIconsShapeName:dockIconShape withRotation:dockIconShapeRotation];
-        });
-
-        [icon applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions];
-
+        [icon applyDockIconOptions];
     } else if ([NSStringFromClass([icon.superview class]) isEqualToString:@"SBRootIconListView"]) {
-        
-        static dispatch_once_t onceTokenPage;
-        dispatch_once(&onceTokenPage, ^{
-            NSString *pageIconShape = (NSString *)[PageIconOptions valueForKey:@"shape"];
-            NSNumber *pageIconShapeRotation = (NSNumber *)[PageIconOptions valueForKey:@"shape_rotation"];
-            [[SPGTLZIconManager sharedInstance] setPageIconsShapeName:pageIconShape withRotation:pageIconShapeRotation];
-        });
-
-       [icon applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions];
+       [icon applyPageIconOptions];
     }
 }
 
 %end
 
-%hook UIView
+// %hook UIView
 
-- (void)addSubview:(UIView *)view {
-    %orig;
+// - (void)addSubview:(UIView *)view {
+//     %orig;
 
-    if (view.tag == CONTAINER_SHAPE_VIEW_TAG) {
+//     if (view.tag == CONTAINER_SHAPE_VIEW_TAG) {
             
-        [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
-            view.transform = CGAffineTransformMakeRotation(M_PI);
-        } completion:nil];
+//         [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
+//             view.transform = CGAffineTransformMakeRotation(M_PI);
+//         } completion:nil];
 
-    }
-    else if (view.tag == CONTAINER_SATELLITES_VIEW_TAG) {
-        [view orbit];
-    }
-}
-%end
+//     }
+//     else if (view.tag == CONTAINER_SATELLITES_VIEW_TAG) {
+//         [view orbit];
+//     }
+// }
+// %end

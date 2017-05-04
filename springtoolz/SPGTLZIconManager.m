@@ -12,16 +12,9 @@
 
 @interface SPGTLZIconManager()
 
-@property (nonatomic, assign) BOOL isIconSizeSet;
-
-@property (nonatomic, strong) NSMutableArray<UIView *> *masks;
-@property (nonatomic, strong) NSMutableArray<UIView *> *satellites;
-
 @property (nonatomic, strong) UIBezierPath *pageIconsShape;
 @property (nonatomic, strong) UIBezierPath *dockIconsShape;
 
-@property (nonatomic, strong) NSTimer *shapeAlternationTimer;
-@property (nonatomic, strong) NSTimer *satellitesTimer;
 @end
 
 @implementation SPGTLZIconManager
@@ -33,50 +26,11 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[SPGTLZIconManager alloc] init];
-        sharedInstance.masks = [NSMutableArray new];
-        sharedInstance.satellites = [NSMutableArray new];
     });
     return sharedInstance;
 }
 
-#pragma mark - Shape Animation
-
-- (void)addMaskView:(UIView *)mask {
-    [self.masks addObject:mask];
-}
-
-- (void)addSatellite:(UIView *)satellite {
-    [self.satellites addObject:satellite];
-}
-
-- (void)animateIfNeeded {
-    [self.shapeAlternationTimer invalidate];
-    self.shapeAlternationTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animateShapes) userInfo:nil repeats:NO];
-    [self.satellitesTimer invalidate];
-    self.satellitesTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animateSatellites) userInfo:nil repeats:NO];
-}
-
-- (void)animateShapes {
-    
-    
-    [UIView animateWithDuration:5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState animations:^{
-        
-        for (UIView *mask in self.masks) {
-            mask.transform = CGAffineTransformMakeRotation(M_PI);
-        }
-        [self.masks removeAllObjects];
-        
-    } completion:nil];
-}
-
-- (void)animateSatellites {
-    for (UIView *satellite in self.satellites) {
-        [satellite orbit];
-    }
-    [self.satellites removeAllObjects];
-}
-
-#pragma mark - Icon Shapes
+#pragma mark - Icon Shapes Public
 
 - (void)setIconSize:(CGRect)iconSize {
     CGFloat newLenght = iconSize.size.width * 0.88;
@@ -84,32 +38,44 @@
     CGFloat yDelta = iconSize.size.height - newLenght;
     
     _iconSize = CGRectMake( xDelta / 2.0, yDelta / 2.0, newLenght, newLenght);
-    self.isIconSizeSet = YES;
 }
 
-- (void)setPageIconsShapeName:(NSString *)pageIconsShapeName withRotation:(NSNumber *)rotation {
-    UIBezierPath *shape = [self shapeForName:pageIconsShapeName];
-    [shape applyTransform:CGAffineTransformMakeRotation(rotation.floatValue)];
+- (UIBezierPath *)iconShapeForOptions:(NSDictionary *)options {
+
+    if ([(NSString *)[options valueForKey:@"icon_type"] isEqualToString:@"page_icon"]) {
+        return self.pageIconsShape;
+    } else if ([(NSString *)[options valueForKey:@"icon_type"] isEqualToString:@"dock_icon"]) {
+        return self.dockIconsShape;
+    }
+    
+    return nil;
+}
+
+- (void)setPageIconOptions:(NSDictionary *)pageIconOptions {
+    _pageIconOptions = pageIconOptions;
+    NSString *pageIconShapeName = [pageIconOptions valueForKey:@"shape"];
+    NSNumber *pageIconShapeRotation = [pageIconOptions valueForKey:@"shape_rotation"];
+    
+    UIBezierPath *shape = [self shapeForName:pageIconShapeName];
+    [shape applyTransform:CGAffineTransformMakeRotation(pageIconShapeRotation.floatValue)];
     [shape applyTransform:CGAffineTransformMakeTranslation(self.iconSize.size.width / 2.0 + self.iconSize.origin.x,
                                                            self.iconSize.size.width / 2.0 + self.iconSize.origin.y)];
     self.pageIconsShape = shape;
 }
 
-- (void)setDockIconsShapeName:(NSString *)dockIconsShapeName withRotation:(NSNumber *)rotation {
-    UIBezierPath *shape = [self shapeForName:dockIconsShapeName];
-    [shape applyTransform:CGAffineTransformMakeRotation(rotation.floatValue)];
+- (void)setDockIconOptions:(NSDictionary *)dockIconOptions {
+    _dockIconOptions = dockIconOptions;
+    NSString *dockIconShapeName = [dockIconOptions valueForKey:@"shape"];
+    NSNumber *dockIconShapeRotation = [dockIconOptions valueForKey:@"shape_rotation"];
+    
+    UIBezierPath *shape = [self shapeForName:dockIconShapeName];
+    [shape applyTransform:CGAffineTransformMakeRotation(dockIconShapeRotation.floatValue)];
     [shape applyTransform:CGAffineTransformMakeTranslation(self.iconSize.size.width / 2.0 + self.iconSize.origin.x,
                                                            self.iconSize.size.width / 2.0 + self.iconSize.origin.y)];
     self.dockIconsShape = shape;
 }
 
-- (UIBezierPath *)shapeForPageIcons {
-    return self.pageIconsShape;
-}
-
-- (UIBezierPath *)shapeForDockIcons {
-    return self.dockIconsShape;
-}
+#pragma mark - Icon Shapes Private
 
 - (UIBezierPath *)shapeForName:(NSString *)name {
     
