@@ -1,5 +1,5 @@
 # SpringToolz
-SpringBoard tweak for iOS versions above 8.<br />
+SpringBoard tweak for iOS 10 (should work on iOS 8 and above).<br />
 Make system - [Theos](https://github.com/theos/theos).<br />
 Some features are still experimental(under development).<br />
 
