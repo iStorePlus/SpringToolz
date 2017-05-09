@@ -7,14 +7,14 @@
 
 static BOOL TweakEnabled = YES;
 
-static NSString *DEFAULT_PAGE_ICON_SHAPE = @"default";
+static NSString *DEFAULT_PAGE_ICON_SHAPE = @"circle";
 static CGFloat DEFAULT_PAGE_ICON_SHAPE_ROTATION = 0.0;
 static BOOL DEFAULT_PAGE_ICON_SHADOWS_ENABLED = YES;
 static BOOL DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED = NO;
 static BOOL DEFAULT_PAGE_ICON_SATELLITES_ENABLED = NO;
 static NSUInteger DEFAULT_PAGE_ICON_SATELLITES_COUNT = 1;
 
-static NSString *DEFAULT_DOCK_ICON_SHAPE = @"default";
+static NSString *DEFAULT_DOCK_ICON_SHAPE = @"sine_circle_1";
 static CGFloat DEFAULT_DOCK_ICON_SHAPE_ROTATION = 0.0;
 static BOOL DEFAULT_DOCK_ICON_SHADOWS_ENABLED = YES;
 static BOOL DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED = NO;
@@ -26,16 +26,18 @@ static CGFloat DEFAULT_SHADOW_INTENSITY = 1.0;
 static CGFloat DEFAULT_SHADOW_HOR_DEVIATION = 0.0;
 static CGFloat DEFAULT_SHADOW_VER_DEVIATION = 0.0;
 
+static NSString *PlistFileLocation = @"/var/mobile/Library/Preferences/com.stoqn4opm.springtoolz.plist";
+
 #pragma mark - Settings Loading
 
 static NSDictionary *PageIconOptions = nil;
 static NSDictionary *DockIconOptions = nil;
 static NSDictionary *ShadowOptions = nil;
 
-static void loadPrefs() {
-    NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.stoqn4opm.springtoolz.plist"];
-    if(prefs) {
+static void loadPrefsFromPlist() {
         
+        NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:PlistFileLocation];
+
         TweakEnabled = [prefs objectForKey:@"tweak_enabled"] ? [[prefs objectForKey:@"tweak_enabled"] boolValue] : TweakEnabled;
 
         NSString *pageIconShape = [prefs objectForKey:@"page_icon_shape"] ? (NSString *)[prefs objectForKey:@"page_icon_shape"] : DEFAULT_PAGE_ICON_SHAPE;
@@ -60,8 +62,6 @@ static void loadPrefs() {
         BOOL dockIconsAnimationEnabled = [prefs objectForKey:@"dock_icons_animations_enabled"] ? [[prefs objectForKey:@"dock_icons_animations_enabled"] boolValue] : DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED;
         BOOL dockIconsSatellitesEnabled = [prefs objectForKey:@"dock_icons_satellites_enabled"] ? [[prefs objectForKey:@"dock_icons_satellites_enabled"] boolValue] : DEFAULT_DOCK_ICON_SATELLITES_ENABLED;
         NSNumber *dockIconSatellitesCount = [prefs objectForKey:@"dock_icon_satellites_count"] ? @([(NSString *)[prefs objectForKey:@"dock_icon_satellites_count"] intValue]) : @(DEFAULT_DOCK_ICON_SATELLITES_COUNT);
-        
-        // NSLog(@"%lu %@", (unsigned long)DEFAULT_DOCK_ICON_SATELLITES_COUNT, dockIconSatellitesCount);
 
         DockIconOptions = @{
             @"shape"        : dockIconShape,
@@ -84,12 +84,52 @@ static void loadPrefs() {
             @"hor_deviation"    : shadowHorDeviation,
             @"ver_deviation"    : shadowVerDeviation
         };
+}
+
+static void createPrefs() {
+
+    NSDictionary *prefs = @{
+        @"tweak_enabled" : @(TweakEnabled),
+        
+        @"page_icon_shape" : DEFAULT_PAGE_ICON_SHAPE,
+        @"page_icon_shape_rotation" : @(DEFAULT_PAGE_ICON_SHAPE_ROTATION),
+        @"page_icons_shadows_enabled" : @(DEFAULT_PAGE_ICON_SHADOWS_ENABLED),
+        @"page_icons_animations_enabled" : @(DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED),
+        @"page_icons_satellites_enabled" : @(DEFAULT_PAGE_ICON_SATELLITES_ENABLED),
+        @"page_icon_satellites_count" : [NSString stringWithFormat:@"%@", @(DEFAULT_PAGE_ICON_SATELLITES_COUNT)],
+        
+        @"dock_icon_shape" : DEFAULT_DOCK_ICON_SHAPE,
+        @"dock_icon_shape_rotation" : @(DEFAULT_DOCK_ICON_SHAPE_ROTATION),
+        @"dock_icons_shadows_enabled" : @(DEFAULT_DOCK_ICON_SHADOWS_ENABLED),
+        @"dock_icons_animations_enabled" : @(DEFAULT_DOCK_ICON_ANIMATIONS_ENABLED),
+        @"dock_icons_satellites_enabled" : @(DEFAULT_DOCK_ICON_SATELLITES_ENABLED),
+        @"dock_icon_satellites_count" : [NSString stringWithFormat:@"%@", @(DEFAULT_DOCK_ICON_SATELLITES_COUNT)],
+
+        @"shadow_color" : DEFAULT_SHADOW_COLOR,
+        @"shadow_intensity" : @(DEFAULT_SHADOW_INTENSITY),
+        @"shadow_hor_deviation" : @(DEFAULT_SHADOW_HOR_DEVIATION),
+        @"shadow_ver_deviation" : @(DEFAULT_SHADOW_VER_DEVIATION)
+    };
+
+    [prefs writeToFile:PlistFileLocation atomically:YES];
+}
+
+static void loadPrefs() {
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    if ([fileManager fileExistsAtPath:PlistFileLocation]) {
+        loadPrefsFromPlist();
+    } else {
+        createPrefs();
+        loadPrefsFromPlist();
     }
 }
 
 %ctor {
     loadPrefs();
 }
+
 
 #pragma mark - Hooking
 
