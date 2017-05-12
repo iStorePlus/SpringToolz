@@ -150,7 +150,8 @@ static void loadPrefs() {
     if (TweakEnabled) {
         if ([NSStringFromClass([superView class]) isEqualToString:@"SBDockIconListView"]) {
             [self applyDockIconOptions:DockIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
-        } else if ([NSStringFromClass([superView class]) isEqualToString:@"SBRootIconListView"]) {
+        } else if ([NSStringFromClass([superView class]) isEqualToString:@"SBRootIconListView"] ||
+                   [NSStringFromClass([superView class]) isEqualToString:@"SBFolderIconListView"]) {
             [self applyPageIconOptions:PageIconOptions withShadowOptions:ShadowOptions inRegardsTo:superView andNewWindow:window];
         }
     }

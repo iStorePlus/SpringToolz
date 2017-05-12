@@ -3,7 +3,7 @@
 
 ### THEOS-Tweak ###
 ._*
-#*.deb
+*.deb
 .debmake
 _
 obj
