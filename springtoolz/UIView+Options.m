@@ -27,7 +27,8 @@
         if (![[SPGTLZIconManager sharedInstance] isIconSizeSet]) {
             for (UIView *subview in [self subviews]) {
                 if ([NSStringFromClass([subview class]) isEqualToString:@"SBIconImageView"] ||
-                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"]) {
+                    [NSStringFromClass([subview class]) isEqualToString:@"SBClockApplicationIconImageView"] ||
+                    [NSStringFromClass([subview class]) isEqualToString:@"SBFolderIconImageView"]) {
                     
                     [[SPGTLZIconManager sharedInstance] setIconSize:subview.bounds];
                     break;
@@ -111,6 +112,27 @@
                 [subview addSatellites:satellitesCount.unsignedIntegerValue];
             }
             [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
+            break;
+            
+        } else if ([NSStringFromClass([subview class]) isEqualToString:@"SBFolderIconImageView"]) {
+            
+            BOOL shadowWillBeEnabled = [(NSNumber *)[iconOptions valueForKey:@"shadows_on_folders"] boolValue];
+            BOOL shapeWillBeEnabled = [(NSNumber *)[iconOptions valueForKey:@"shape_on_folders"] boolValue];
+            
+            if (shadowWillBeEnabled) {
+                UIBezierPath *folderShadowShape = shapeWillBeEnabled ? shape : nil;
+                
+                [subview applyShadow:shadowEnabled.boolValue
+                           withShape:folderShadowShape
+              andHorizontalDeviation:shadowHorDeviation.floatValue
+                   verticalDeviation:shadowVerDeviation.floatValue
+                           intensity:shadowIntensity.floatValue
+                           colorName:shadowColorName];
+            }
+            
+            if (shapeWillBeEnabled) {
+                [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
+            }
             break;
         }
     }

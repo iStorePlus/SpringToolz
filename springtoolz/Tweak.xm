@@ -19,16 +19,20 @@ static void loadPrefsFromPlist() {
         NSString *pageIconShape = [prefs objectForKey:@"page_icon_shape"] ? (NSString *)[prefs objectForKey:@"page_icon_shape"] : DEFAULT_PAGE_ICON_SHAPE;
         NSNumber *pageIconShapeRotation = [prefs objectForKey:@"page_icon_shape_rotation"] ? [prefs objectForKey:@"page_icon_shape_rotation"] : @(DEFAULT_PAGE_ICON_SHAPE_ROTATION);
         BOOL pageIconsShadowsEnabled = [prefs objectForKey:@"page_icons_shadows_enabled"] ? [[prefs objectForKey:@"page_icons_shadows_enabled"] boolValue] : DEFAULT_PAGE_ICON_SHADOWS_ENABLED;
+        BOOL pageIconsShapesOnFoldesEnabled = [prefs objectForKey:@"page_icons_shapes_on_folders_enabled"] ? [[prefs objectForKey:@"page_icons_shapes_on_folders_enabled"] boolValue] : DEFAULT_PAGE_ICON_SHAPES_FOLDERS_ENABLED;
+        BOOL pageIconsShadowsOnFoldersEnabled = [prefs objectForKey:@"page_icons_shadows_on_folders_enabled"] ? [[prefs objectForKey:@"page_icons_shadows_on_folders_enabled"] boolValue] : DEFAULT_PAGE_ICON_SHADOWS_FOLDERS_ENABLED;
         BOOL pageIconsAnimationEnabled = [prefs objectForKey:@"page_icons_animations_enabled"] ? [[prefs objectForKey:@"page_icons_animations_enabled"] boolValue] : DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED;
         BOOL pageIconsSatellitesEnabled = [prefs objectForKey:@"page_icons_satellites_enabled"] ? [[prefs objectForKey:@"page_icons_satellites_enabled"] boolValue] : DEFAULT_PAGE_ICON_SATELLITES_ENABLED;
         NSNumber *pageIconSatellitesCount = [prefs objectForKey:@"page_icon_satellites_count"] ? @([(NSString *)[prefs objectForKey:@"page_icon_satellites_count"] intValue]) : @(DEFAULT_PAGE_ICON_SATELLITES_COUNT);
 
         PageIconOptions = @{
             @"shape" : pageIconShape,
+            @"shape_on_folders" : @(pageIconsShapesOnFoldesEnabled),
             @"shape_rotation" : pageIconShapeRotation,
             @"satellites_enabled" : @(pageIconsSatellitesEnabled),
             @"satellites_count" : pageIconSatellitesCount,
             @"shadows" : @(pageIconsShadowsEnabled),
+            @"shadows_on_folders" : @(pageIconsShadowsOnFoldersEnabled),
             @"animations" : @(pageIconsAnimationEnabled)
         };
 
@@ -69,6 +73,8 @@ static void createPrefs() {
         
         @"page_icon_shape" : DEFAULT_PAGE_ICON_SHAPE,
         @"page_icon_shape_rotation" : @(DEFAULT_PAGE_ICON_SHAPE_ROTATION),
+        @"shape_on_folders" : @(DEFAULT_PAGE_ICON_SHAPES_FOLDERS_ENABLED),
+        @"shadows_on_folders" : @(DEFAULT_PAGE_ICON_SHADOWS_FOLDERS_ENABLED),
         @"page_icons_shadows_enabled" : @(DEFAULT_PAGE_ICON_SHADOWS_ENABLED),
         @"page_icons_animations_enabled" : @(DEFAULT_PAGE_ICON_ANIMATIONS_ENABLED),
         @"page_icons_satellites_enabled" : @(DEFAULT_PAGE_ICON_SATELLITES_ENABLED),
