@@ -55,7 +55,7 @@
 #pragma mark - Icon Shapes
 
 - (void)setIconSize:(CGRect)iconSize {
-    CGFloat newLenght = iconSize.size.width * 0.88;
+    CGFloat newLenght = iconSize.size.width * 0.88; //0.96
     CGFloat xDelta = iconSize.size.width - newLenght;
     CGFloat yDelta = iconSize.size.height - newLenght;
     
@@ -92,7 +92,8 @@
     if ([name isEqualToString:@"default"]) {
         return nil;
     } else if ([name isEqualToString:@"circle"]) {
-        return [UIBezierPath bezierPathWithArcCenter:CGPointZero radius:self.iconSize.size.width / 2.0 startAngle:0 endAngle:2 * M_PI clockwise:YES];
+        CGFloat circleRadius = self.iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96;
+        return [UIBezierPath bezierPathWithArcCenter:CGPointZero radius:circleRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];
     } else if ([name isEqualToString:@"gear_wheel_1"]) {
         return [UIBezierPath gearPathWithNumberOfSides:24 radiusDeviation:2.5 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"gear_wheel_2"]) {
