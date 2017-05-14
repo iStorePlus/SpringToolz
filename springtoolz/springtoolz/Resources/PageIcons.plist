@@ -18,6 +18,8 @@
 			<key>validTitles</key>
 			<array>
 				<string>Default</string>
+				<string>Rounded Square 1</string>
+				<string>Rounded Square 2</string>
 				<string>Circle</string>
 				<string>Gear Wheel 1</string>
 				<string>Gear Wheel 2</string>
@@ -46,6 +48,8 @@
 			<key>validValues</key>
 			<array>
 				<string>default</string>
+				<string>round_square_1</string>
+				<string>round_square_2</string>
 				<string>circle</string>
 				<string>gear_wheel_1</string>
 				<string>gear_wheel_2</string>
