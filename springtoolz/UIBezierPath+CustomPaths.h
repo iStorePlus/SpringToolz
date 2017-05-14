@@ -15,4 +15,5 @@
 + (UIBezierPath *)circleWithNotchWidth:(CGFloat)notchWidth notchDepth:(CGFloat)depth iconSize:(CGRect)iconSize;
 + (UIBezierPath *)circleWithTwoNotchesWidth:(CGFloat)notchesWidth notchesDepth:(CGFloat)depth iconSize:(CGRect)iconSize;
 + (UIBezierPath *)bloatedSquareWithNormalizedDeviation:(CGFloat)deviation iconSize:(CGRect)iconSize;
++ (UIBezierPath *)roundedSquareWithCornerRadius:(CGFloat)cornerRadius iconSize:(CGRect)iconSize;
 @end

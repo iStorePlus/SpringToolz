@@ -130,4 +130,30 @@
     return bPath;
 }
 
++ (UIBezierPath *)roundedSquareWithCornerRadius:(CGFloat)cornerRadius iconSize:(CGRect)iconSize {
+    CGFloat baseRadius = iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96;
+    
+    CGPoint firstPoint = CGPointMake(-baseRadius, 0);
+    CGPoint secondPoint = CGPointMake(0, baseRadius);
+    CGPoint thirdPoint = CGPointMake(baseRadius, 0);
+    CGPoint fourthPoint = CGPointMake(0, -baseRadius);
+    
+    CGPoint topLeftAnchorPoint = CGPointMake(-cornerRadius, cornerRadius);
+    CGPoint topRightAnchorPoint = CGPointMake(cornerRadius, cornerRadius);
+    CGPoint bottomRightAnchorPoint = CGPointMake(cornerRadius, -cornerRadius);
+    CGPoint bottomLeftAnchorPoint = CGPointMake(-cornerRadius, -cornerRadius);
+    
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    
+    
+    [bPath moveToPoint:firstPoint];
+    [bPath addCurveToPoint:secondPoint controlPoint1:topLeftAnchorPoint controlPoint2:topLeftAnchorPoint];
+    [bPath addCurveToPoint:thirdPoint controlPoint1:topRightAnchorPoint controlPoint2:topRightAnchorPoint];
+    [bPath addCurveToPoint:fourthPoint controlPoint1:bottomRightAnchorPoint controlPoint2:bottomRightAnchorPoint];
+    [bPath addCurveToPoint:firstPoint controlPoint1:bottomLeftAnchorPoint controlPoint2:bottomLeftAnchorPoint];
+    
+    [bPath closePath];
+    return bPath;
+}
+
 @end
