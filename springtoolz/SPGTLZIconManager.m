@@ -91,10 +91,12 @@
     
     if ([name isEqualToString:@"default"]) {
         return nil;
-    } else if ([name isEqualToString:@"round_square_1"]) {
-        return [UIBezierPath roundedSquareWithCornerRadius:self.iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96 iconSize:self.iconSize];
-    } else if ([name isEqualToString:@"round_square_2"]) {
-        return [UIBezierPath roundedSquareWithCornerRadius:self.iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96 - 3 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"round_default_1"]) {
+        return [UIBezierPath roundedDefaultShapeWithCornerRadius:self.iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"round_default_2"]) {
+        return [UIBezierPath roundedDefaultShapeWithCornerRadius:self.iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96 - 3 iconSize:self.iconSize];
+    } else if ([name isEqualToString:@"round_square"]) {
+        return [UIBezierPath roundedSquareWithCornerRadius:self.iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96 - 2 iconSize:self.iconSize];
     } else if ([name isEqualToString:@"circle"]) {
         CGFloat circleRadius = self.iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96;
         return [UIBezierPath bezierPathWithArcCenter:CGPointZero radius:circleRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];

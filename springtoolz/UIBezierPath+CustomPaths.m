@@ -130,7 +130,7 @@
     return bPath;
 }
 
-+ (UIBezierPath *)roundedSquareWithCornerRadius:(CGFloat)cornerRadius iconSize:(CGRect)iconSize {
++ (UIBezierPath *)roundedDefaultShapeWithCornerRadius:(CGFloat)cornerRadius iconSize:(CGRect)iconSize {
     CGFloat baseRadius = iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96;
     
     CGPoint firstPoint = CGPointMake(-baseRadius, 0);
@@ -151,6 +151,47 @@
     [bPath addCurveToPoint:thirdPoint controlPoint1:topRightAnchorPoint controlPoint2:topRightAnchorPoint];
     [bPath addCurveToPoint:fourthPoint controlPoint1:bottomRightAnchorPoint controlPoint2:bottomRightAnchorPoint];
     [bPath addCurveToPoint:firstPoint controlPoint1:bottomLeftAnchorPoint controlPoint2:bottomLeftAnchorPoint];
+    
+    [bPath closePath];
+    return bPath;
+}
+
++ (UIBezierPath *)roundedSquareWithCornerRadius:(CGFloat)cornerRadius iconSize:(CGRect)iconSize {
+    CGFloat baseRadius = iconSize.size.width * 100.0 / 88.0 / 2.0 * 0.96;
+    CGFloat deviation = 3.0;
+    
+    CGPoint firstPoint = CGPointMake(-baseRadius, baseRadius / deviation);
+    CGPoint secondPoint = CGPointMake(-baseRadius, -baseRadius / deviation);
+    CGPoint thirdPoint = CGPointMake(-baseRadius / deviation, -baseRadius);
+    CGPoint fourthPoint = CGPointMake(baseRadius / deviation, -baseRadius);
+    CGPoint fifthPoint = CGPointMake(baseRadius, -baseRadius / deviation);
+    CGPoint sixthPoint = CGPointMake(baseRadius, baseRadius / deviation);
+    CGPoint seventhPoint = CGPointMake(baseRadius / deviation, baseRadius);
+    CGPoint eightPoint = CGPointMake(-baseRadius / deviation, baseRadius);
+    
+    CGFloat bezierCurvesControlPointsSpreadFactor = 1.5;
+    
+    CGPoint topLeftFirstAnchorPoint = CGPointMake(-cornerRadius, -cornerRadius + deviation / bezierCurvesControlPointsSpreadFactor);
+    CGPoint topLeftSecondAnchorPoint = CGPointMake(-cornerRadius  + deviation / bezierCurvesControlPointsSpreadFactor, -cornerRadius);
+    CGPoint topRightFirstAnchorPoint = CGPointMake(cornerRadius - deviation / bezierCurvesControlPointsSpreadFactor, -cornerRadius);
+    CGPoint topRightSecondAnchorPoint = CGPointMake(cornerRadius, -cornerRadius + deviation / bezierCurvesControlPointsSpreadFactor);
+    CGPoint bottomRightFirstAnchorPoint = CGPointMake(cornerRadius, cornerRadius - deviation / bezierCurvesControlPointsSpreadFactor);
+    CGPoint bottomRightSecondAnchorPoint = CGPointMake(cornerRadius - deviation / bezierCurvesControlPointsSpreadFactor, cornerRadius);
+    CGPoint bottomLeftFirstAnchorPoint = CGPointMake(-cornerRadius + deviation / bezierCurvesControlPointsSpreadFactor, cornerRadius);
+    CGPoint bottomLeftSecondAnchorPoint = CGPointMake(-cornerRadius, cornerRadius - deviation / bezierCurvesControlPointsSpreadFactor);
+    
+    UIBezierPath *bPath = [UIBezierPath bezierPath];
+    
+    
+    [bPath moveToPoint:firstPoint];
+    [bPath addLineToPoint:secondPoint];
+    [bPath addCurveToPoint:thirdPoint controlPoint1:topLeftFirstAnchorPoint controlPoint2:topLeftSecondAnchorPoint];
+    [bPath addLineToPoint:fourthPoint];
+    [bPath addCurveToPoint:fifthPoint controlPoint1:topRightFirstAnchorPoint controlPoint2:topRightSecondAnchorPoint];
+    [bPath addLineToPoint:sixthPoint];
+    [bPath addCurveToPoint:seventhPoint controlPoint1:bottomRightFirstAnchorPoint controlPoint2:bottomRightSecondAnchorPoint];
+    [bPath addLineToPoint:eightPoint];
+    [bPath addCurveToPoint:firstPoint controlPoint1:bottomLeftFirstAnchorPoint controlPoint2:bottomLeftSecondAnchorPoint];
     
     [bPath closePath];
     return bPath;
