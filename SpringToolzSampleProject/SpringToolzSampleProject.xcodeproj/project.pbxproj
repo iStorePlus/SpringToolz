@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		325573E31ECDE5C000183112 /* UIView+CrossFadeShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 325573E21ECDE5C000183112 /* UIView+CrossFadeShape.m */; };
 		32574C6F1EA7791E00DC3AD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C6E1EA7791E00DC3AD8 /* main.m */; };
 		32574C721EA7791E00DC3AD8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C711EA7791E00DC3AD8 /* AppDelegate.m */; };
 		32574C751EA7791E00DC3AD8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32574C741EA7791E00DC3AD8 /* ViewController.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		325573E11ECDE5C000183112 /* UIView+CrossFadeShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CrossFadeShape.h"; path = "../../springtoolz/UIView+CrossFadeShape.h"; sourceTree = "<group>"; };
+		325573E21ECDE5C000183112 /* UIView+CrossFadeShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CrossFadeShape.m"; path = "../../springtoolz/UIView+CrossFadeShape.m"; sourceTree = "<group>"; };
 		32574C6A1EA7791E00DC3AD8 /* SpringToolzSampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpringToolzSampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32574C6E1EA7791E00DC3AD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32574C701EA7791E00DC3AD8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 			children = (
 				32E2F5541EAC932F0052AE1D /* UIView+Options.h */,
 				32E2F5551EAC932F0052AE1D /* UIView+Options.m */,
+				325573E01ECDE59600183112 /* CrossFade Shape Helper */,
 				32575B241EAF7C110004C0BD /* Satellite */,
 				3215CDC51EAC967F00604FC7 /* Shadow Helpers */,
 				3215CDC41EAC966700604FC7 /* Shape Helpers */,
@@ -110,6 +114,15 @@
 				32574C941EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m */,
 			);
 			name = "Common Helpers";
+			sourceTree = "<group>";
+		};
+		325573E01ECDE59600183112 /* CrossFade Shape Helper */ = {
+			isa = PBXGroup;
+			children = (
+				325573E11ECDE5C000183112 /* UIView+CrossFadeShape.h */,
+				325573E21ECDE5C000183112 /* UIView+CrossFadeShape.m */,
+			);
+			name = "CrossFade Shape Helper";
 			sourceTree = "<group>";
 		};
 		32574C611EA7791E00DC3AD8 = {
@@ -262,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32574C951EA78BE900DC3AD8 /* CABasicAnimation+Rotation.m in Sources */,
+				325573E31ECDE5C000183112 /* UIView+CrossFadeShape.m in Sources */,
 				32574C961EA78BE900DC3AD8 /* UIBezierPath+CustomPaths.m in Sources */,
 				32E328261EAD3222004A88AE /* DummyImplementations.m in Sources */,
 				32574C751EA7791E00DC3AD8 /* ViewController.m in Sources */,
