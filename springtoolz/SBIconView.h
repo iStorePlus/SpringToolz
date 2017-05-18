@@ -10,9 +10,16 @@
 
 @interface SBIconView: UIView
 - (void)applyIconOptionsInRegardsToSuperView:(UIView *)superView andWindow:(UIWindow *)window;
+- (BOOL)isInDock;
 @end
 
 
 @interface SBIconImageView: UIImageView
 @end
 
+
+@interface SBRootIconListView: UIView
+@end
+
+@interface SBIconImageCrossfadeView: UIView
+@end

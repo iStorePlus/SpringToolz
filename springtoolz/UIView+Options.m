@@ -129,7 +129,9 @@
                            intensity:shadowIntensity.floatValue
                            colorName:shadowColorName];
             }
-            
+            if (satellitesEnabled.boolValue) {
+                [subview addSatellites:satellitesCount.unsignedIntegerValue];
+            }
             if (shapeWillBeEnabled) {
                 [subview applyIconShape:shape shouldAnimate:animationsEnabled.boolValue];
             }

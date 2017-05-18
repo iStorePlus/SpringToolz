@@ -3,6 +3,7 @@
 #import "SBIconView.h"
 #import "SPGTLZIconManager.h"
 #import "SPGTLZDefaults.h"
+#import "UIView+CrossFadeShape.h"
 
 #pragma mark - Settings Loading
 
@@ -111,6 +112,50 @@ static void createPrefs() {
 
 
 #pragma mark - Hooking
+
+%hook SBRootIconListView
+
+- (void)didMoveToWindow {
+    %orig;
+    
+    if (TweakEnabled) {
+        if (self.window == nil) {
+            return; // may need to perform cleanup
+        }
+
+        for (UIView *iconView in self.subviews) {
+             if ([NSStringFromClass([iconView class]) isEqualToString:@"SBIconView"]) {
+                SBIconView *icon = (SBIconView *)iconView;
+                [icon applyIconOptionsInRegardsToSuperView:icon.superview andWindow:self.window];
+            }
+        }
+    }
+}
+
+- (void)addSubview:(UIView *)view {
+    %orig;
+    
+    if (TweakEnabled) {
+        if ([NSStringFromClass([view class]) isEqualToString:@"SBIconView"]) {
+            SBIconView *icon = (SBIconView *)view;
+            [icon applyIconOptionsInRegardsToSuperView:icon.superview andWindow:self.window];
+        }
+    }
+}
+
+%end
+
+%hook SBIconImageCrossfadeView
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    %orig;
+    if (TweakEnabled) {
+        [self applyCrossFadeShapeInRegardsTo:newSuperview];
+    }
+    
+}
+
+%end
 
 %hook SBIconView
 
