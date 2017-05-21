@@ -28,9 +28,23 @@
         
         UIView *mask = [[UIView alloc] initWithFrame:self.bounds];
         [mask.layer addSublayer:maskLayer];
+                
+        // iOS 10
+        @try {
+            UIView *icon = (UIView *)[self valueForKey:@"iconImageView"];
+            if (icon && [icon respondsToSelector:@selector(maskView)]) {
+                icon.maskView = mask;
+            }
+        } @catch (NSException *exception) { }
         
-        UIView *scalingView = (UIView *)[self valueForKey:@"iconImageView"];
-        scalingView.maskView = mask;
+        
+        // iOS 8, 9
+        @try {
+            UIView *iconView = (UIView *)[self valueForKey:@"_imageView"];
+            if (iconView && [iconView respondsToSelector:@selector(maskView)]) {
+                iconView.maskView = mask;
+            }
+        } @catch (NSException *exception) { }
     }
 }
 
