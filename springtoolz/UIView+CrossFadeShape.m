@@ -23,6 +23,10 @@
             shape = [[SPGTLZIconManager sharedInstance] shapeForPageIcons];
         }
         
+        if (shape == nil) {
+            return;
+        }
+        
         CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
         maskLayer.path = shape.CGPath;
         
